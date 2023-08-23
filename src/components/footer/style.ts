@@ -62,6 +62,7 @@ export const StyledFooterContainer = styled.footer`
       border-radius: 0.75rem;
       font-size: 1.5rem;
       font-weight: 400;
+      border: none;
     }
   }
 `;

@@ -2,12 +2,14 @@ import { HeroContainer } from "./style";
 import HeroImg from "../../assets/hero-img.png";
 import { StyledTitle, StyledTag } from "../../styles/typography";
 import { StyledButton } from "../../styles/buttons";
+import { NavLink } from "react-router-dom";
 
 export default function Hero() {
   return (
     <HeroContainer>
       <div className="hero-img-div">
-        <img className="hero-img"
+        <img
+          className="hero-img"
           src={HeroImg}
           alt="Imagem de uma mulher sorridente e bem vestida sentada à mesa de trabalho, com caderno de notas e um tablet"
         />
@@ -20,7 +22,15 @@ export default function Hero() {
           Aqui, nós simplificamos o gerenciamento para que você tenha uma vida
           financeira plena!
         </StyledTag>
-        <StyledButton className="styled-btn" buttonsize={"lg"} buttonstyle={"landingPage"}>entrar na plataforma!</StyledButton>
+        <NavLink to={"/login"}>
+          <StyledButton
+            className="styled-btn"
+            buttonsize={"lg"}
+            buttonstyle={"landingPage"}
+          >
+            entrar na plataforma!
+          </StyledButton>
+        </NavLink>
       </div>
     </HeroContainer>
   );

@@ -7,6 +7,7 @@ import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
+import { NavLink } from "react-router-dom";
 
 export interface IFormLogin {
   email: string;
@@ -33,7 +34,9 @@ export default function Login() {
   return (
     <StyledLoginContainer>
       <div className="header">
-        <img src={logoDark} alt="Logo da Wallet Life" />
+        <NavLink to={"/"}>
+          <img src={logoDark} alt="Logo da Wallet Life" />
+        </NavLink>
         <div>
           <StyledTitle
             className="title"
@@ -64,7 +67,7 @@ export default function Login() {
           placeholder="sua senha"
         />
         <StyledSpan fontSize="lg">
-          Ainda não possui login? <strong>Faça seu cadastro!</strong>
+          Ainda não possui login? <strong><NavLink to={"/cadastro"}>Faça seu cadastro!</NavLink></strong>
         </StyledSpan>
         <StyledButton
           type="submit"

@@ -7,6 +7,7 @@ import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
+import { NavLink } from "react-router-dom";
 
 export interface IFormCadastro {
   name: string;
@@ -67,7 +68,9 @@ export default function Cadastro() {
   return (
     <StyledCadastroContainer>
       <div className="header">
-        <img src={logoDark} alt="Logo da Wallet Life" />
+        <NavLink to={"/"}>
+          <img src={logoDark} alt="Logo da Wallet Life" />
+        </NavLink>
         <div>
           <StyledTitle
             className="title"
@@ -120,15 +123,20 @@ export default function Cadastro() {
           placeholder="senha (mínimo 5 caracteres)"
         />
         <StyledSpan fontSize="lg">
-          Já possui cadastro? <strong>Faça seu login!</strong>
+          Já possui cadastro?{" "}
+          <strong>
+            <NavLink to={"/login"}>Faça seu login!</NavLink>
+          </strong>
         </StyledSpan>
-        <StyledButton
-          type="submit"
-          buttonsize="mdlc"
-          buttonstyle="signinSignout"
-        >
-          cadastrar
-        </StyledButton>
+        <NavLink to={"/login"}>
+          <StyledButton
+            type="submit"
+            buttonsize="mdlc"
+            buttonstyle="signinSignout"
+          >
+            cadastrar
+          </StyledButton>
+        </NavLink>
       </form>
 
       <ToastContainer />

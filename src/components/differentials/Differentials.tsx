@@ -1,3 +1,4 @@
+import { NavLink } from "react-router-dom";
 import { StyledButton } from "../../styles/buttons";
 import {
   Aside,
@@ -33,13 +34,15 @@ export const Differentials = () => {
               <Caption>Valor gerenciado</Caption>
             </Topic>
           </Container>
-          <StyledButton
-            buttonsize="lg"
-            buttonstyle="landingPage"
-            style={{ fontSize: "1.5rem" }}
-          >
-            faça seu cadastro!
-          </StyledButton>
+          <NavLink to={"/login"}>
+            <StyledButton
+              buttonsize="lg"
+              buttonstyle="landingPage"
+              style={{ fontSize: "1.5rem" }}
+            >
+              acesse sua área!
+            </StyledButton>
+          </NavLink>
         </Aside>
         <AsideImg>
           <Img src="differential.png" />
