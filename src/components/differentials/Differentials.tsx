@@ -34,8 +34,8 @@ export const Differentials = () => {
             </Topic>
           </Container>
           <StyledButton
-            buttonSize="lg"
-            buttonStyle="landingPage"
+            buttonsize="lg"
+            buttonstyle="landingPage"
             style={{ fontSize: "1.5rem" }}
           >
             faça seu cadastro!
