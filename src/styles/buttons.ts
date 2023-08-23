@@ -1,8 +1,8 @@
 import styled, { css } from "styled-components";
 
 interface iStyledbuttonProps {
-  buttonSize: "sm" | "mdlp" | "mdlc" | "lg";
-  buttonStyle: "landingPage" | "signinSignout";
+  buttonsize: "sm" | "mdlp" | "mdlc" | "lg";
+  buttonstyle: "landingPage" | "signinSignout";
 }
 
 export const StyledButton = styled.button<iStyledbuttonProps>`
@@ -16,8 +16,8 @@ export const StyledButton = styled.button<iStyledbuttonProps>`
   color: ${({theme}) => theme.color.white};
   
 
-  ${({ buttonSize }) => {
-    switch (buttonSize) {
+  ${({ buttonsize }) => {
+    switch (buttonsize) {
       case "lg":
         return css`
           width: 35.8rem;
@@ -42,8 +42,8 @@ export const StyledButton = styled.button<iStyledbuttonProps>`
   }}
 
   
-  ${({ buttonStyle, theme }) => {
-    switch (buttonStyle) {
+  ${({ buttonstyle, theme }) => {
+    switch (buttonstyle) {
       case "landingPage":
         return css`
           background: ${theme.color.brownSugar};
