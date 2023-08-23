@@ -12,7 +12,10 @@ export const StyledLoginContainer = styled.main`
         }
 
         div{
-            padding: 5rem 9rem 2rem;
+            width: 420px;
+            padding: 5rem 0 2rem;
+            display: flex;
+            justify-content: center;
             position: absolute;
             top: 0;
             left: 50%;
