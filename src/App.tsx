@@ -7,8 +7,6 @@ function App() {
   return (
     <ThemeProvider theme={ColorsTheme}>
     <div className="App">
-      <Hero></Hero>
-      <Services></Services>
     </div>
     </ThemeProvider>
   );
