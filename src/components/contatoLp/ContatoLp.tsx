@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
+import { StyledButton } from "../../styles/buttons";
 
 interface FormData {
   nome: string;
@@ -23,17 +24,17 @@ export default function ContatoLp() {
       return regex.test(email);
     };
 
-    if (!validateEmail(data.email)) {
+    if (!data.nome.trim() || !data.email.trim() || !data.duvida.trim()) {
+      toast.warning("É necessário preencher todos os campos!", {
+        position: toast.POSITION.TOP_RIGHT,
+      });
+    } else if (!validateEmail(data.email)) {
       toast.warning(
         "É necessário que seu e-mail esteja completo! Exemplo: seuemail@email.com",
         {
           position: toast.POSITION.TOP_RIGHT,
         }
       );
-    } else if (!data.nome.trim() || !data.email.trim() || !data.duvida.trim()) {
-      toast.warning("É necessário preencher todos os campos!", {
-        position: toast.POSITION.TOP_RIGHT,
-      });
     } else {
       toast.success("Sua dúvida foi enviada!", {
         position: toast.POSITION.TOP_RIGHT,
@@ -62,14 +63,14 @@ export default function ContatoLp() {
         >
           Fale conosco!
         </StyledTitle>
-        <div>
+        <div className="divForm">
           <input
             className="input"
             placeholder="seu nome"
             {...register("nome")}
           />
         </div>
-        <div>
+        <div className="divForm">
           <input
             className="input"
             type="email"
@@ -77,7 +78,7 @@ export default function ContatoLp() {
             {...register("email")}
           />
         </div>
-        <div>
+        <div className="divForm">
           <textarea
             className="textarea"
             placeholder="sua dúvida"
@@ -85,7 +86,9 @@ export default function ContatoLp() {
           />
         </div>
         <div>
-          <button type="submit">Enviar</button>
+          <StyledButton buttonsize="sm" buttonstyle="landingPage">
+            enviar
+          </StyledButton>
         </div>
       </FormContatoLP>
       <ToastContainer />

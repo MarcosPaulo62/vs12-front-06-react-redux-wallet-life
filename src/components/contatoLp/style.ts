@@ -11,7 +11,7 @@ border-radius: 32px;
 margin: auto;
 padding: 45px 85px;
 box-sizing: border-box;
-height: 555px;
+height: 655px;
 
 .styled-title{
     width: 35%;
@@ -37,9 +37,15 @@ border-radius: 32px;
 margin-right: -30px;
 gap: 20px;
 
+.divForm{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 
 .input{
-    width: 415px;
+    width: 80%;
     padding: 15px;
     height: 60px;
     border-radius: 12px;
@@ -48,7 +54,7 @@ gap: 20px;
 }
 
 .textarea{
-    width: 415px;
+    width: 80%;
     padding: 15px;
     height: 120px;
     border-radius: 12px;
