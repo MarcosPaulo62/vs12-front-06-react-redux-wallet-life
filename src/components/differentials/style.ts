@@ -3,10 +3,16 @@ import { styled } from "styled-components";
 
 export const Section = styled.section`
   box-sizing: border-box;
-  width: 100%;
-  height: 90vh;
+  width: 80%;
   display: flex;
+  justify-content: center;
   padding: 2rem;
+  margin: 0 12%;
+  @media (max-width: 1441px){
+    padding: 2rem;
+    width: 100%;
+    margin: 0;
+  }
 `
 
 export const Aside = styled.section`
@@ -14,8 +20,12 @@ export const Aside = styled.section`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 60%;
-  padding-left: 2rem;
+  width: 50%;
+  @media (max-width: 1441px){
+    width: 55%;
+    margin-left: 2.5rem;
+  }
+  
 `
 export const Container = styled.div`
   display: flex;
@@ -35,8 +45,8 @@ export const Container = styled.div`
 
 export const AsideImg = styled.section`
   display: flex;
-  justify-content: center;
-  align-items: center;
+  justify-content: flex-start;
+  align-items: flex-start;
   width: 40%;
 `
 
@@ -45,7 +55,7 @@ export const Caption = styled.p`
 `
 
 export const Title = styled.h1`
-  font-size: 6.5rem;
+  font-size: 5rem;
 
   @media (max-width: 1441px){
   font-size: 5rem;
@@ -57,7 +67,7 @@ export const Title = styled.h1`
 
 export const Topic = styled.div`
   padding: 2.5rem;
-  flex: 1 1 400px;
+  flex: 1 1 300px;
   @media (max-width: 1441px){
     padding: 0;
     padding-left: 2.5rem;
@@ -71,9 +81,12 @@ export const Topic = styled.div`
 `
 
 export const Img = styled.img`
-  width: 70%;
+  width: 80%;
   @media (max-width: 1025px){
     padding-left: 0;
     flex: 1 1 200px;
+  }
+  @media (max-width: 1441px){
+    margin-left: 1rem;
   }
 `
