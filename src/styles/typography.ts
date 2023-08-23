@@ -11,7 +11,7 @@ export const StyledTitle = styled(BaseTitle)`
     switch (fontSize) {
       case "lg":
         return css`
-          font-size: 2.8rem;
+          font-size: 2rem;
         `;
       case "md":
         return css`
@@ -58,10 +58,10 @@ export const StyledSpan = styled.span<iStyledSpan>`
 
 export const StyledTag = styled.p`
   font-family: "Quicksand", sans-serif;
-  font-size: 1rem;
-  font-weight: 400;
+  font-size: 1.5rem;
+  font-weight: 600;
   display: inline-flex;
   text-align: center;
-  line-height: 1.25rem;
+  line-height: 2.5rem;
   color: ${({ theme }) => theme.color.black};
 `;

@@ -1,8 +1,8 @@
 import styled, { css } from "styled-components";
 
 interface iStyledbuttonProps {
-  buttonSize: "sm" | "mdlp" | "mdlc" | "lg";
-  buttonStyle: "landingPage" | "signinSignout";
+  buttonsize: "sm" | "mdlp" | "mdlc" | "lg";
+  buttonstyle: "landingPage" | "signinSignout";
 }
 
 export const StyledButton = styled.button<iStyledbuttonProps>`
@@ -13,11 +13,10 @@ export const StyledButton = styled.button<iStyledbuttonProps>`
   font-weight: 700;
   transition: 0.4s;
   border-radius: 0.75rem;
-  color: ${({theme}) => theme.color.white};
-  
+  color: ${({ theme }) => theme.color.white};
 
-  ${({ buttonSize }) => {
-    switch (buttonSize) {
+  ${({ buttonsize }) => {
+    switch (buttonsize) {
       case "lg":
         return css`
           width: 35.8rem;
@@ -32,7 +31,7 @@ export const StyledButton = styled.button<iStyledbuttonProps>`
         return css`
           width: 18.4rem;
           height: 5rem;
-        `;  
+        `;
       case "sm":
         return css`
           width: 10.75rem;
@@ -41,9 +40,8 @@ export const StyledButton = styled.button<iStyledbuttonProps>`
     }
   }}
 
-  
-  ${({ buttonStyle, theme }) => {
-    switch (buttonStyle) {
+  ${({ buttonstyle, theme }) => {
+    switch (buttonstyle) {
       case "landingPage":
         return css`
           background: ${theme.color.brownSugar};
@@ -51,7 +49,6 @@ export const StyledButton = styled.button<iStyledbuttonProps>`
       case "signinSignout":
         return css`
           background-color: ${theme.color.jet};
-          
         `;
     }
   }}
@@ -63,4 +60,3 @@ export const StyledButton = styled.button<iStyledbuttonProps>`
     box-shadow: 0px 4px 25px rgba(255, 249, 249, 0.25);
   }
 `;
-
