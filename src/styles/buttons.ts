@@ -40,6 +40,7 @@ export const StyledButton = styled.button<iStyledbuttonProps>`
     }
   }}
 
+  
   ${({ buttonstyle, theme }) => {
     switch (buttonstyle) {
       case "landingPage":
