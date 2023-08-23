@@ -7,7 +7,7 @@ import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
 export interface IFormCadastro {
   name: string;
@@ -19,6 +19,7 @@ export interface IFormCadastro {
 
 export default function Cadastro() {
   const { register, handleSubmit, reset } = useForm<IFormCadastro>();
+  const navigate = useNavigate();
 
   function onSubmit(data: IFormCadastro) {
     const validateEmail = (email: string) => {
@@ -60,6 +61,7 @@ export default function Cadastro() {
           position: toast.POSITION.TOP_RIGHT,
         });
         console.log(data);
+        navigate('/login');
         reset();
       }
     }
@@ -128,15 +130,13 @@ export default function Cadastro() {
             <NavLink to={"/login"}>Faça seu login!</NavLink>
           </strong>
         </StyledSpan>
-        <NavLink to={"/login"}>
-          <StyledButton
-            type="submit"
-            buttonsize="mdlc"
-            buttonstyle="signinSignout"
-          >
-            cadastrar
-          </StyledButton>
-        </NavLink>
+        <StyledButton
+          type="submit"
+          buttonsize="mdlc"
+          buttonstyle="signinSignout"
+        >
+          cadastrar
+        </StyledButton>
       </form>
 
       <ToastContainer />
