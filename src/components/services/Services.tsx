@@ -41,7 +41,9 @@ export default function Services() {
               alt="Ícone representando um gráfico de barras com valores em crescimento"
             />
           </div>
-          <StyledSpan className="styled-span" fontSize={"lg"}>Controle de receita</StyledSpan>
+          <StyledSpan className="styled-span" fontSize={"lg"}>
+            Controle de receita
+          </StyledSpan>
         </div>
         <div className="grid-item">
           <div className="circle">
@@ -50,7 +52,9 @@ export default function Services() {
               alt="Ícone representando um gráfico de barras com valores em crescimento"
             />
           </div>
-          <StyledSpan className="styled-span" fontSize={"lg"}>Controle de despesas</StyledSpan>
+          <StyledSpan className="styled-span" fontSize={"lg"}>
+            Controle de despesas
+          </StyledSpan>
         </div>
         <div className="grid-item">
           <div className="circle">
@@ -59,7 +63,9 @@ export default function Services() {
               alt="Ícone representando um gráfico de barras com valores em crescimento"
             />
           </div>
-          <StyledSpan className="styled-span" fontSize={"lg"}>Fácil, rápido e intuitivo</StyledSpan>
+          <StyledSpan className="styled-span" fontSize={"lg"}>
+            Fácil, rápido e intuitivo
+          </StyledSpan>
         </div>
       </div>
     </ServicesContainer>

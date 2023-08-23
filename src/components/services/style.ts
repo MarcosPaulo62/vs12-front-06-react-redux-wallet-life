@@ -1,7 +1,8 @@
 import styled from "styled-components";
 
 export const ServicesContainer = styled.div`
-  max-width: 74rem;
+  width: 74rem;
+  max-width: 90%;
   height: fit-content;
   display: flex;
   flex-wrap: wrap;
@@ -66,5 +67,14 @@ export const ServicesContainer = styled.div`
     text-align: center;
     font-size: 22px;
     font-weight: 500;
+  }
+
+  @media screen and (max-width: 640px) {
+    width: 90%;
+
+    .services-grid {
+      height: fit-content;
+      grid-template-columns: repeat(1, 1fr);
+    }
   }
 `;
