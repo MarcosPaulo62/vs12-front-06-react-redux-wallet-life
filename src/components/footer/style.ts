@@ -6,7 +6,8 @@ export const StyledFooterContainer = styled.footer`
   justify-content: space-between;
   height: 32.37rem;
   background-color: ${({ theme }) => theme.color.alabaster};
-  gap: 14rem;
+  /* gap: 14rem; */
+  padding-inline: 50px;
 
   img {
     width: 17.1rem;
@@ -42,7 +43,6 @@ export const StyledFooterContainer = styled.footer`
     flex-direction: column;
     justify-self: end;
     gap: 2.9rem;
-    margin-right: 4.8rem;
   }
 
   .paragraphy {

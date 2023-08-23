@@ -6,14 +6,15 @@ flex-direction: row;
 align-items: center;
 justify-content: space-between;
 background-color: ${({theme})=>theme.color.jet};
-width: 90%;
+width: 74rem;
+max-width: 90%;
 border-radius: 32px;
 margin: auto;
 padding: 45px 85px;
 box-sizing: border-box;
 height: 655px;
 
-.styled-title{
+.styled-title{ 
     width: 35%;
     color: ${({theme})=>theme.color.white};
 }

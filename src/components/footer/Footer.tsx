@@ -5,19 +5,36 @@ import { StyledButton } from "../../styles/buttons";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { NavLink } from "react-router-dom";
 
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer } from "react-toastify";
+
 type FormData = {
   email: string;
 };
 
 export default function Footer() {
-  const { register, handleSubmit, reset, formState } = useForm<FormData>();
-  const { isSubmitting, isSubmitSuccessful } = formState;
+  const { register, handleSubmit, reset } = useForm<FormData>();
 
-  const onSubmit: SubmitHandler<FormData> = async (data) => {
-    await new Promise((resolve) => setTimeout(resolve, 1000));
+  const onSubmit: SubmitHandler<FormData> = (data) => {
+    const validateEmail = (email: string) => {
+      const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+      return regex.test(email);
+    };
 
-    console.log("Email cadastrado com sucesso:", data.email);
-    reset();
+    if (!validateEmail(data.email)) {
+      toast.warning(
+        "É necessário que seu e-mail esteja completo! Exemplo: seuemail@email.com",
+        {
+          position: toast.POSITION.TOP_RIGHT,
+        }
+      );
+    } else {
+      toast.success("Seu e-mail foi cadastrado!", {
+        position: toast.POSITION.TOP_RIGHT,
+      });
+      reset();
+    }
   };
 
   return (
@@ -25,16 +42,13 @@ export default function Footer() {
       <div className="left-section">
         <img src={logo} alt="" />
         <NavLink className="login" to={"/login"}>
-            Login
+          Login
         </NavLink>
         <NavLink className="cadastro" to={"/cadastro"}>
-            Cadastro
+          Cadastro
         </NavLink>
       </div>
       <div className="right-section">
-        {isSubmitSuccessful && (
-          <p style={{ color: "green" }}>Email cadastrado com sucesso!</p>
-        )}
         <StyledTag className="paragraphy">
           Assine gratuitamente nossa newsletter e fique por dentro das nossas
           dicas sobre finanças!
@@ -43,18 +57,14 @@ export default function Footer() {
           <form className="styled-input" onSubmit={handleSubmit(onSubmit)}>
             <input
               type="email"
-              {...register("email", { required: true })}
-              disabled={isSubmitting}
+              {...register("email")}
               placeholder="Seu email"
             />
 
-            <StyledButton
-              disabled={isSubmitting}
-              buttonsize="sm"
-              buttonstyle="landingPage"
-            >
-              {isSubmitting ? "Enviando..." : "Cadastrar"}
+            <StyledButton buttonsize="sm" buttonstyle="landingPage">
+              cadastrar
             </StyledButton>
+            <ToastContainer />
           </form>
         </div>
       </div>
