@@ -5,7 +5,6 @@ function App() {
   return (
     <ThemeProvider theme={ColorsTheme}>
     <div className="App">
-      
     </div>
     </ThemeProvider>
   );
