@@ -7,7 +7,7 @@ import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 
 export interface IFormLogin {
   email: string;
@@ -15,15 +15,19 @@ export interface IFormLogin {
 }
 
 export default function Login() {
-  const { register, handleSubmit } = useForm<IFormLogin>();
+  const location = useLocation();
+  const { email: initialEmail } = location.state || {};
+  const { register, handleSubmit } = useForm<IFormLogin>({
+    defaultValues: { email: initialEmail || "" },
+  });
 
   function onSubmit(data: IFormLogin) {
-    console.log(data);
-
     if (!data.email.trim() || !data.password.trim()) {
       toast.warning("É necessário preencher todos os campos!", {
         position: toast.POSITION.TOP_RIGHT,
       });
+    } else {
+      console.log(data);
     }
 
     // toast.error('Usuário e/ou senha incorretos', {
@@ -67,7 +71,10 @@ export default function Login() {
           placeholder="sua senha"
         />
         <StyledSpan fontSize="lg">
-          Ainda não possui login? <strong><NavLink to={"/cadastro"}>Faça seu cadastro!</NavLink></strong>
+          Ainda não possui login?{" "}
+          <strong>
+            <NavLink to={"/cadastro"}>Faça seu cadastro!</NavLink>
+          </strong>
         </StyledSpan>
         <StyledButton
           type="submit"

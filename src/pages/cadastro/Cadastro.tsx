@@ -61,7 +61,7 @@ export default function Cadastro() {
           position: toast.POSITION.TOP_RIGHT,
         });
         console.log(data);
-        navigate('/login');
+        navigate("/login", { state: { email: data.email } });
         reset();
       }
     }
