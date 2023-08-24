@@ -31,6 +31,7 @@ export default function Cadastro() {
   const dispatch = useAppDispatch();
   const createSuccess = useSelector(selectCreateSuccess);
   const errorOnCreate = useSelector(selectErrorOnCreate);
+  const creatingUser = useSelector(selectCreateSuccess);
 
   async function onSubmit(data: IFormCadastro) {
     const validateEmail = (email: string) => {
@@ -173,7 +174,7 @@ export default function Cadastro() {
           buttonsize="mdlc"
           buttonstyle="signinSignout"
         >
-          cadastrar
+          {creatingUser ? "cadastrando..." : "cadastrar"}
         </StyledButton>
       </form>
 

@@ -7,16 +7,12 @@ import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
-import {
-  NavLink,
-  useLocation,
-  useNavigate,
-} from "react-router-dom";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { loginUser } from "../../store/UserSlice";
-import { AppDispatch, RootState } from "../../store/Store";
+import { AppDispatch, RootState } from "../../store";
 
 export interface IFormLogin {
   login: string;
@@ -29,11 +25,11 @@ export default function Login() {
   const { register, handleSubmit } = useForm<IFormLogin>({
     defaultValues: { login: initialEmail || "" },
   });
-  
+
   const navigate = useNavigate();
-  
+
   const dispatch = useDispatch<AppDispatch>();
-  
+
   function onSubmit(data: IFormLogin) {
     const validateEmail = (email: string) => {
       const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,4}$/;
@@ -60,14 +56,14 @@ export default function Login() {
     }
   }
 
-  const loginStatus = useSelector((state: RootState) => state.user.status);
+  const loginStatus = useSelector((state: RootState) => state.user?.status);
 
   useEffect(() => {
     if (loginStatus === "fulfilled" && localStorage.getItem("user")) {
       navigate("/sua-carteira");
     } else if (loginStatus === "rejected") {
-      toast.error('Usuário e/ou senha incorretos', {
-          position: toast.POSITION.TOP_RIGHT
+      toast.error("Usuário e/ou senha incorretos", {
+        position: toast.POSITION.TOP_RIGHT,
       });
     }
   }, [loginStatus, navigate]);
