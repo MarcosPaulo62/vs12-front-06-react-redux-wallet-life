@@ -1,7 +1,8 @@
 import { StyledSpan, StyledTitle } from "../../styles/typography";
 import { StyledSectionDashboard } from "./style";
-import information from '../../assets/information.svg'
-import iconeAdd from '../../assets/iconeAdd.png'
+import information from "../../assets/information.svg";
+import iconeAdd from "../../assets/iconeAdd.png";
+import { NavLink } from "react-router-dom";
 
 export default function PrincipalSectionDashboard() {
   return (
@@ -23,23 +24,55 @@ export default function PrincipalSectionDashboard() {
         </div>
       </div>
       <div className="section-dois">
-        <div className="card-option">
-          <StyledSpan className="title-card-grid" fontSize="md">SUAS RECEITAS</StyledSpan>
-          <StyledSpan className="value-card-grid" fontSize="md">R$ 5000,00</StyledSpan>
-          <img className="img" src={information} alt="ícone para informações" />
-        </div>
-        <div className="card-option">
-          <StyledSpan className="title-card-grid" fontSize="md">SUAS DESPESAS</StyledSpan>
-          <StyledSpan className="value-card-grid" fontSize="md">R$ 5000,00</StyledSpan>
-          <img className="img" src={information} alt="ícone para informações" />
-        </div>
-        <div className="card-option">
-          <StyledSpan className="title-card-grid" fontSize="md">SEUS INVESTIMENTOS</StyledSpan>
-          <StyledSpan className="value-card-grid" fontSize="md">R$ 5000,00</StyledSpan>
-          <img className="img" src={information} alt="ícone para informações" />
-        </div>
+        <NavLink to={"/receitas"}>
+          <div className="card-option card1">
+            <StyledSpan className="title-card-grid" fontSize="md">
+              SUAS RECEITAS
+            </StyledSpan>
+            <StyledSpan className="value-card-grid" fontSize="md">
+              R$ 5000,00
+            </StyledSpan>
+            <img
+              className="img"
+              src={information}
+              alt="ícone para informações"
+            />
+          </div>
+        </NavLink>
+        <NavLink to={"/despesas"}>
+          <div className="card-option card2">
+            <StyledSpan className="title-card-grid" fontSize="md">
+              SUAS DESPESAS
+            </StyledSpan>
+            <StyledSpan className="value-card-grid" fontSize="md">
+              R$ 5000,00
+            </StyledSpan>
+            <img
+              className="img"
+              src={information}
+              alt="ícone para informações"
+            />
+          </div>
+        </NavLink>
+        <NavLink to={"/investimentos"}>
+          <div className="card-option card3">
+            <StyledSpan className="title-card-grid" fontSize="md">
+              SEUS INVESTIMENTOS
+            </StyledSpan>
+            <StyledSpan className="value-card-grid" fontSize="md">
+              R$ 5000,00
+            </StyledSpan>
+            <img
+              className="img"
+              src={information}
+              alt="ícone para informações"
+            />
+          </div>
+        </NavLink>
         <div className="center-option">
-            <button><img src={iconeAdd} alt="" /></button>
+          <button>
+            <img src={iconeAdd} alt="" />
+          </button>
         </div>
       </div>
     </StyledSectionDashboard>

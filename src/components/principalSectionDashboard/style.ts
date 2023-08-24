@@ -68,8 +68,7 @@ export const StyledSectionDashboard = styled.section`
 
             .card-option{
                 display: flex;
-                flex-direction: column;
-                background-color: #C1A099;
+                flex-direction: column;                
                 border-radius: 2rem;
                 width:23.68rem;
                 height: 19.9rem;                
@@ -99,6 +98,18 @@ export const StyledSectionDashboard = styled.section`
                     margin-bottom: 2rem;
                     margin-top: 2rem;
                 }
+            }
+
+            .card1 {
+                background-color: #B2C199;
+            }
+
+            .card2 {
+                background-color: #C1A099;
+            }
+
+            .card3 {
+                background-color: #99B5C1;
             }
 
             .center-option {
