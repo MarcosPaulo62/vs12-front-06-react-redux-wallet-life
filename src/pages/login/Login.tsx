@@ -10,14 +10,10 @@ import { ToastContainer } from "react-toastify";
 import {
   NavLink,
   useLocation,
-  BrowserRouter,
-  Router,
-  Routes,
-  Route,
   useNavigate,
 } from "react-router-dom";
 
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { loginUser } from "../../store/UserSlice";
 import { AppDispatch, RootState } from "../../store/Store";
@@ -28,34 +24,51 @@ export interface IFormLogin {
 }
 
 export default function Login() {
-  // states
-  const [login, setLogin] = useState<string>("");
-  const [senha, setSenha] = useState<string>("");
-
-  //redux state
-  //*const { loading, error } = useSelector((state: any)=>state.user);*/
-
+  const location = useLocation();
+  const { login: initialEmail } = location.state || {};
+  const { register, handleSubmit } = useForm<IFormLogin>({
+    defaultValues: { login: initialEmail || "" },
+  });
+  
   const navigate = useNavigate();
-
+  
   const dispatch = useDispatch<AppDispatch>();
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    let userCredentials: IFormLogin = {
-      login,
-      senha,
+  
+  function onSubmit(data: IFormLogin) {
+    const validateEmail = (email: string) => {
+      const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,4}$/;
+      return regex.test(email);
     };
-    dispatch(loginUser(userCredentials));
-  };
 
-  const loginStatus = useSelector((state: any) => state.user.status);
+    if (!data.login.trim() || !data.senha.trim()) {
+      toast.warning("É necessário preencher todos os campos!", {
+        position: toast.POSITION.TOP_RIGHT,
+      });
+    } else if (!validateEmail(data.login)) {
+      toast.warning(
+        "É necessário que seu e-mail esteja completo! Exemplo: seuemail@email.com",
+        {
+          position: toast.POSITION.TOP_RIGHT,
+        }
+      );
+    } else {
+      let userCredentials: IFormLogin = {
+        login: data.login,
+        senha: data.senha,
+      };
+      dispatch(loginUser(userCredentials));
+    }
+  }
+
+  const loginStatus = useSelector((state: RootState) => state.user.status);
 
   useEffect(() => {
-    console.log(loginStatus)
-    if (loginStatus === "fulfilled") {
-      setLogin("");
-      setSenha("");
+    if (loginStatus === "fulfilled" && localStorage.getItem("user")) {
       navigate("/sua-carteira");
+    } else if (loginStatus === "rejected") {
+      toast.error('Usuário e/ou senha incorretos', {
+          position: toast.POSITION.TOP_RIGHT
+      });
     }
   }, [loginStatus, navigate]);
 
@@ -81,15 +94,14 @@ export default function Login() {
         </div>
       </div>
 
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit((data) => onSubmit(data))}>
         <input
-          /*type="email"*/
+          type="email"
           id="email"
-          /*minLength={12}
-          maxLength={255}*/
+          minLength={12}
+          maxLength={255}
           placeholder="seu e-mail"
-          value={login}
-          onChange={(e) => setLogin(e.target.value)}
+          {...register("login")}
         />
         <input
           type="password"
@@ -97,7 +109,7 @@ export default function Login() {
           minLength={5}
           maxLength={30}
           placeholder="sua senha"
-          onChange={(e) => setSenha(e.target.value)}
+          {...register("senha")}
         />
         <StyledSpan fontSize="lg">
           Ainda não possui login?{" "}
@@ -113,8 +125,6 @@ export default function Login() {
           {loading ? "logando..." : "logar"}
         </StyledButton>
       </form>
-      {error && <div>{error}</div>}
-
       <ToastContainer />
     </StyledLoginContainer>
   );
