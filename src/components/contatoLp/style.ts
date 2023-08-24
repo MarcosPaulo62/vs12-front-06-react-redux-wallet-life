@@ -1,65 +1,69 @@
-import { styled } from "styled-components"
+import { styled } from "styled-components";
 
-export const ContainerContatoLp = styled.div `
-display: flex;
-flex-direction: row;
-align-items: center;
-justify-content: space-between;
-background-color: ${({theme})=>theme.color.jet};
-width: 74rem;
-max-width: 90%;
-border-radius: 32px;
-margin: auto;
-padding: 45px 85px;
-box-sizing: border-box;
-height: 655px;
+export const ContainerContatoLp = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  background-color: ${({ theme }) => theme.color.jet};
+  width: 74rem;
+  max-width: 90%;
+  border-radius: 32px;
+  margin: auto;
+  padding: 45px 85px;
+  box-sizing: border-box;
+  height: 655px;
 
-.styled-title{ 
+  .styled-title {
     width: 35%;
-    color: ${({theme})=>theme.color.white};
-}
+    color: ${({ theme }) => theme.color.white};
+  }
 
-.styled-title-fale-conosco{
+  .styled-title-fale-conosco {
     font-weight: bold;
     font-size: 44px;
-}
-`
+  }
+`;
 
 export const FormContatoLP = styled.form`
-display: flex;
-flex-direction: column;
-align-items: center;
-justify-content: space-between;
-width: 55%;
-height: 100%;
-background-color: ${({theme})=>theme.color.white};
-padding-block: 40px;
-border-radius: 32px;
-margin-right: -30px;
-gap: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  width: 55%;
+  height: 100%;
+  background-color: ${({ theme }) => theme.color.white};
+  padding-block: 40px;
+  border-radius: 32px;
+  margin-right: -30px;
+  gap: 20px;
 
-.divForm{
+  .divForm {
     width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
-}
+  }
 
-.input{
+  .input {
     width: 80%;
     padding: 15px;
     height: 60px;
     border-radius: 12px;
     border: none;
-    background-color: ${({theme})=>theme.color.alabaster};
-}
+    background-color: ${({ theme }) => theme.color.alabaster};
+  }
 
-.textarea{
+  .input-error {
+    border: 1px solid red;
+  }
+
+  .textarea {
     width: 80%;
     padding: 15px;
     height: 120px;
     border-radius: 12px;
     border: none;
-    background-color: ${({theme})=>theme.color.alabaster};
-}
-`
+    background-color: ${({ theme }) => theme.color.alabaster};
+  }
+`;
