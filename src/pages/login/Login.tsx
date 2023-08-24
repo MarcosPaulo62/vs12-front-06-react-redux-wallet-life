@@ -9,7 +9,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { loginUser } from "../../store/UserSlice";
 import { AppDispatch, RootState } from "../../store";
@@ -21,9 +21,10 @@ export interface IFormLogin {
 
 export default function Login() {
   const location = useLocation();
-  const { login: initialEmail } = location.state || {};
+  const email = location.state?.email || "";
+
   const { register, handleSubmit } = useForm<IFormLogin>({
-    defaultValues: { login: initialEmail || "" },
+    defaultValues: { login: email || "" },
   });
 
   const navigate = useNavigate();
@@ -66,7 +67,7 @@ export default function Login() {
         position: toast.POSITION.TOP_RIGHT,
       });
     }
-  }, [loginStatus, initialEmail, navigate]);
+  }, [loginStatus, navigate]);
 
   const userState = useSelector((state: RootState) => state.user);
 

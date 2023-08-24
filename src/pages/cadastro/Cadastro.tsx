@@ -42,6 +42,12 @@ export default function Cadastro() {
   const errorOnCreate = useSelector(selectErrorOnCreate);
   const creatingUser = useSelector(selectCreateSuccess);
 
+  const [emailValue, setEmailValue] = useState("");
+
+  const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setEmailValue(event.target.value);
+  };
+
   const [formErrors, setFormErrors] = useState<IFormErrors>({
     name: false,
     email: false,
@@ -120,8 +126,8 @@ export default function Cadastro() {
       toast.success("Usuário cadastrado com sucesso!", {
         position: toast.POSITION.TOP_RIGHT,
       });
+      navigate("/login", { state: { email: emailValue } });
       reset();
-      navigate("/login");
 
       dispatch(usersSlice.actions.resetCreateSuccess());
     }
@@ -171,6 +177,8 @@ export default function Cadastro() {
           {...register("email")}
           placeholder="seu e-mail"
           className={formErrors.email ? "input-error" : ""}
+          value={emailValue}
+          onChange={handleEmailChange}
         />
         <input
           type="date"
