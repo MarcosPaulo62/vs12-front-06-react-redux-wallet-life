@@ -12,6 +12,9 @@ declare module "styled-components" {
       alabaster: string;
       error: string;
       success: string;
+      green: string;
+      red: string;
+      blue: string;
     };
   }
 }

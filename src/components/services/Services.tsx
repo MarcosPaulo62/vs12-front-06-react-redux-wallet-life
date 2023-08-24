@@ -24,7 +24,7 @@ export default function Services() {
       </div>
       <div className="services-grid">
         <div className="grid-item">
-          <div className="circle">
+          <div className="circle blue-circle">
             <img
               src={IconChart}
               alt="Ícone representando um gráfico de barras com valores em crescimento"
@@ -35,7 +35,7 @@ export default function Services() {
           </StyledSpan>
         </div>
         <div className="grid-item">
-          <div className="circle">
+          <div className="circle green-circle">
             <img
               src={IconRevenue}
               alt="Ícone representando um gráfico de barras com valores em crescimento"
@@ -46,7 +46,7 @@ export default function Services() {
           </StyledSpan>
         </div>
         <div className="grid-item">
-          <div className="circle">
+          <div className="circle red-circle">
             <img
               src={IconCalculator}
               alt="Ícone representando um gráfico de barras com valores em crescimento"

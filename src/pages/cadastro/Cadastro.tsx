@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { StyledSpan, StyledTitle } from "../../styles/typography";
 import { StyledCadastroContainer } from "./style";
 import logoDark from "../../assets/logoTextDark.png";
@@ -8,6 +9,13 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
 import { NavLink, useNavigate } from "react-router-dom";
+import { createUser } from "../../store/users/usersSlice";
+import { useAppDispatch } from "../../store";
+import { useSelector } from "react-redux";
+import {
+  selectCreateSuccess,
+  selectErrorOnCreate,
+} from "../../store/users/selectors";
 
 export interface IFormCadastro {
   name: string;
@@ -17,16 +25,49 @@ export interface IFormCadastro {
   password: string;
 }
 
+interface IFormErrors {
+  name: boolean;
+  email: boolean;
+  dateBirth: boolean;
+  cpf: boolean;
+  password: boolean;
+}
+
 export default function Cadastro() {
   const { register, handleSubmit, reset } = useForm<IFormCadastro>();
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
+  const createSuccess = useSelector(selectCreateSuccess);
+  const errorOnCreate = useSelector(selectErrorOnCreate);
+  const creatingUser = useSelector(selectCreateSuccess);
 
-  function onSubmit(data: IFormCadastro) {
+  const [formErrors, setFormErrors] = useState<IFormErrors>({
+    name: false,
+    email: false,
+    dateBirth: false,
+    cpf: false,
+    password: false,
+  });
+
+  async function onSubmit(data: IFormCadastro) {
     const validateEmail = (email: string) => {
-      const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,4}$/;
+      const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
       return regex.test(email);
     };
 
+    const today = new Date();
+    const birthDate = new Date(data.dateBirth);
+
+    const newFormErrors: IFormErrors = {
+      name: !data.name.trim(),
+      email: !data.email.trim() || !validateEmail(data.email),
+      dateBirth: !data.dateBirth.trim() || birthDate > today,
+      cpf: !data.cpf.trim() || !/^\d+$/.test(data.cpf),
+      password: !data.password.trim(),
+    };
+
+    setFormErrors(newFormErrors);
+    
     if (
       !data.name.trim() ||
       !data.email.trim() ||
@@ -48,24 +89,53 @@ export default function Cadastro() {
           position: toast.POSITION.TOP_RIGHT,
         }
       );
-    } else {
-      const today = new Date();
-      const birthDate = new Date(data.dateBirth);
 
-      if (birthDate > today) {
-        toast.warning("A data de nascimento não pode ser no futuro!", {
-          position: toast.POSITION.TOP_RIGHT,
-        });
-      } else {
-        toast.success("Cadastro realizado com sucesso!", {
-          position: toast.POSITION.TOP_RIGHT,
-        });
-        console.log(data);
-        navigate("/login", { state: { email: data.email } });
-        reset();
-      }
+      return;
+    } else if (birthDate > today) {
+      toast.warning("A data de nascimento não pode ser no futuro!", {
+        position: toast.POSITION.TOP_RIGHT,
+      });
+
+      return;
+    } else {
+      dispatch(
+        createUser({
+          cpf: data.cpf,
+          dataNascimento: data.dateBirth,
+          email: data.email,
+          login: data.email,
+          nome: data.name,
+          senha: data.password,
+          tipoCargo: 1,
+        })
+      );
+      toast.success("Usuário cadastrado com sucesso!", {
+        position: toast.POSITION.TOP_RIGHT,
+      });
     }
+
+    if (Object.values(newFormErrors).some((error) => error)) {
+      return;
+    } 
   }
+
+  console.log("createSuccess", createSuccess);
+  console.log("errorOnCreate", errorOnCreate);
+
+  useEffect(() => {
+    if (createSuccess) {
+      navigate("/login");
+      reset();
+    }
+  }, [createSuccess]);
+
+  useEffect(() => {
+    if (errorOnCreate) {
+      toast.error(errorOnCreate, {
+        position: toast.POSITION.TOP_RIGHT,
+      });
+    }
+  }, [errorOnCreate]);
 
   return (
     <StyledCadastroContainer>
@@ -93,6 +163,7 @@ export default function Cadastro() {
           maxLength={255}
           {...register("name")}
           placeholder="seu nome completo"
+          className={formErrors.name ? "input-error" : ""}
         />
         <input
           type="email"
@@ -101,12 +172,14 @@ export default function Cadastro() {
           maxLength={300}
           {...register("email")}
           placeholder="seu e-mail"
+          className={formErrors.email ? "input-error" : ""}
         />
         <input
           type="date"
           id="dateBith"
           {...register("dateBirth")}
           placeholder="data de nascimento"
+          className={formErrors.dateBirth ? "input-error" : ""}
         />
         <input
           type="text"
@@ -115,6 +188,7 @@ export default function Cadastro() {
           maxLength={11}
           {...register("cpf")}
           placeholder="CPF (apenas números)"
+          className={formErrors.cpf ? "input-error" : ""}
         />
         <input
           type="password"
@@ -123,6 +197,7 @@ export default function Cadastro() {
           maxLength={30}
           {...register("password")}
           placeholder="senha (mínimo 5 caracteres)"
+          className={formErrors.password ? "input-error" : ""}
         />
         <StyledSpan fontSize="lg">
           Já possui cadastro?{" "}
@@ -135,7 +210,7 @@ export default function Cadastro() {
           buttonsize="mdlc"
           buttonstyle="signinSignout"
         >
-          cadastrar
+          {creatingUser ? "cadastrando..." : "cadastrar"}
         </StyledButton>
       </form>
 

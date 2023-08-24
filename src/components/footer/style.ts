@@ -56,7 +56,7 @@ export const StyledFooterContainer = styled.footer`
     display: flex;
     gap: 2.1rem;
 
-    input {
+    .input {
       width: 29.3rem;
       padding-left: 1.7rem;
       border-radius: 0.75rem;
@@ -64,5 +64,8 @@ export const StyledFooterContainer = styled.footer`
       font-weight: 400;
       border: none;
     }
+  }
+  .input-error {
+    border: 1px solid red;
   }
 `;
