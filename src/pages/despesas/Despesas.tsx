@@ -1,10 +1,16 @@
 import { NavLink } from "react-router-dom";
+import SideHeader from "../../components/sideHeaderDashboard/SideHeaderDashboard";
+import { StyledContainerDashboard } from "../dashboard/style";
+import ExpensesSectionDashboard from "../../components/expensesSectionDashboard/ExpensesSectionDashboard";
 
-export default function Despesas() {
+export default function Receitas() {
     return(
-        <div>
-            <h1>DESPESAAAAAAAAAAAAAS</h1>
-            <NavLink to="/login"><button>SAIR</button></NavLink>
-        </div>
+        <>
+        <StyledContainerDashboard>
+          <SideHeader />
+          <ExpensesSectionDashboard />
+        </StyledContainerDashboard>
+        <NavLink to="/login"></NavLink>
+      </>
     )
 }
