@@ -4,6 +4,7 @@ import styled from 'styled-components';
 export const StyledSectionDashboard = styled.section`
     display: flex;
     flex-direction: column;
+    margin-bottom: 8.8rem;
 
     .title{
         margin-top: 8.8rem;

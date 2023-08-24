@@ -51,6 +51,7 @@ export const FormContatoLP = styled.form`
     height: 60px;
     border-radius: 12px;
     border: none;
+    font-size: 24px;
     background-color: ${({ theme }) => theme.color.alabaster};
   }
 
@@ -64,6 +65,7 @@ export const FormContatoLP = styled.form`
     height: 120px;
     border-radius: 12px;
     border: none;
-    background-color: ${({ theme }) => theme.color.alabaster};
-  }
-`;
+    font-size: 24px;
+    background-color: ${({theme})=>theme.color.alabaster};
+}
+`

@@ -58,9 +58,21 @@ export const ServicesContainer = styled.div`
   .circle {
     width: 90px;
     height: 90px;
-    background-color: ${({ theme }) => theme.color.alabaster};
     padding: 1.5rem;
     border-radius: 50%;
+    background-color: ${({ theme }) => theme.color.alabaster};
+  }
+
+  .blue-circle{
+    background-color: ${({ theme }) => theme.color.blue};
+  }
+
+  .green-circle{
+    background-color: ${({ theme }) => theme.color.green};
+  }
+
+  .red-circle{
+    background-color: ${({ theme }) => theme.color.red};
   }
 
   .styled-span {
