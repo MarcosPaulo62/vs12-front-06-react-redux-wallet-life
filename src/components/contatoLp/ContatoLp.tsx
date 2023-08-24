@@ -66,7 +66,7 @@ export default function ContatoLp() {
         <div className="divForm">
           <input
             className="input"
-            placeholder="seu nome"
+            placeholder="seu nome" 
             {...register("nome")}
           />
         </div>

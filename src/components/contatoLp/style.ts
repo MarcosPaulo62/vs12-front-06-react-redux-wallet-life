@@ -51,6 +51,7 @@ gap: 20px;
     height: 60px;
     border-radius: 12px;
     border: none;
+    font-size: 24px;
     background-color: ${({theme})=>theme.color.alabaster};
 }
 
@@ -60,6 +61,7 @@ gap: 20px;
     height: 120px;
     border-radius: 12px;
     border: none;
+    font-size: 24px;
     background-color: ${({theme})=>theme.color.alabaster};
 }
 `
