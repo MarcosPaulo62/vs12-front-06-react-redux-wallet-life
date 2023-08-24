@@ -10,6 +10,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
 import { NavLink, useNavigate } from "react-router-dom";
 import { createUser } from "../../store/users/usersSlice";
+import { usersSlice } from "../../store/users/usersSlice";
 import { useAppDispatch } from "../../store";
 import { useSelector } from "react-redux";
 import {
@@ -78,10 +79,6 @@ export default function Cadastro() {
       toast.warning("É necessário preencher todos os campos!", {
         position: toast.POSITION.TOP_RIGHT,
       });
-    } else if (!/^\d+$/.test(data.cpf)) {
-      toast.warning("CPF inválido! Deve conter apenas números.", {
-        position: toast.POSITION.TOP_RIGHT,
-      });
     } else if (!validateEmail(data.email)) {
       toast.warning(
         "É necessário que seu e-mail esteja completo! Exemplo: seuemail@email.com",
@@ -97,6 +94,10 @@ export default function Cadastro() {
       });
 
       return;
+    } else if (!/^\d+$/.test(data.cpf)) {
+      toast.warning("CPF inválido! Deve conter apenas números.", {
+        position: toast.POSITION.TOP_RIGHT,
+      });
     } else {
       dispatch(
         createUser({
@@ -121,6 +122,8 @@ export default function Cadastro() {
       });
       reset();
       navigate("/login");
+
+      dispatch(usersSlice.actions.resetCreateSuccess());
     }
   }, [createSuccess]);
 

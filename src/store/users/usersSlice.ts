@@ -22,6 +22,9 @@ export const usersSlice = createSlice({
     createSuccess: false,
   } as UsersSliceState,
   reducers: {
+    resetCreateSuccess: (state) => {
+      state.createSuccess = false;
+    },
       },
   extraReducers: (builder) => {
     builder.addCase(createUser.fulfilled, (state, { payload }) => {
