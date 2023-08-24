@@ -7,7 +7,15 @@ import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
-import { NavLink, useLocation, BrowserRouter, Router, Routes, Route, useNavigate } from "react-router-dom";
+import {
+  NavLink,
+  useLocation,
+  BrowserRouter,
+  Router,
+  Routes,
+  Route,
+  useNavigate,
+} from "react-router-dom";
 
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -15,46 +23,45 @@ import { loginUser } from "../../store/UserSlice";
 import { AppDispatch, RootState } from "../../store/Store";
 
 export interface IFormLogin {
-  email: string;
-  password: string;
+  login: string;
+  senha: string;
 }
 
 export default function Login() {
-
   // states
-  const [email, setEmail] = useState<string>('');
-  const [password, setPassword] = useState<string>('');
+  const [login, setLogin] = useState<string>("");
+  const [senha, setSenha] = useState<string>("");
 
   //redux state
   //*const { loading, error } = useSelector((state: any)=>state.user);*/
-  
-  const navigate = useNavigate()
+
+  const navigate = useNavigate();
 
   const dispatch = useDispatch<AppDispatch>();
 
-    const handleSubmit = (e: React.FormEvent)=>{
-      e.preventDefault();
-      let userCredentials: IFormLogin = {
-        email,
-        password
-      }
-      dispatch(loginUser(userCredentials));
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    let userCredentials: IFormLogin = {
+      login,
+      senha,
+    };
+    dispatch(loginUser(userCredentials));
+  };
+
+  const loginStatus = useSelector((state: any) => state.user.status);
+
+  useEffect(() => {
+    console.log(loginStatus)
+    if (loginStatus === "fulfilled") {
+      setLogin("");
+      setSenha("");
+      navigate("/sua-carteira");
     }
+  }, [loginStatus, navigate]);
 
-    const loginStatus = useSelector((state: any) => state.user.status);
-    useEffect(() => {
-      if (loginStatus === 'fulfilled') {
-        setEmail('');
-        setPassword('');
-        navigate('/');
-      }
-    }, [loginStatus, navigate]);
+  const userState = useSelector((state: RootState) => state.user);
 
-    const userState = useSelector((state: RootState) => state.user);
-
-    const { loading, error } = userState;
-
-  
+  const { loading, error } = userState;
 
   return (
     <StyledLoginContainer>
@@ -81,10 +88,8 @@ export default function Login() {
           /*minLength={12}
           maxLength={255}*/
           placeholder="seu e-mail"
-          
-          value={email}
-          onChange={(e)=>setEmail(e.target.value)}
-
+          value={login}
+          onChange={(e) => setLogin(e.target.value)}
         />
         <input
           type="password"
@@ -92,9 +97,7 @@ export default function Login() {
           minLength={5}
           maxLength={30}
           placeholder="sua senha"
-
-          onChange={(e)=>setPassword(e.target.value)}
-
+          onChange={(e) => setSenha(e.target.value)}
         />
         <StyledSpan fontSize="lg">
           Ainda não possui login?{" "}
@@ -107,12 +110,10 @@ export default function Login() {
           buttonsize="mdlc"
           buttonstyle="signinSignout"
         >
-          {loading? 'logando...': 'logar'}
+          {loading ? "logando..." : "logar"}
         </StyledButton>
       </form>
-      {error&&(
-        <div>{error}</div>
-      )}
+      {error && <div>{error}</div>}
 
       <ToastContainer />
     </StyledLoginContainer>
