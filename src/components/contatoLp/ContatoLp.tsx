@@ -107,7 +107,7 @@ export default function ContatoLp() {
         <div className="divForm">
           <textarea
             placeholder="sua dúvida"
-            className={formErrorsLp.duvida ? "input input-error" : "input"}
+            className={formErrorsLp.duvida ? "textarea input-error" : "textarea"}
             {...register("duvida")}
           />
         </div>
