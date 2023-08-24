@@ -29,7 +29,7 @@ export default function SideHeader() {
         <NavLink
           onClick={() => localStorage.removeItem("user")}
           className="navlink"
-          to={"/login"}
+          to={"/"}
         >
           Sair
         </NavLink>

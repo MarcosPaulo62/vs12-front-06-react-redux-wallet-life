@@ -59,14 +59,14 @@ export default function Login() {
   const loginStatus = useSelector((state: RootState) => state.user?.status);
 
   useEffect(() => {
-    if (loginStatus === "fulfilled" && localStorage.getItem("user")) {
+    if (loginStatus === "fulfilled") {
       navigate("/sua-carteira");
     } else if (loginStatus === "rejected") {
       toast.error("Usuário e/ou senha incorretos", {
         position: toast.POSITION.TOP_RIGHT,
       });
     }
-  }, [loginStatus]);
+  }, [loginStatus, initialEmail, navigate]);
 
   const userState = useSelector((state: RootState) => state.user);
 
