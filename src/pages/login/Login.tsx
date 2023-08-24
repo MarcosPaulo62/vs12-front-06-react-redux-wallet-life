@@ -59,7 +59,7 @@ export default function Login() {
   const loginStatus = useSelector((state: RootState) => state.user?.status);
 
   useEffect(() => {
-    if (loginStatus === "fulfilled") {
+    if (localStorage.getItem("user")) {
       navigate("/sua-carteira");
     } else if (loginStatus === "rejected") {
       toast.error("Usuário e/ou senha incorretos", {
