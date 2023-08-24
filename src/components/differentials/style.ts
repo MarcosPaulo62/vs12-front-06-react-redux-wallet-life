@@ -57,8 +57,8 @@ export const Caption = styled.p`
 export const Title = styled.h1`
   font-size: 5rem;
 
-  @media (max-width: 1441px){
-  font-size: 5rem;
+  @media (max-width: 1025px){
+  font-size: 4.5rem;
     
   }
 
