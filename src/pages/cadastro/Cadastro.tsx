@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { StyledSpan, StyledTitle } from "../../styles/typography";
 import { StyledCadastroContainer } from "./style";
 import logoDark from "../../assets/logoTextDark.png";
@@ -25,6 +25,14 @@ export interface IFormCadastro {
   password: string;
 }
 
+interface IFormErrors {
+  name: boolean;
+  email: boolean;
+  dateBirth: boolean;
+  cpf: boolean;
+  password: boolean;
+}
+
 export default function Cadastro() {
   const { register, handleSubmit, reset } = useForm<IFormCadastro>();
   const navigate = useNavigate();
@@ -32,6 +40,14 @@ export default function Cadastro() {
   const createSuccess = useSelector(selectCreateSuccess);
   const errorOnCreate = useSelector(selectErrorOnCreate);
   const creatingUser = useSelector(selectCreateSuccess);
+
+  const [formErrors, setFormErrors] = useState<IFormErrors>({
+    name: false,
+    email: false,
+    dateBirth: false,
+    cpf: false,
+    password: false,
+  });
 
   async function onSubmit(data: IFormCadastro) {
     const validateEmail = (email: string) => {
@@ -42,6 +58,16 @@ export default function Cadastro() {
     const today = new Date();
     const birthDate = new Date(data.dateBirth);
 
+    const newFormErrors: IFormErrors = {
+      name: !data.name.trim(),
+      email: !data.email.trim() || !validateEmail(data.email),
+      dateBirth: !data.dateBirth.trim() || birthDate > today,
+      cpf: !data.cpf.trim() || !/^\d+$/.test(data.cpf),
+      password: !data.password.trim(),
+    };
+
+    setFormErrors(newFormErrors);
+    
     if (
       !data.name.trim() ||
       !data.email.trim() ||
@@ -87,7 +113,11 @@ export default function Cadastro() {
         position: toast.POSITION.TOP_RIGHT,
       });
     }
-  } 
+
+    if (Object.values(newFormErrors).some((error) => error)) {
+      return;
+    } 
+  }
 
   console.log("createSuccess", createSuccess);
   console.log("errorOnCreate", errorOnCreate);
@@ -133,6 +163,7 @@ export default function Cadastro() {
           maxLength={255}
           {...register("name")}
           placeholder="seu nome completo"
+          className={formErrors.name ? "input-error" : ""}
         />
         <input
           type="email"
@@ -141,12 +172,14 @@ export default function Cadastro() {
           maxLength={300}
           {...register("email")}
           placeholder="seu e-mail"
+          className={formErrors.email ? "input-error" : ""}
         />
         <input
           type="date"
           id="dateBith"
           {...register("dateBirth")}
           placeholder="data de nascimento"
+          className={formErrors.dateBirth ? "input-error" : ""}
         />
         <input
           type="text"
@@ -155,6 +188,7 @@ export default function Cadastro() {
           maxLength={11}
           {...register("cpf")}
           placeholder="CPF (apenas números)"
+          className={formErrors.cpf ? "input-error" : ""}
         />
         <input
           type="password"
@@ -163,6 +197,7 @@ export default function Cadastro() {
           maxLength={30}
           {...register("password")}
           placeholder="senha (mínimo 5 caracteres)"
+          className={formErrors.password ? "input-error" : ""}
         />
         <StyledSpan fontSize="lg">
           Já possui cadastro?{" "}

@@ -46,6 +46,10 @@ export const StyledCadastroContainer = styled.main`
       border: none;
     }
 
+    .input-error {
+      border: 1px solid red;
+    }
+
     strong {
       cursor: pointer;
     }
