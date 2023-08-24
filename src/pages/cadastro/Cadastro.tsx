@@ -67,7 +67,7 @@ export default function Cadastro() {
     };
 
     setFormErrors(newFormErrors);
-    
+
     if (
       !data.name.trim() ||
       !data.email.trim() ||
@@ -103,29 +103,24 @@ export default function Cadastro() {
           cpf: data.cpf,
           dataNascimento: data.dateBirth,
           email: data.email,
-          login: data.email,
           nome: data.name,
           senha: data.password,
-          tipoCargo: 1,
         })
       );
-      toast.success("Usuário cadastrado com sucesso!", {
-        position: toast.POSITION.TOP_RIGHT,
-      });
     }
 
     if (Object.values(newFormErrors).some((error) => error)) {
       return;
-    } 
+    }
   }
-
-  console.log("createSuccess", createSuccess);
-  console.log("errorOnCreate", errorOnCreate);
 
   useEffect(() => {
     if (createSuccess) {
-      navigate("/login");
+      toast.success("Usuário cadastrado com sucesso!", {
+        position: toast.POSITION.TOP_RIGHT,
+      });
       reset();
+      navigate("/login");
     }
   }, [createSuccess]);
 

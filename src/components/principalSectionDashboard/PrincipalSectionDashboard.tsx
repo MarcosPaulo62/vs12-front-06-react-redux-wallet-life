@@ -29,14 +29,16 @@ export default function PrincipalSectionDashboard() {
             <StyledSpan className="title-card-grid" fontSize="md">
               SUAS RECEITAS
             </StyledSpan>
-            <StyledSpan className="value-card-grid" fontSize="md">
-              R$ 5000,00
-            </StyledSpan>
-            <img
-              className="img"
-              src={information}
-              alt="ícone para informações"
-            />
+            <div className="value-text">
+              <StyledSpan className="value-card-grid" fontSize="md">
+                R$ 5000,00
+              </StyledSpan>
+              <img
+                className="img"
+                src={information}
+                alt="ícone para informações"
+              />
+            </div>
           </div>
         </NavLink>
         <NavLink to={"/despesas"}>
@@ -44,14 +46,16 @@ export default function PrincipalSectionDashboard() {
             <StyledSpan className="title-card-grid" fontSize="md">
               SUAS DESPESAS
             </StyledSpan>
-            <StyledSpan className="value-card-grid" fontSize="md">
-              R$ 5000,00
-            </StyledSpan>
-            <img
-              className="img"
-              src={information}
-              alt="ícone para informações"
-            />
+            <div className="value-text">
+              <StyledSpan className="value-card-grid" fontSize="md">
+                R$ 5000,00
+              </StyledSpan>
+              <img
+                className="img"
+                src={information}
+                alt="ícone para informações"
+              />
+            </div>
           </div>
         </NavLink>
         <NavLink to={"/investimentos"}>
@@ -59,14 +63,16 @@ export default function PrincipalSectionDashboard() {
             <StyledSpan className="title-card-grid" fontSize="md">
               SEUS INVESTIMENTOS
             </StyledSpan>
-            <StyledSpan className="value-card-grid" fontSize="md">
-              R$ 5000,00
-            </StyledSpan>
-            <img
-              className="img"
-              src={information}
-              alt="ícone para informações"
-            />
+            <div className="value-text">
+              <StyledSpan className="value-card-grid" fontSize="md">
+                R$ 5000,00
+              </StyledSpan>
+              <img
+                className="img"
+                src={information}
+                alt="ícone para informações"
+              />
+            </div>
           </div>
         </NavLink>
         <div className="center-option">

@@ -6,7 +6,7 @@ export const StyledHeader = styled.header`
     justify-content: flex-start;
     align-items: center;
     height: 100vh;
-    width: 23.75rem;
+    width: 30%;
     background-color: ${({theme}) => theme.color.alabaster};
     gap: 2rem;
     padding: 3rem;
