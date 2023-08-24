@@ -8,19 +8,34 @@ import { NavLink } from "react-router-dom";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
+import { useState } from "react";
 
 type FormData = {
   email: string;
 };
 
+interface IFormErrosFooter {
+  email: boolean;
+}
+
 export default function Footer() {
   const { register, handleSubmit, reset } = useForm<FormData>();
+
+  const [formErrorsFooter, setFormErrors] = useState<IFormErrosFooter>({
+    email: false,
+  });
 
   const onSubmit: SubmitHandler<FormData> = (data) => {
     const validateEmail = (email: string) => {
       const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
       return regex.test(email);
     };
+
+    const newFormErrorsFooter: IFormErrosFooter = {
+      email: !data.email.trim() || !validateEmail(data.email),
+    };
+
+    setFormErrors(newFormErrorsFooter);
 
     if (!validateEmail(data.email)) {
       toast.warning(
@@ -34,6 +49,10 @@ export default function Footer() {
         position: toast.POSITION.TOP_RIGHT,
       });
       reset();
+    }
+
+    if (Object.values(newFormErrorsFooter).some((error) => error)) {
+      return;
     }
   };
 
@@ -57,6 +76,7 @@ export default function Footer() {
           <form className="styled-input" onSubmit={handleSubmit(onSubmit)}>
             <input
               type="email"
+              className={formErrorsFooter.email ? "input input-error" : "input"}
               {...register("email")}
               placeholder="Seu email"
             />
