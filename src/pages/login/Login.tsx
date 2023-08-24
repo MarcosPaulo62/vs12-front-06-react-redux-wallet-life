@@ -7,7 +7,12 @@ import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
-import { NavLink, useLocation } from "react-router-dom";
+import { NavLink, useLocation, BrowserRouter, Router, Routes, Route, useNavigate } from "react-router-dom";
+
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { loginUser } from "../../store/UserSlice";
+import { AppDispatch, RootState } from "../../store/Store";
 
 export interface IFormLogin {
   email: string;
@@ -15,25 +20,41 @@ export interface IFormLogin {
 }
 
 export default function Login() {
-  const location = useLocation();
-  const { email: initialEmail } = location.state || {};
-  const { register, handleSubmit } = useForm<IFormLogin>({
-    defaultValues: { email: initialEmail || "" },
-  });
 
-  function onSubmit(data: IFormLogin) {
-    if (!data.email.trim() || !data.password.trim()) {
-      toast.warning("É necessário preencher todos os campos!", {
-        position: toast.POSITION.TOP_RIGHT,
-      });
-    } else {
-      console.log(data);
+  // states
+  const [email, setEmail] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
+
+  //redux state
+  //*const { loading, error } = useSelector((state: any)=>state.user);*/
+  
+  const navigate = useNavigate()
+
+  const dispatch = useDispatch<AppDispatch>();
+
+    const handleSubmit = (e: React.FormEvent)=>{
+      e.preventDefault();
+      let userCredentials: IFormLogin = {
+        email,
+        password
+      }
+      dispatch(loginUser(userCredentials));
     }
 
-    // toast.error('Usuário e/ou senha incorretos', {
-    //     position: toast.POSITION.TOP_RIGHT
-    // });
-  }
+    const loginStatus = useSelector((state: any) => state.user.status);
+    useEffect(() => {
+      if (loginStatus === 'fulfilled') {
+        setEmail('');
+        setPassword('');
+        navigate('/');
+      }
+    }, [loginStatus, navigate]);
+
+    const userState = useSelector((state: RootState) => state.user);
+
+    const { loading, error } = userState;
+
+  
 
   return (
     <StyledLoginContainer>
@@ -53,22 +74,27 @@ export default function Login() {
         </div>
       </div>
 
-      <form onSubmit={handleSubmit((data) => onSubmit(data))}>
+      <form onSubmit={handleSubmit}>
         <input
-          type="email"
+          /*type="email"*/
           id="email"
-          minLength={12}
-          maxLength={255}
-          {...register("email")}
+          /*minLength={12}
+          maxLength={255}*/
           placeholder="seu e-mail"
+          
+          value={email}
+          onChange={(e)=>setEmail(e.target.value)}
+
         />
         <input
           type="password"
           id="password"
           minLength={5}
           maxLength={30}
-          {...register("password")}
           placeholder="sua senha"
+
+          onChange={(e)=>setPassword(e.target.value)}
+
         />
         <StyledSpan fontSize="lg">
           Ainda não possui login?{" "}
@@ -81,9 +107,12 @@ export default function Login() {
           buttonsize="mdlc"
           buttonstyle="signinSignout"
         >
-          logar
+          {loading? 'logando...': 'logar'}
         </StyledButton>
       </form>
+      {error&&(
+        <div>{error}</div>
+      )}
 
       <ToastContainer />
     </StyledLoginContainer>
