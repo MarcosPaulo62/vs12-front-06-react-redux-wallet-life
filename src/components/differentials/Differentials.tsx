@@ -34,7 +34,7 @@ export const Differentials = () => {
               <Caption>Valor gerenciado</Caption>
             </Topic>
           </Container>
-          <NavLink to={"/login"}>
+          <NavLink to={(localStorage.getItem("user"))? "/sua-carteira" : "/login"}>
             <StyledButton
               buttonsize="lg"
               buttonstyle="landingPage"
