@@ -65,7 +65,7 @@ export default function Footer() {
         </NavLink>
         <NavLink className="cadastro" to={"/cadastro"}>
           Cadastro
-        </NavLink>
+        </NavLink> 
       </div>
       <div className="right-section">
         <StyledTag className="paragraphy">
