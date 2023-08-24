@@ -11,6 +11,9 @@ export const ColorsTheme = {
       alabaster: "#E4E4DB",
       error: "#FC0000",
       success: "#36C76C",
+      green: "#B2C199",
+      red: "#C1A099",
+      blue: "#99B5C1",
     },
   };
   
