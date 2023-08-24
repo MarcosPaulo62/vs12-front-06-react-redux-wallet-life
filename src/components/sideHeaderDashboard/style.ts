@@ -13,8 +13,7 @@ export const StyledHeader = styled.header`
 
     img{
         width: 20.43rem;
-        max-width: 100%;
-        height: 11.06rem;       
+        max-width: 100%;      
     }
 
     div {
@@ -29,6 +28,7 @@ export const StyledHeader = styled.header`
         color: ${({ theme }) => theme.color.jet};
         font-size: 24px;
         font-weight: 700;
+        cursor: pointer;
     }
 
 `

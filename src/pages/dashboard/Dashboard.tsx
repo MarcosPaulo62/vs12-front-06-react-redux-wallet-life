@@ -6,7 +6,6 @@ export default function Dashboard() {
     <div>
       <SideHeader />
       <NavLink to="/login">
-        <button>SAIR</button>
       </NavLink>
     </div>
   );

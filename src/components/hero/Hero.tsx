@@ -22,7 +22,7 @@ export default function Hero() {
           Aqui, nós simplificamos o gerenciamento para que você tenha uma vida
           financeira plena!
         </StyledTag>
-        <NavLink to={"/login"}>
+        <NavLink to={(localStorage.getItem("user"))? "/sua-carteira" : "/login"}>
           <StyledButton
             className="styled-btn"
             buttonsize={"lg"}
