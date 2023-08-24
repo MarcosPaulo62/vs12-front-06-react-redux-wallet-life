@@ -10,6 +10,8 @@ export const StyledHeader = styled.header`
     background-color: ${({theme}) => theme.color.alabaster};
     gap: 2rem;
     padding: 3rem;
+    position: sticky;
+    top: 0;
 
     img{
         width: 20.43rem;
