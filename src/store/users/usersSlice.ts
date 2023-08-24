@@ -22,7 +22,7 @@ export const usersSlice = createSlice({
     createSuccess: false,
   } as UsersSliceState,
   reducers: {
-  },
+      },
   extraReducers: (builder) => {
     builder.addCase(createUser.fulfilled, (state, { payload }) => {
       if (payload) {
@@ -45,6 +45,7 @@ export const usersSlice = createSlice({
     })
   }
 })
+
 
 export const createUser = createAsyncThunk(
   'users/createUser',
