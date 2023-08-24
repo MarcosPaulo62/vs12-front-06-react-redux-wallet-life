@@ -5,18 +5,20 @@ export const StyledSectionDashboard = styled.section`
     display: flex;
     flex-direction: column;
     margin-bottom: 8.8rem;
+    align-self: center;
+    width: 70%;
 
     .title{
-        margin-top: 8.8rem;
+        margin-top: 1rem;
         margin-left: 5.3rem;
-        margin-bottom: 3.62rem;
+        margin-bottom: 1.5rem;
     }
 
     .saldo-total {
         display: flex;
         flex-direction: column;
         margin-left: 5.3rem;
-        width:49.25rem;
+        width:80%;
         height: 12.06rem;
         background-color: ${({theme}) => theme.color.jet};
         border-radius: 2rem;
@@ -63,23 +65,28 @@ export const StyledSectionDashboard = styled.section`
             justify-content: center;
             align-items: center;
             margin-left: 5rem;
-            margin-top: 6.06rem;
-            width:49.25rem;
+            margin-top: 2.2rem;
+            width:80%;
             gap: 1.88rem;
 
             .card-option{
                 display: flex;
                 flex-direction: column;                
                 border-radius: 2rem;
-                width:23.68rem;
-                height: 19.9rem;                
+                width:100%;
+                height: 11.4rem;                
                 cursor: pointer;
+
+                .value-text {
+                    display: flex;
+                    justify-content: space-between;
+                    width: 100%;
+                }
 
                 img{
                     width: 2rem;
                     height: 2rem;
-                    margin-left: 20rem;
-                    margin-top: 2rem;
+                    margin-right: 1.5rem;
                 }
 
                 .title-card-grid {
@@ -87,30 +94,29 @@ export const StyledSectionDashboard = styled.section`
                     font-weight: 700;
                     line-height: 2.5rem;
                     margin-left: 2.06rem;
-                    margin-top: 3.25rem;
-                    margin-bottom: 2.19rem;
+                    margin-top: 2.44rem;
+                    margin-bottom: 2.06rem;
                 }
 
                 .value-card-grid {
                     font-size: 2rem;                    
                     font-weight: 700;
                     line-height: 2.5rem;
-                    margin-left: 5.5rem;
+                    margin-left: 2.06rem;
                     margin-bottom: 2rem;
-                    margin-top: 2rem;
                 }
             }
 
             .card1 {
-                background-color: #B2C199;
+                background-color: ${({theme}) => theme.color.green};
             }
 
             .card2 {
-                background-color: #C1A099;
+                background-color: ${({theme}) => theme.color.red};
             }
 
             .card3 {
-                background-color: #99B5C1;
+                background-color: ${({theme}) => theme.color.blue};
             }
 
             .center-option {
@@ -119,6 +125,7 @@ export const StyledSectionDashboard = styled.section`
                 width: 10.05rem;
                 height: 11.9rem;
                 border-radius: 2rem;
+                display: none;
 
                 button{
                     
