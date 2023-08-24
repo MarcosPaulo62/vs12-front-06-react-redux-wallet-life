@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { StyledSpan, StyledTitle } from "../../styles/typography";
 import { StyledCadastroContainer } from "./style";
 import logoDark from "../../assets/logoTextDark.png";
@@ -8,6 +9,13 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
 import { NavLink, useNavigate } from "react-router-dom";
+import { createUser } from "../../store/users/usersSlice";
+import { useAppDispatch } from "../../store";
+import { useSelector } from "react-redux";
+import {
+  selectCreateSuccess,
+  selectErrorOnCreate,
+} from "../../store/users/selectors";
 
 export interface IFormCadastro {
   name: string;
@@ -20,8 +28,12 @@ export interface IFormCadastro {
 export default function Cadastro() {
   const { register, handleSubmit, reset } = useForm<IFormCadastro>();
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
+  const createSuccess = useSelector(selectCreateSuccess);
+  const errorOnCreate = useSelector(selectErrorOnCreate);
+  const creatingUser = useSelector(selectCreateSuccess);
 
-  function onSubmit(data: IFormCadastro) {
+  async function onSubmit(data: IFormCadastro) {
     const validateEmail = (email: string) => {
       const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,4}$/;
       return regex.test(email);
@@ -48,24 +60,51 @@ export default function Cadastro() {
           position: toast.POSITION.TOP_RIGHT,
         }
       );
-    } else {
-      const today = new Date();
-      const birthDate = new Date(data.dateBirth);
 
-      if (birthDate > today) {
-        toast.warning("A data de nascimento não pode ser no futuro!", {
-          position: toast.POSITION.TOP_RIGHT,
-        });
-      } else {
-        toast.success("Cadastro realizado com sucesso!", {
-          position: toast.POSITION.TOP_RIGHT,
-        });
-        console.log(data);
-        navigate("/login", { state: { email: data.email } });
-        reset();
-      }
+      return;
     }
+
+    const today = new Date();
+    const birthDate = new Date(data.dateBirth);
+
+    if (birthDate > today) {
+      toast.warning("A data de nascimento não pode ser no futuro!", {
+        position: toast.POSITION.TOP_RIGHT,
+      });
+
+      return;
+    }
+
+    dispatch(
+      createUser({
+        cpf: data.cpf,
+        dataNascimento: data.dateBirth,
+        email: data.email,
+        login: data.email,
+        nome: data.name,
+        senha: data.password,
+        tipoCargo: 1,
+      })
+    );
   }
+
+  console.log("createSuccess", createSuccess);
+  console.log("errorOnCreate", errorOnCreate);
+
+  useEffect(() => {
+    if (createSuccess) {
+      navigate("/login");
+      reset();
+    }
+  }, [createSuccess]);
+
+  useEffect(() => {
+    if (errorOnCreate) {
+      toast.error(errorOnCreate, {
+        position: toast.POSITION.TOP_RIGHT,
+      });
+    }
+  }, [errorOnCreate]);
 
   return (
     <StyledCadastroContainer>
@@ -135,7 +174,7 @@ export default function Cadastro() {
           buttonsize="mdlc"
           buttonstyle="signinSignout"
         >
-          cadastrar
+          {creatingUser ? "cadastrando..." : "cadastrar"}
         </StyledButton>
       </form>
 

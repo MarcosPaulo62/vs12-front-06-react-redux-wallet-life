@@ -1,11 +1,12 @@
 import { NavLink } from "react-router-dom";
-import PrincipalSectionDashboard from "../../components/principalSectionDashboard/PrincipalSectionDashboard";
+import SideHeader from "../../components/sideHeaderDashboard/SideHeaderDashboard";
 
 export default function Dashboard() {
-    return(
-        <div>
-            <PrincipalSectionDashboard />
-            <NavLink to="/login"><button>SAIR</button></NavLink>
-        </div>
-    )
+  return (
+    <div>
+      <SideHeader />
+      <NavLink to="/login">
+      </NavLink>
+    </div>
+  );
 }
