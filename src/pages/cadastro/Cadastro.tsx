@@ -35,9 +35,12 @@ export default function Cadastro() {
 
   async function onSubmit(data: IFormCadastro) {
     const validateEmail = (email: string) => {
-      const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,4}$/;
+      const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
       return regex.test(email);
     };
+
+    const today = new Date();
+    const birthDate = new Date(data.dateBirth);
 
     if (
       !data.name.trim() ||
@@ -62,31 +65,29 @@ export default function Cadastro() {
       );
 
       return;
-    }
-
-    const today = new Date();
-    const birthDate = new Date(data.dateBirth);
-
-    if (birthDate > today) {
+    } else if (birthDate > today) {
       toast.warning("A data de nascimento não pode ser no futuro!", {
         position: toast.POSITION.TOP_RIGHT,
       });
 
       return;
+    } else {
+      dispatch(
+        createUser({
+          cpf: data.cpf,
+          dataNascimento: data.dateBirth,
+          email: data.email,
+          login: data.email,
+          nome: data.name,
+          senha: data.password,
+          tipoCargo: 1,
+        })
+      );
+      toast.success("Usuário cadastrado com sucesso!", {
+        position: toast.POSITION.TOP_RIGHT,
+      });
     }
-
-    dispatch(
-      createUser({
-        cpf: data.cpf,
-        dataNascimento: data.dateBirth,
-        email: data.email,
-        login: data.email,
-        nome: data.name,
-        senha: data.password,
-        tipoCargo: 1,
-      })
-    );
-  }
+  } 
 
   console.log("createSuccess", createSuccess);
   console.log("errorOnCreate", errorOnCreate);

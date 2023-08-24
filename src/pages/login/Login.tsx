@@ -32,7 +32,7 @@ export default function Login() {
 
   function onSubmit(data: IFormLogin) {
     const validateEmail = (email: string) => {
-      const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,4}$/;
+      const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
       return regex.test(email);
     };
 
@@ -66,7 +66,7 @@ export default function Login() {
         position: toast.POSITION.TOP_RIGHT,
       });
     }
-  }, [loginStatus, navigate]);
+  }, [loginStatus]);
 
   const userState = useSelector((state: RootState) => state.user);
 
