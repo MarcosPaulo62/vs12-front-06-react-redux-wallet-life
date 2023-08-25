@@ -1,3 +1,4 @@
+import React from "react";
 import { StyledButton } from "../../../styles/buttons";
 import { StyledSpan, StyledTitle } from "../../../styles/typography";
 import { StyledModalContainer, StyledModalDespesaContainer } from "./style";
