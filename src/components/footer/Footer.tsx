@@ -72,7 +72,7 @@ export default function Footer() {
           Assine gratuitamente nossa newsletter e fique por dentro das nossas
           dicas sobre finanças!
         </StyledTag>
-        <div>
+        <div className="input-and-btn">
           <form className="styled-input" onSubmit={handleSubmit(onSubmit)}>
             <input
               type="email"
