@@ -1,4 +1,3 @@
-import { getUserLogged } from './get-user-logged';
 import {http} from './http';
 
 export async function getRecipes(pagina : number, quantidadeRegistros: number){
