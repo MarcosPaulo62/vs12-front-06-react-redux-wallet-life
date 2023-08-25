@@ -9,7 +9,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { loginUser } from "../../store/UserSlice";
 import { AppDispatch, RootState } from "../../store";
@@ -71,7 +71,7 @@ export default function Login() {
 
   const userState = useSelector((state: RootState) => state.user);
 
-  const { loading, error } = userState;
+  const { loading } = userState;
 
   return (
     <StyledLoginContainer>
