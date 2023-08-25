@@ -1,9 +1,29 @@
 import { StyledButton } from "../../../styles/buttons";
 import { StyledSpan, StyledTitle } from "../../../styles/typography";
 import { StyledModalContainer, StyledModalDespesaContainer } from "./style";
+import { useForm } from 'react-hook-form';
 
+interface TransactionFormData {
+    tipoDespesa: string;
+    valor: number;
+    descricao: string;
+    data: string;
+}
 
 export default function ModalAddDespesa () {
+    const { register, handleSubmit, reset } = useForm<TransactionFormData>();
+
+    const onSubmit = (data: TransactionFormData) => {
+
+        console.log('Dados capturados:', data);
+        const transactions = JSON.parse(localStorage.getItem('transactions') || '[]') as TransactionFormData[];
+        transactions.push(data);
+        localStorage.setItem('transactions', JSON.stringify(transactions));      
+        
+        
+        reset();
+    };
+
     return(
         <StyledModalDespesaContainer>
             <StyledModalContainer>
@@ -11,16 +31,16 @@ export default function ModalAddDespesa () {
                     <StyledTitle fontSize="md" fontWeight={700} tag="h3">ADICIONAR TRANSAÇÃO</StyledTitle>
                     <StyledSpan fontSize="lg">X</StyledSpan>
                 </div>
-                <form action="">
-                    <select name="" id=""  required>
+                <form onSubmit={handleSubmit((data) => onSubmit(data))}>
+                    <select id="tipoDespesa"  required {...register("tipoDespesa")}>
                         <option className="opt" value="" disabled selected>Tipo de despesa</option>
-                        <option className="opt" value="">Única</option>
-                        <option className="opt" value="">Recorrente</option>
+                        <option className="opt" value="Única">Única</option>
+                        <option className="opt" value="Recorrente">Recorrente</option>
                     </select>
-                    <input type="number" name="" id="" placeholder="Valor" required />
-                    <input type="text" name="" id="" placeholder="Descrição" required />
-                    <input type="date" name="" id="" placeholder="Data" required/>
-                    <StyledButton buttonsize="mdlp" buttonstyle="landingPage">Adicionar</StyledButton>
+                    <input type="number" id="valor" placeholder="Valor" required {...register("valor")} />
+                    <input type="text" id="descricao" placeholder="Descrição" required {...register("descricao")} />
+                    <input type="date" id="data" placeholder="Data" required {...register("data")}/>
+                    <StyledButton buttonsize="mdlp" buttonstyle="landingPage" type="submit">Adicionar</StyledButton>
                 </form>                
             </StyledModalContainer>
         </StyledModalDespesaContainer>
