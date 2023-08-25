@@ -24,7 +24,7 @@ export default function PrincipalSectionDashboard() {
         </div>
       </div>
       <div className="section-dois">
-        <NavLink to={"/receitas"}>
+        <NavLink className="card" to={"/receitas"}>
           <div className="card-option card1">
             <StyledSpan className="title-card-grid" fontSize="md">
               SUAS RECEITAS
@@ -41,7 +41,7 @@ export default function PrincipalSectionDashboard() {
             </div>
           </div>
         </NavLink>
-        <NavLink to={"/despesas"}>
+        <NavLink className="card" to={"/despesas"}>
           <div className="card-option card2">
             <StyledSpan className="title-card-grid" fontSize="md">
               SUAS DESPESAS
@@ -58,7 +58,7 @@ export default function PrincipalSectionDashboard() {
             </div>
           </div>
         </NavLink>
-        <NavLink to={"/investimentos"}>
+        <NavLink className="card" to={"/investimentos"}>
           <div className="card-option card3">
             <StyledSpan className="title-card-grid" fontSize="md">
               SEUS INVESTIMENTOS

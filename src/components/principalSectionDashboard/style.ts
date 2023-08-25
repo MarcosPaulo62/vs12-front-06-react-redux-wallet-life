@@ -7,18 +7,17 @@ export const StyledSectionDashboard = styled.section`
     margin-bottom: 8.8rem;
     align-self: center;
     width: 70%;
+    padding: 0 5rem;
 
     .title{
-        margin-top: 1rem;
-        margin-left: 5.3rem;
+        margin-top: 2rem;
         margin-bottom: 1.5rem;
     }
 
     .saldo-total {
         display: flex;
         flex-direction: column;
-        margin-left: 5.3rem;
-        width:80%;
+        width:100%;
         height: 12.06rem;
         background-color: ${({theme}) => theme.color.jet};
         border-radius: 2rem;
@@ -64,9 +63,8 @@ export const StyledSectionDashboard = styled.section`
             grid-template-rows: 1fr 1fr;
             justify-content: center;
             align-items: center;
-            margin-left: 5rem;
             margin-top: 2.2rem;
-            width:80%;
+            width:100%;
             gap: 1.88rem;
 
             .card-option{
@@ -134,4 +132,71 @@ export const StyledSectionDashboard = styled.section`
                 }
             }
         }
+        
+
+    @media (max-width: 1200px){
+        padding: 0 5rem;
+
+        .title{
+            font-size: 1.8rem;
+        }
+
+        .saldo-total .title-card-saldo {
+            font-size: 1.8rem;            
+        }
+
+        .section-dois .card-option .title-card-grid {
+            font-size: 1.2rem;
+        }
+
+        .section-dois .card-option .value-card-grid {
+            font-size: 1.5rem;   
+        }
+    }
+
+    @media (max-width: 960px){
+        padding: 0 4rem;
+
+        .saldo-total .saldo-card .simbolo-moeda, .saldo-total .saldo-card .valor{
+            font-size: 2rem;
+        }
+
+        .section-dois {
+            display: flex;
+            flex-direction: column;
+            gap: 1.88rem;
+        }
+
+        .card{
+            width:100%;
+        }
+    }
+
+    @media (max-width: 760px){
+        padding: 0 .5rem;
+    }
+
+    @media (max-width: 480px){
+        padding: 0;
+
+        .title{
+            font-size: 1.5rem;
+        }
+
+        .saldo-total .title-card-saldo {
+            font-size: 1.4rem;            
+        }
+
+        .saldo-total .saldo-card .simbolo-moeda, .saldo-total .saldo-card .valor{
+            font-size: 1.5rem;
+        }
+
+        .section-dois .card-option .title-card-grid {
+            font-size: 1.1rem;
+        }
+
+        .section-dois .card-option .value-card-grid {
+            font-size: 1.3rem;   
+        }
+    }
 `
