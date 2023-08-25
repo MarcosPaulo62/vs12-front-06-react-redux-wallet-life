@@ -2,6 +2,7 @@ import { styled } from "styled-components";
 
 export const StyledFooterContainer = styled.footer`
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
   height: 32.37rem;
@@ -39,6 +40,7 @@ export const StyledFooterContainer = styled.footer`
   }
 
   .right-section {
+    max-width: 100vw;
     display: flex;
     flex-direction: column;
     justify-self: end;
@@ -50,6 +52,7 @@ export const StyledFooterContainer = styled.footer`
     font-weight: 600;
     text-align: start;
     width: 42.5rem;
+    max-width: 100vw;
   }
 
   .styled-input {
