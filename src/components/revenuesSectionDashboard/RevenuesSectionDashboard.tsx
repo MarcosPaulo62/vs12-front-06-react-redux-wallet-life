@@ -30,6 +30,7 @@ export default function RevenuesSectionDashboard() {
   console.log(recipes);
 
   useEffect(() => {
+    dispatch(RecipesSlice.actions.resetRecipes());
     dispatch(ListRecipes({ pagina: 0, quantidadeRegistros: 10 }));
   }, []);
 
@@ -55,12 +56,12 @@ export default function RevenuesSectionDashboard() {
       <div className="itens-paginacao">
         <ul>
           {recipes.map((recipe) => (
-            <li>
+            <li key={recipe.idReceita}>
               <ItemDashboard
                 description={recipe.descricao}
                 value={recipe.valor}
                 currentPage="receitas"
-              ></ItemDashboard>
+              />
             </li>
           ))}
         </ul>

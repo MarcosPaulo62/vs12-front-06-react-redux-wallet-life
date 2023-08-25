@@ -26,12 +26,14 @@ export const RecipesSlice = createSlice({
     errorOnList: undefined,
   } as RecipesSliceState,
   reducers: {
-  
+    resetRecipes: (state) => {
+      state.recipes = [];
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(ListRecipes.fulfilled, (state, {payload}) => {
       if (payload){
-        state.recipes = [...state.recipes, payload]
+        state.recipes = [...state.recipes, ...payload]
         state.errorOnList = undefined;
       }
     });
