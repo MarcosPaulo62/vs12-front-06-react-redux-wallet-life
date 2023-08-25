@@ -24,7 +24,6 @@ export const DifferentialsContainer = styled.div`
     }
   }
 
-
   .numbers-grid {
     width: 34.375rem;
     height: 28.75rem;
@@ -89,6 +88,14 @@ export const DifferentialsContainer = styled.div`
     .grid-item {
       width: 100%;
       justify-content: center;
-  }
+    }
+
+    .div-btn {
+      width: 90%;
+    }
+
+    .styled-btn {
+      max-width: 90vw;
+    }
   }
 `;

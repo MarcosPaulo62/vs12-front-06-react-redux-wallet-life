@@ -48,8 +48,8 @@ export default function RevenuesSectionDashboard() {
         </StyledTotalValueAndPlusButton>
       </StyledTotalDiv>
       <StyledInputAndButtonDiv>
-        <StyledDashboardInput placeholder="busque uma receita"></StyledDashboardInput>
-        <StyledDashboardSearchButton />
+        <StyledDashboardInput placeholder="busque uma receita" ></StyledDashboardInput>
+        <StyledDashboardSearchButton aria-label={"Imagem de uma lupa, indicando que este botão serve para ativar a pesquisa com o parâmetro inserido no campo"}/>
       </StyledInputAndButtonDiv>
 
       <div className="itens-paginacao">

@@ -31,8 +31,8 @@ export default function ItemDashboard({
     <StyledItemlDiv>
       <StyledItemValue themecolor={currentPage}>R$ {value}</StyledItemValue>
       <StyledItemDescription>{description}</StyledItemDescription>
-      <StyledEyeButton></StyledEyeButton>
-      <StyledTrashCanButton></StyledTrashCanButton>
+      <StyledEyeButton aria-label={"Imagem de um olho, indicando que este botão serve para ver detalhes deste item"}></StyledEyeButton>
+      <StyledTrashCanButton aria-label={"Imagem de uma lata de lixo, indicando que este botão serve para excluir este item da lista"}></StyledTrashCanButton>
     </StyledItemlDiv>
   );
 }
