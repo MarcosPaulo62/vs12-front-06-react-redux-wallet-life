@@ -1,3 +1,4 @@
+import { Pagination } from '@mui/material';
 import { StyledTitle } from "../../styles/typography";
 import { StyledSectionDashboard } from "./style";
 import {
@@ -20,18 +21,22 @@ import {
   selectErrorOnList,
   selectRecipes,
 } from "../../store/recipes/Selectors";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
-export default function RevenuesSectionDashboard() {
+export default function RevenuesSectionDashboard() {''
   const dispatch = useAppDispatch();
-  const errorOnList = useSelector(selectErrorOnList);
   const recipes = useSelector(selectRecipes);
-  console.log(recipes);
+  const [currentPage, setPage] = useState(0);
+  const itemsPerPage = 5;
+
+  function handleSetPage(_: any, newPage: number) {
+    setPage(newPage - 1);
+  }
 
   useEffect(() => {
     dispatch(RecipesSlice.actions.resetRecipes());
-    dispatch(ListRecipes({ pagina: 0, quantidadeRegistros: 10 }));
-  }, []);
+    dispatch(ListRecipes({ pagina: currentPage, quantidadeRegistros: itemsPerPage }));
+  }, [currentPage]);
 
   return (
     <StyledSectionDashboard>
@@ -65,6 +70,7 @@ export default function RevenuesSectionDashboard() {
           ))}
         </ul>
       </div>
+      <Pagination count={10} onChange={handleSetPage} />
     </StyledSectionDashboard>
   );
 }
