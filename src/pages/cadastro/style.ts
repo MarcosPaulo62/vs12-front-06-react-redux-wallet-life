@@ -1,14 +1,34 @@
 import { styled } from "styled-components";
+import logo from "../../assets/logoTextLight.png";
 
 export const StyledCadastroContainer = styled.main`
+  display: flex;
+  flex-direction: column;
+
   .header {
     display: flex;
     padding: 3.81rem 3.81rem 1rem;
     position: relative;
+    width: 100%;
 
     img {
       width: 172px;
       cursor: pointer;
+
+      @media (min-width: 1920px) {
+        width: 220px;
+      }
+
+      @media (min-width: 768px) and (max-width: 1200px) {
+        width: 125px;
+        margin-left: -20px;
+      }
+
+      @media (min-width: 300px) and (max-width: 767px) {
+        width: 110px;
+        margin-left: -50px;
+        margin-top: -30px;
+      }
     }
 
     div {
@@ -23,8 +43,21 @@ export const StyledCadastroContainer = styled.main`
       border-radius: 0 0 12px 12px;
       background-color: ${({ theme }) => theme.color.jet};
 
+      @media (min-width: 1920px) {
+        width: 550px;
+      }
+
+      @media (min-width: 300px) and (max-width: 767px) {
+        width: 160px;
+        height: 90px;
+      }
+
       .title {
         color: ${({ theme }) => theme.color.white};
+
+        @media (min-width: 300px) and (max-width: 768px) {
+          font-size: 1.1rem;
+        }
       }
     }
   }
@@ -37,6 +70,21 @@ export const StyledCadastroContainer = styled.main`
     align-items: center;
     gap: 1rem;
 
+    @media (min-width: 768px) and (max-width: 1200px) {
+      width: 60%;
+    }
+
+    @media (min-width: 300px) and (max-width: 767px) {
+      width: 220px;
+    }
+
+    button {
+      @media (min-width: 300px) and (max-width: 767px) {
+        width: 160px;
+        font-size: 1.5rem;
+      }
+    }
+
     input {
       width: 100%;
       border-radius: 12px;
@@ -44,10 +92,21 @@ export const StyledCadastroContainer = styled.main`
       background-color: ${({ theme }) => theme.color.alabaster};
       font-size: 1.3rem;
       border: none;
+
+      @media (min-width: 300px) and (max-width: 767px) {
+        font-size: 1rem;
+      }
     }
 
     .input-error {
       border: 1px solid red;
+    }
+
+    span {
+      @media (min-width: 300px) and (max-width: 767px) {
+        font-size: 1rem;
+        width: 150px;
+      }
     }
 
     strong {
