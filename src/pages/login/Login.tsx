@@ -21,9 +21,10 @@ export interface IFormLogin {
 
 export default function Login() {
   const location = useLocation();
-  const { login: initialEmail } = location.state || {};
+  const email = location.state?.email || "";
+
   const { register, handleSubmit } = useForm<IFormLogin>({
-    defaultValues: { login: initialEmail || "" },
+    defaultValues: { login: email || "" },
   });
 
   const navigate = useNavigate();
@@ -59,18 +60,18 @@ export default function Login() {
   const loginStatus = useSelector((state: RootState) => state.user?.status);
 
   useEffect(() => {
-    if (loginStatus === "fulfilled") {
+    if (localStorage.getItem("user")) {
       navigate("/sua-carteira");
     } else if (loginStatus === "rejected") {
       toast.error("Usuário e/ou senha incorretos", {
         position: toast.POSITION.TOP_RIGHT,
       });
     }
-  }, [loginStatus, initialEmail, navigate]);
+  }, [loginStatus, navigate]);
 
   const userState = useSelector((state: RootState) => state.user);
 
-  const { loading, error } = userState;
+  const { loading } = userState;
 
   return (
     <StyledLoginContainer>

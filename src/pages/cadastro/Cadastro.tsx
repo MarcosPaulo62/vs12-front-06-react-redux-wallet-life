@@ -10,6 +10,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
 import { NavLink, useNavigate } from "react-router-dom";
 import { createUser } from "../../store/users/usersSlice";
+import { usersSlice } from "../../store/users/usersSlice";
 import { useAppDispatch } from "../../store";
 import { useSelector } from "react-redux";
 import {
@@ -40,6 +41,12 @@ export default function Cadastro() {
   const createSuccess = useSelector(selectCreateSuccess);
   const errorOnCreate = useSelector(selectErrorOnCreate);
   const creatingUser = useSelector(selectCreateSuccess);
+
+  const [emailValue, setEmailValue] = useState("");
+
+  const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setEmailValue(event.target.value);
+  };
 
   const [formErrors, setFormErrors] = useState<IFormErrors>({
     name: false,
@@ -78,10 +85,6 @@ export default function Cadastro() {
       toast.warning("É necessário preencher todos os campos!", {
         position: toast.POSITION.TOP_RIGHT,
       });
-    } else if (!/^\d+$/.test(data.cpf)) {
-      toast.warning("CPF inválido! Deve conter apenas números.", {
-        position: toast.POSITION.TOP_RIGHT,
-      });
     } else if (!validateEmail(data.email)) {
       toast.warning(
         "É necessário que seu e-mail esteja completo! Exemplo: seuemail@email.com",
@@ -97,6 +100,10 @@ export default function Cadastro() {
       });
 
       return;
+    } else if (!/^\d+$/.test(data.cpf)) {
+      toast.warning("CPF inválido! Deve conter apenas números.", {
+        position: toast.POSITION.TOP_RIGHT,
+      });
     } else {
       dispatch(
         createUser({
@@ -119,8 +126,10 @@ export default function Cadastro() {
       toast.success("Usuário cadastrado com sucesso!", {
         position: toast.POSITION.TOP_RIGHT,
       });
+      navigate("/login", { state: { email: emailValue } });
       reset();
-      navigate("/login");
+
+      dispatch(usersSlice.actions.resetCreateSuccess());
     }
   }, [createSuccess]);
 
@@ -168,6 +177,8 @@ export default function Cadastro() {
           {...register("email")}
           placeholder="seu e-mail"
           className={formErrors.email ? "input-error" : ""}
+          value={emailValue}
+          onChange={handleEmailChange}
         />
         <input
           type="date"
