@@ -3,7 +3,7 @@ import { StyledDashboardInput, StyledDashboardLabel, StyledDashboardSearchButton
 import { StyledSectionDashboard } from "../revenuesSectionDashboard/style";
 import ItemDashboard from "../itemDashboard/ItemDashboard";
 
-export default function RevenuesSectionDashboard() {
+export default function InvestmentsSectionDashboard() {
   return (
     <StyledSectionDashboard>
       <StyledDashboardLabel themecolor={"investimentos"}>

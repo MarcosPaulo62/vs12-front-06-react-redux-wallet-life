@@ -4,7 +4,7 @@ import { StyledContainerDashboard } from "../dashboard/style";
 import InvestmentsSectionDashboard from "../../components/investmentsSectionDashboard/InvestmentsSectionDashboard";
 
 
-export default function Receitas() {
+export default function Investimentos() {
     return(
         <>
         <StyledContainerDashboard>
