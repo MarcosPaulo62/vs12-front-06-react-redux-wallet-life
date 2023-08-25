@@ -1,53 +1,111 @@
 import { styled } from "styled-components";
 
 export const StyledLoginContainer = styled.main`
-    .header{
-        display: flex;
-        padding: 3.81rem 3.81rem 1rem;
-        position: relative;
+  display: flex;
+  flex-direction: column;
 
-        img{
-            width: 172px;
-            cursor: pointer;
-        }
+  .header {
+    display: flex;
+    padding: 3.81rem 3.81rem 1rem;
+    position: relative;
+    width: 100%;
 
-        div{
-            width: 420px;
-            padding: 5rem 0 2rem;
-            display: flex;
-            justify-content: center;
-            position: absolute;
-            top: 0;
-            left: 50%;
-            translate: -50% 0;
-            border-radius: 0 0 12px 12px;
-            background-color: ${({theme}) => theme.color.jet};
+    img {
+      width: 172px;
+      cursor: pointer;
 
-            .title{
-                color: ${({theme}) => theme.color.white};
-            }
-        }
+      @media (min-width: 1920px) {
+        width: 220px;
+      }
+
+      @media (min-width: 768px) and (max-width: 1200px) {
+        width: 125px;
+        margin-left: -20px;
+      }
+
+      @media (min-width: 300px) and (max-width: 767px) {
+        width: 110px;
+        margin-left: -50px;
+        margin-top: -30px;
+      }
     }
 
-    form{
-        width: 35%;
-        margin: 5.4rem auto 0;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 2.3rem;
+    div {
+      width: 420px;
+      padding: 5rem 0 2rem;
+      display: flex;
+      justify-content: center;
+      position: absolute;
+      top: 0;
+      left: 50%;
+      translate: -50% 0;
+      border-radius: 0 0 12px 12px;
+      background-color: ${({ theme }) => theme.color.jet};
 
-        input{
-            width: 100%;
-            border-radius: 12px;
-            padding: 2rem 1.7rem;
-            background-color: ${({theme}) => theme.color.alabaster};
-            font-size: 1.3rem;
-            border: none;
-        }
+      @media (min-width: 1920px) {
+        width: 550px;
+      }
 
-        strong{
-            cursor: pointer;
+      @media (min-width: 300px) and (max-width: 767px) {
+        width: 160px;
+        height: 90px;
+      }
+
+      .title {
+        color: ${({ theme }) => theme.color.white};
+
+        @media (min-width: 300px) and (max-width: 768px) {
+          font-size: 1.1rem;
         }
+      }
     }
-`
+  }
+
+  form {
+    width: 35%;
+    margin: 5.4rem auto 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2.3rem;
+
+    @media (min-width: 768px) and (max-width: 1200px) {
+      width: 60%;
+    }
+
+    @media (min-width: 300px) and (max-width: 767px) {
+      width: 220px;
+    }
+
+    button {
+      @media (min-width: 300px) and (max-width: 767px) {
+        width: 160px;
+        font-size: 1.5rem;
+      }
+    }
+
+    input {
+      width: 100%;
+      border-radius: 12px;
+      padding: 2rem 1.7rem;
+      background-color: ${({ theme }) => theme.color.alabaster};
+      font-size: 1.3rem;
+      border: none;
+
+      @media (min-width: 300px) and (max-width: 767px) {
+        font-size: 1rem;
+      }
+
+      span {
+        @media (min-width: 300px) and (max-width: 767px) {
+          font-size: 1rem;
+          width: 150px;
+        }
+      }
+    }
+
+    strong {
+      cursor: pointer;
+    }
+  }
+`;
