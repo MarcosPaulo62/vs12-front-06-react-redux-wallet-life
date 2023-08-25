@@ -3,8 +3,8 @@ import Lupa from "../../src/assets/dashboard-lupa.png";
 import Eye from "../../src/assets/dashboard-olho.png";
 import TrashCan from "../../src/assets/dashboard-lixo.png";
 
-interface iStyledDashboardThemeProps {
-  themecolor: "receitas" | "despesas" | "investimentos";
+export interface iStyledDashboardThemeProps {
+  themecolor: "receitas" | "despesas" | "investimentos" | "currentPage";
 }
 
 export const StyledDashboardLabel = styled.div<iStyledDashboardThemeProps>`

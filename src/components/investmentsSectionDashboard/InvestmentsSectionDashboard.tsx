@@ -25,7 +25,7 @@ export default function RevenuesSectionDashboard() {
       
       <div className="itens-paginacao">
         <ul>
-          <li><ItemDashboard ></ItemDashboard></li>
+          <li><ItemDashboard currentPage="investimentos"></ItemDashboard></li>
         </ul>
       </div>
 
