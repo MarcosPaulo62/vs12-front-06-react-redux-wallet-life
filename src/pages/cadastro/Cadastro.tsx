@@ -10,6 +10,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
 import { NavLink, useNavigate } from "react-router-dom";
 import { createUser } from "../../store/users/usersSlice";
+import { usersSlice } from "../../store/users/usersSlice";
 import { useAppDispatch } from "../../store";
 import { useSelector } from "react-redux";
 import {
@@ -41,6 +42,12 @@ export default function Cadastro() {
   const errorOnCreate = useSelector(selectErrorOnCreate);
   const creatingUser = useSelector(selectCreateSuccess);
 
+  const [emailValue, setEmailValue] = useState("");
+
+  const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setEmailValue(event.target.value);
+  };
+
   const [formErrors, setFormErrors] = useState<IFormErrors>({
     name: false,
     email: false,
@@ -67,7 +74,7 @@ export default function Cadastro() {
     };
 
     setFormErrors(newFormErrors);
-    
+
     if (
       !data.name.trim() ||
       !data.email.trim() ||
@@ -76,10 +83,6 @@ export default function Cadastro() {
       !data.password.trim()
     ) {
       toast.warning("É necessário preencher todos os campos!", {
-        position: toast.POSITION.TOP_RIGHT,
-      });
-    } else if (!/^\d+$/.test(data.cpf)) {
-      toast.warning("CPF inválido! Deve conter apenas números.", {
         position: toast.POSITION.TOP_RIGHT,
       });
     } else if (!validateEmail(data.email)) {
@@ -97,35 +100,36 @@ export default function Cadastro() {
       });
 
       return;
+    } else if (!/^\d+$/.test(data.cpf)) {
+      toast.warning("CPF inválido! Deve conter apenas números.", {
+        position: toast.POSITION.TOP_RIGHT,
+      });
     } else {
       dispatch(
         createUser({
           cpf: data.cpf,
           dataNascimento: data.dateBirth,
           email: data.email,
-          login: data.email,
           nome: data.name,
           senha: data.password,
-          tipoCargo: 1,
         })
       );
-      toast.success("Usuário cadastrado com sucesso!", {
-        position: toast.POSITION.TOP_RIGHT,
-      });
     }
 
     if (Object.values(newFormErrors).some((error) => error)) {
       return;
-    } 
+    }
   }
-
-  console.log("createSuccess", createSuccess);
-  console.log("errorOnCreate", errorOnCreate);
 
   useEffect(() => {
     if (createSuccess) {
-      navigate("/login");
+      toast.success("Usuário cadastrado com sucesso!", {
+        position: toast.POSITION.TOP_RIGHT,
+      });
+      navigate("/login", { state: { email: emailValue } });
       reset();
+
+      dispatch(usersSlice.actions.resetCreateSuccess());
     }
   }, [createSuccess]);
 
@@ -173,6 +177,8 @@ export default function Cadastro() {
           {...register("email")}
           placeholder="seu e-mail"
           className={formErrors.email ? "input-error" : ""}
+          value={emailValue}
+          onChange={handleEmailChange}
         />
         <input
           type="date"

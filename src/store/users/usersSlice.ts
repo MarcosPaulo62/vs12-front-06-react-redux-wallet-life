@@ -22,6 +22,9 @@ export const usersSlice = createSlice({
     createSuccess: false,
   } as UsersSliceState,
   reducers: {
+    resetCreateSuccess: (state) => {
+      state.createSuccess = false;
+    },
       },
   extraReducers: (builder) => {
     builder.addCase(createUser.fulfilled, (state, { payload }) => {
@@ -33,9 +36,15 @@ export const usersSlice = createSlice({
     });
     
     builder.addCase(createUser.rejected, (state, { payload, error }) => {
+      if(payload){
+        state.errorOnCreate = 'Usuário já cadastrado!';
+        state.creatingUser = false;
+        state.createSuccess = false;
+      } else{
       state.errorOnCreate = 'Falha ao tentar criar usuário';
       state.creatingUser = false;
       state.createSuccess = false;
+      }
     });
 
     builder.addCase(createUser.pending, (state, action) => {
