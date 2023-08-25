@@ -8,7 +8,7 @@ export const ColorsTheme = {
       jet: "#393838",
       black: "#000000",
       offWhite: "#F5F5F5",
-      alabaster: "#E4E4DB",
+      alabaster: "#E4E4DB", 
       error: "#FC0000",
       success: "#36C76C",
       green: "#B2C199",
