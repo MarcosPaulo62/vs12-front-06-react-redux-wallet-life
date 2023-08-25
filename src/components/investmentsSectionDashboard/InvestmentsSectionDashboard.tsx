@@ -29,7 +29,7 @@ export default function InvestmentsSectionDashboard() {
       </StyledTotalDiv>
       <StyledInputAndButtonDiv>
         <StyledDashboardInput placeholder="busque uma despesa"></StyledDashboardInput>
-        <StyledDashboardSearchButton />
+        <StyledDashboardSearchButton aria-label={"Imagem de uma lupa, indicando que este botão serve para ativar a pesquisa com o parâmetro inserido no campo"}/>
       </StyledInputAndButtonDiv>
 
       <div className="itens-paginacao">
