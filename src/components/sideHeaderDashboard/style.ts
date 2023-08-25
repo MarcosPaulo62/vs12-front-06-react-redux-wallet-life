@@ -19,7 +19,7 @@ export const StyledHeader = styled.header`
         max-width: 100%;      
     }
 
-    div {
+    .navegacao {
         width: 100%;
         display: flex;
         flex-direction: column;
@@ -34,6 +34,10 @@ export const StyledHeader = styled.header`
         cursor: pointer;
     }
 
+    .menu-hamburguer{
+        display: none;
+    }
+
     @media (max-width: 760px){
         position: relative;
         width: 100%;
@@ -42,12 +46,12 @@ export const StyledHeader = styled.header`
         flex-direction: row;
         justify-content: space-between;
 
-        div {
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            align-items: end;
-            gap: .3rem;
+        .menu-hamburguer{
+            display: block;
+        }
+
+        .navegacao {
+            display: none;
         }
     }
 
@@ -57,4 +61,32 @@ export const StyledHeader = styled.header`
         }
     }
 
+`
+
+export const MenuHamburguer = styled.div`
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100%;
+    display: flex;
+    justify-content: end;
+    background-color: rgba(0, 0, 0, 0.3);
+    
+    div{
+        position: sticky;
+        top: 0;
+        padding: 3rem 2rem;
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+        background-color: ${({theme}) => theme.color.alabaster};
+        height: 100vh;
+        width: 50%;
+
+        .close-menu{
+            align-self: flex-end;
+            cursor: pointer;
+        }
+    }
 `
