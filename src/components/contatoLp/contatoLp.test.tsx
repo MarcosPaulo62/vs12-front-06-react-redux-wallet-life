@@ -1,8 +1,12 @@
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
-import userEvent from "@testing-library/user-event"; 
+import userEvent from "@testing-library/user-event";
 import ContatoLp from "./ContatoLp";
 import { toast } from "react-toastify";
-
+import { Provider } from "react-redux";
+import { BrowserRouter } from "react-router-dom";
+import { ThemeProvider } from "styled-components";
+import store from "../../store";
+import { ColorsTheme } from "../../styles/global";
 
 jest.mock("react-toastify", () => ({
   toast: {
@@ -14,7 +18,15 @@ jest.mock("react-toastify", () => ({
 
 describe("ContatoLp component", () => {
   test("submits form with valid data and shows success toast", async () => {
-    render(<ContatoLp />);
+    render(
+      <Provider store={store}>
+        <ThemeProvider theme={ColorsTheme}>
+          <BrowserRouter>
+            <ContatoLp />
+          </BrowserRouter>
+        </ThemeProvider>
+      </Provider>
+    );
 
     const nomeInput = screen.getByPlaceholderText("seu nome");
     const emailInput = screen.getByPlaceholderText("seu e-mail");
@@ -36,7 +48,15 @@ describe("ContatoLp component", () => {
   });
 
   test("submits form with missing data and shows warning toast", async () => {
-    render(<ContatoLp />);
+    render(
+      <Provider store={store}>
+        <ThemeProvider theme={ColorsTheme}>
+          <BrowserRouter>
+            <ContatoLp />
+          </BrowserRouter>
+        </ThemeProvider>
+      </Provider>
+    );
 
     const enviarButton = screen.getByText("enviar");
     fireEvent.click(enviarButton);
@@ -50,7 +70,15 @@ describe("ContatoLp component", () => {
   });
 
   test("submits form with invalid email and shows warning toast", async () => {
-    render(<ContatoLp />);
+    render(
+      <Provider store={store}>
+        <ThemeProvider theme={ColorsTheme}>
+          <BrowserRouter>
+            <ContatoLp />
+          </BrowserRouter>
+        </ThemeProvider>
+      </Provider>
+    );
 
     const emailInput = screen.getByPlaceholderText("seu e-mail");
     const enviarButton = screen.getByText("enviar");
@@ -65,5 +93,4 @@ describe("ContatoLp component", () => {
       }
     );
   });
-
 });

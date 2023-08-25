@@ -1,13 +1,21 @@
 import { render, screen } from "@testing-library/react";
 import { BrowserRouter } from "react-router-dom";
 import Header from "./Header";
+import { Provider } from "react-redux";
+import { ThemeProvider } from "styled-components";
+import store from "../../store";
+import { ColorsTheme } from "../../styles/global";
 
 describe("Header component", () => {
   test("renders logo with correct alt text", () => {
     render(
-      <BrowserRouter>
-        <Header />
-      </BrowserRouter>
+      <Provider store={store}>
+        <ThemeProvider theme={ColorsTheme}>
+          <BrowserRouter>
+            <Header />
+          </BrowserRouter>
+        </ThemeProvider>
+      </Provider>
     );
 
     const logoElement = screen.getByAltText(
@@ -18,9 +26,13 @@ describe("Header component", () => {
 
   test("renders Cadastro button with correct text and navigation", () => {
     render(
-      <BrowserRouter>
-        <Header />
-      </BrowserRouter>
+      <Provider store={store}>
+        <ThemeProvider theme={ColorsTheme}>
+          <BrowserRouter>
+            <Header />
+          </BrowserRouter>
+        </ThemeProvider>
+      </Provider>
     );
 
     const cadastroButton = screen.getByText("Cadastro");
@@ -32,9 +44,13 @@ describe("Header component", () => {
 
   test("renders Login button with correct text and navigation", () => {
     render(
-      <BrowserRouter>
-        <Header />
-      </BrowserRouter>
+      <Provider store={store}>
+        <ThemeProvider theme={ColorsTheme}>
+          <BrowserRouter>
+            <Header />
+          </BrowserRouter>
+        </ThemeProvider>
+      </Provider>
     );
 
     const loginButton = screen.getByText("Login");

@@ -1,9 +1,12 @@
 import { render, screen, fireEvent } from "@testing-library/react";
-import userEvent from "@testing-library/user-event"; 
+import userEvent from "@testing-library/user-event";
 import { BrowserRouter } from "react-router-dom";
 import Footer from "./Footer";
 import { toast } from "react-toastify";
-
+import { Provider } from "react-redux";
+import { ThemeProvider } from "styled-components";
+import store from "../../store";
+import { ColorsTheme } from "../../styles/global";
 
 jest.mock("react-toastify", () => ({
   toast: {
@@ -16,9 +19,13 @@ jest.mock("react-toastify", () => ({
 describe("Footer component", () => {
   test("renders logo and navigation links", () => {
     render(
-      <BrowserRouter>
-        <Footer />
-      </BrowserRouter>
+      <Provider store={store}>
+        <ThemeProvider theme={ColorsTheme}>
+          <BrowserRouter>
+            <Footer />
+          </BrowserRouter>
+        </ThemeProvider>
+      </Provider>
     );
 
     const logoElement = screen.getByAltText("Logo da walletLife");
@@ -32,42 +39,45 @@ describe("Footer component", () => {
 
   test("submits form with valid email and shows success toast", async () => {
     render(
-      <BrowserRouter>
-        <Footer />
-      </BrowserRouter>
+      <Provider store={store}>
+        <ThemeProvider theme={ColorsTheme}>
+          <BrowserRouter>
+            <Footer />
+          </BrowserRouter>
+        </ThemeProvider>
+      </Provider>
     );
 
     const emailInput = screen.getByPlaceholderText("Seu email");
     const submitButton = screen.getByText("cadastrar");
 
-
     await userEvent.type(emailInput, "test@example.com");
     fireEvent.click(submitButton);
-
 
     expect(toast.success).toHaveBeenCalledWith("Seu e-mail foi cadastrado!", {
       position: expect.anything(),
     });
-
 
     expect(emailInput).toHaveValue("");
   });
 
   test("submits form with invalid email and shows warning toast", async () => {
     render(
-      <BrowserRouter>
-        <Footer />
-      </BrowserRouter>
+      <Provider store={store}>
+        <ThemeProvider theme={ColorsTheme}>
+          <BrowserRouter>
+            <Footer />
+          </BrowserRouter>
+        </ThemeProvider>
+      </Provider>
     );
 
     const emailInput = screen.getByPlaceholderText("Seu email");
     const submitButton = screen.getByText("cadastrar");
 
-
     await userEvent.type(emailInput, "invalid-email");
     fireEvent.click(submitButton);
 
-  
     expect(toast.warning).toHaveBeenCalledWith(
       "É necessário que seu e-mail esteja completo! Exemplo: seuemail@email.com",
       {

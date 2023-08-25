@@ -2,6 +2,10 @@ import React from "react";
 import { render, screen } from "@testing-library/react";
 import { BrowserRouter } from "react-router-dom";
 import Differentials from "./Differentials";
+import { Provider } from "react-redux";
+import { ThemeProvider } from "styled-components";
+import store from "../../store";
+import { ColorsTheme } from "../../styles/global";
 
 const mockLocalStorage = {
   getItem: jest.fn(),
@@ -11,9 +15,13 @@ global.localStorage = mockLocalStorage;
 describe("Differentials component", () => {
   test("renders all topics with correct titles and captions", () => {
     render(
-      <BrowserRouter>
-        <Differentials />
-      </BrowserRouter>
+      <Provider store={store}>
+        <ThemeProvider theme={ColorsTheme}>
+          <BrowserRouter>
+            <Differentials />
+          </BrowserRouter>
+        </ThemeProvider>
+      </Provider>
     );
 
     const topics = screen.getAllByTestId("differential-topic");
@@ -34,9 +42,13 @@ describe("Differentials component", () => {
 
   test("renders 'Acesse sua área!' button with correct link", () => {
     render(
-      <BrowserRouter>
-        <Differentials />
-      </BrowserRouter>
+      <Provider store={store}>
+        <ThemeProvider theme={ColorsTheme}>
+          <BrowserRouter>
+            <Differentials />
+          </BrowserRouter>
+        </ThemeProvider>
+      </Provider>
     );
 
     const acesseButton = screen.getByText("acesse sua área!");
@@ -47,5 +59,4 @@ describe("Differentials component", () => {
       : "/login";
     expect(acesseButton.closest("a")).toHaveAttribute("href", expectedLink);
   });
-
 });
