@@ -1,7 +1,7 @@
 import { MenuHamburguer, StyledHeader } from "./style";
 import logo from "../../assets/logo-WALLETLIFE.png";
 import { NavLink } from "react-router-dom";
-import { List, X } from "@phosphor-icons/react";
+import { List, X, SignOut } from "@phosphor-icons/react";
 import { useState } from "react";
 import { useLocation } from 'react-router-dom';
 
@@ -38,7 +38,7 @@ export default function SideHeader() {
           className="navlink logout"
           to={"/"}
         >
-          <span>Sair</span>  
+          <span>Sair<SignOut size={40} weight="bold" /></span>            
         </NavLink>
       </div>
 
@@ -66,7 +66,7 @@ export default function SideHeader() {
                 className="navlink logout"
                 to={"/"}
               >
-                <span>Sair</span>                
+                <span>Sair<SignOut size={40} weight="bold" /></span>                                
               </NavLink>
             </div>
           </MenuHamburguer>
