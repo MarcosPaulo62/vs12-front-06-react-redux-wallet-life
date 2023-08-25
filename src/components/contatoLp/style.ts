@@ -25,6 +25,17 @@ export const ContainerContatoLp = styled.div`
     font-weight: bold;
     font-size: 44px;
   }
+
+  @media screen and (max-width: 640px) {
+    .styled-title {
+      padding: 0 2rem;
+
+    }
+
+    .styled-title-fale-conosco {
+      padding: 0 2rem;
+    }
+  }
 `;
 
 export const FormContatoLP = styled.form`
@@ -36,20 +47,20 @@ export const FormContatoLP = styled.form`
   justify-content: space-between;
   height: 100%;
   background-color: ${({ theme }) => theme.color.white};
-  /* padding-block: 40px; */
+  padding-block: 40px;
   border-radius: 32px;
   margin-right: -30px;
   gap: 20px;
 
   .divForm {
-    width: 100%;
+    width: 90%;
     display: flex;
     flex-direction: column;
     align-items: center;
   }
 
   .input {
-    width: 80%;
+    width: 100%;
     padding: 15px;
     height: 60px;
     border-radius: 12px;
@@ -63,7 +74,7 @@ export const FormContatoLP = styled.form`
   }
 
   .textarea {
-    width: 80%;
+    width: 100%;
     padding: 15px;
     height: 120px;
     border-radius: 12px;
@@ -77,7 +88,7 @@ export const FormContatoLP = styled.form`
     margin: auto;
 
     .divForm {
-      width: 80%;
+      width: 95%;
     }
   }
 `;

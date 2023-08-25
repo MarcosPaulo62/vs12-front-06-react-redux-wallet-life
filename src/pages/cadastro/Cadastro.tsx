@@ -151,7 +151,7 @@ export default function Cadastro() {
     <StyledCadastroContainer>
       <div className="header">
         <NavLink to={"/"}>
-          <img src={logoDark} alt="Logo da Wallet Life" />
+          <img src={logoDark} alt="Logo da Wallet Life" data-testid="logo-link-home"/>
         </NavLink>
         <div>
           <StyledTitle

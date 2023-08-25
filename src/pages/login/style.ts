@@ -69,12 +69,12 @@ export const StyledLoginContainer = styled.main`
     align-items: center;
     gap: 2.3rem;
 
-    @media (min-width: 768px) and (max-width: 1200px) {
+    @media (min-width: 640px) and (max-width: 1200px) {
       width: 60%;
     }
 
-    @media (min-width: 300px) and (max-width: 767px) {
-      width: 220px;
+    @media screen and (max-width: 640px) {
+      width: 80%;
     }
 
     button {
@@ -94,6 +94,7 @@ export const StyledLoginContainer = styled.main`
 
       @media (min-width: 300px) and (max-width: 767px) {
         font-size: 1rem;
+        padding: 2rem .8rem;
       }
 
       span {
