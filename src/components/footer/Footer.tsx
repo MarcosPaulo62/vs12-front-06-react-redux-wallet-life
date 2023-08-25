@@ -59,7 +59,7 @@ export default function Footer() {
   return (
     <StyledFooterContainer>
       <div className="left-section">
-        <img src={logo} alt="" />
+        <img src={logo} alt="Logo da walletLife, um quadrado preenchido na cor cinza claro, com 4 triangulos menores em cada uma das arestas, sendo um triângulo marrom escuro a direita, outro com a cor khaki abaixo, um marrom claro a esquerda e um último cinza escuro em cima. Abaixo da imagem está escrito walletlife finances." />
         <NavLink className="login" to={"/login"}>
           Login
         </NavLink>
@@ -72,7 +72,7 @@ export default function Footer() {
           Assine gratuitamente nossa newsletter e fique por dentro das nossas
           dicas sobre finanças!
         </StyledTag>
-        <div>
+        <div className="input-and-btn">
           <form className="styled-input" onSubmit={handleSubmit(onSubmit)}>
             <input
               type="email"

@@ -1,92 +1,101 @@
 import { styled } from "styled-components";
 
-
-export const Section = styled.section`
-  box-sizing: border-box;
-  width: 80%;
+export const DifferentialsContainer = styled.div`
+  width: 74rem;
+  max-width: 90%;
+  height: fit-content;
   display: flex;
-  justify-content: center;
-  padding: 2rem;
-  margin: 0 12%;
-  @media (max-width: 1441px){
-    padding: 2rem;
-    width: 100%;
-    margin: 0;
-  }
-`
-
-export const Aside = styled.section`
-  display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  width: 50%;
-  @media (max-width: 1441px){
-    width: 55%;
-    margin-left: 2.5rem;
-  }
-  
-`
-export const Container = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  padding: 1rem;
-  flex-wrap: wrap;
-  flex: 1;
-  gap: 1rem;
-  @media (max-width: 1441px){
-    align-items: flex-start;
-    gap: 3rem;
-    padding: 0;
-  }
-  
-`
+  gap: 5rem;
 
-export const AsideImg = styled.section`
-  display: flex;
-  justify-content: flex-start;
-  align-items: flex-start;
-  width: 40%;
-`
+  margin: auto;
 
-export const Caption = styled.p`
-  font-size: 1.5rem;
-`
+  .left-side {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5rem;
 
-export const Title = styled.h1`
-  font-size: 5rem;
-
-  @media (max-width: 1025px){
-  font-size: 4.5rem;
-    
+    @media screen and (max-width: 640px) {
+      margin: 0 auto;
+    }
   }
 
+  .numbers-grid {
+    width: 34.375rem;
+    height: 28.75rem;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 3rem;
+  }
 
-`
+  .grid-item {
+    background-color: ${({ theme }) => theme.color.white};
+    width: 16rem;
+    height: 15rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
 
-export const Topic = styled.div`
-  padding: 2.5rem;
-  flex: 1 1 300px;
-  @media (max-width: 1441px){
-    padding: 0;
-    padding-left: 2.5rem;
-    flex: 1 1 300px;
+  .number {
+    font-size: 5rem;
   }
-  @media (max-width: 1025px){
-    padding: 0;
-    padding-left: 0;
-    flex: 1 1 200px;
-  }
-`
 
-export const Img = styled.img`
-  width: 80%;
-  @media (max-width: 1025px){
-    padding-left: 0;
-    flex: 1 1 200px;
+  .div-btn {
+    width: 100%;
   }
-  @media (max-width: 1441px){
-    margin-left: 1rem;
+
+  .styled-btn {
+    max-width: 100vw;
   }
-`
+
+  .styled-span {
+    text-align: center;
+    font-size: 28px;
+    font-weight: 500;
+  }
+
+  .img-cafe {
+    width: 30rem;
+    max-height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+  }
+
+  .img-cafe-img {
+    max-height: 100%;
+    margin: auto;
+  }
+
+  @media screen and (max-width: 640px) {
+    width: 90%;
+
+    .numbers-grid {
+      width: 100vw;
+      height: fit-content;
+      justify-content: center;
+      align-items: center;
+      grid-template-columns: repeat(1, 1fr);
+      margin: auto;
+    }
+
+    .grid-item {
+      width: 100%;
+      justify-content: center;
+    }
+
+    .div-btn {
+      width: 90%;
+    }
+
+    .styled-btn {
+      max-width: 90vw;
+    }
+  }
+`;

@@ -4,13 +4,13 @@ import { StyledContainerDashboard } from "../dashboard/style";
 import RevenuesSectionDashboard from "../../components/revenuesSectionDashboard/RevenuesSectionDashboard";
 
 export default function Receitas() {
-    return(
-        <>
-        <StyledContainerDashboard>
-          <SideHeader />
-          <RevenuesSectionDashboard />
-        </StyledContainerDashboard>
-        <NavLink to="/login"></NavLink>
-      </>
-    )
+  return (
+    <>
+      <StyledContainerDashboard>
+        <SideHeader />
+        <RevenuesSectionDashboard />
+      </StyledContainerDashboard>
+      <NavLink to="/login"></NavLink>
+    </>
+  );
 }
