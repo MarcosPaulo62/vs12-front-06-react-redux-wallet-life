@@ -33,7 +33,7 @@ export const RecipesSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(ListRecipes.fulfilled, (state, {payload}) => {
       if (payload){
-        state.recipes = [...state.recipes, ...payload]
+        state.recipes = payload;
         state.errorOnList = undefined;
       }
     });
