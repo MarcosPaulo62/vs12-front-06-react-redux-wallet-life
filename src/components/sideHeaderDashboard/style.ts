@@ -7,6 +7,7 @@ export const StyledHeader = styled.header`
     align-items: center;
     height: 100vh;
     width: 30%;
+    min-width: 250px;
     background-color: ${({theme}) => theme.color.alabaster};
     gap: 2rem;
     padding: 3rem;
@@ -28,9 +29,32 @@ export const StyledHeader = styled.header`
 
     .navlink {
         color: ${({ theme }) => theme.color.jet};
-        font-size: 24px;
+        font-size: 1.5rem;
         font-weight: 700;
         cursor: pointer;
+    }
+
+    @media (max-width: 760px){
+        position: relative;
+        width: 100%;
+        height: 250px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+
+        div {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: end;
+            gap: .3rem;
+        }
+    }
+
+    @media (max-width: 480px){
+        .navlink{
+            font-size: 1.1rem;
+        }
     }
 
 `
