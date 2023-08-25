@@ -1,20 +1,20 @@
 import { NavLink } from "react-router-dom";
 import { StyledButton } from "../../styles/buttons";
-import {
-  Aside,
-  AsideImg,
-  Caption,
-  Container,
-  Img,
-  Section,
-  Title,
-  Topic,
-} from "./style";
+// import {
+//   Aside,
+//   AsideImg,
+//   Caption,
+//   Container,
+//   Img,
+//   Section,
+//   Title,
+//   Topic,
+// } from "./style";
 
 export const Differentials = () => {
   return (
     <>
-      <Section>
+      {/* <Section>
         <Aside>
           <Container>
             <Topic>
@@ -47,7 +47,7 @@ export const Differentials = () => {
         <AsideImg>
           <Img src="differential.png" />
         </AsideImg>
-      </Section>
+      </Section> */}
     </>
   );
 };

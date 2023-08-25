@@ -20,7 +20,7 @@ export const loginUser = createAsyncThunk(
     async(userCredentials: any)=>{
         const request = await axios.post('http://vemser-hml.dbccompany.com.br:39000/guilherme-militao/vemser-tf-04-security/auth', userCredentials);
         const response = await request.data;
-        localStorage.setItem('user', JSON.stringify(response));
+        localStorage.setItem('user', response);
         return response;
     }
 );
