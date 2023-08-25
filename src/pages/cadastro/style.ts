@@ -1,5 +1,4 @@
 import { styled } from "styled-components";
-import logo from "../../assets/logoTextLight.png";
 
 export const StyledCadastroContainer = styled.main`
   display: flex;

@@ -1,6 +1,5 @@
 import { MenuHamburguer, StyledHeader } from "./style";
 import logo from "../../assets/logo-WALLETLIFE.png";
-import { StyledButton } from "../../styles/buttons";
 import { NavLink } from "react-router-dom";
 import { List, X } from "@phosphor-icons/react";
 import { useState } from "react";

@@ -1,4 +1,4 @@
-import { StyledSpan, StyledTitle } from "../../styles/typography";
+import { StyledTitle } from "../../styles/typography";
 import {
   StyledDashboardInput,
   StyledDashboardLabel,
@@ -11,7 +11,6 @@ import {
   StyledTotalValueAndPlusButton,
 } from "../../styles/dashboardSections";
 import { StyledSectionDashboard } from "../revenuesSectionDashboard/style";
-import ItemDashboard from "../itemDashboard/ItemDashboard";
 
 export default function InvestmentsSectionDashboard() {
   return (

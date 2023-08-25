@@ -1,4 +1,4 @@
-import { StyledSpan, StyledTitle } from "../../styles/typography";
+import { StyledTitle } from "../../styles/typography";
 import { StyledSectionDashboard } from "./style";
 import {
   StyledDashboardLabel,
@@ -10,7 +10,6 @@ import {
   StyledTotalValue,
   StyledTotalValueAndPlusButton,
   StyledDashboardSearchButton,
-  StyledItemlDiv,
 } from "../../styles/dashboardSections";
 import ItemDashboard from "../itemDashboard/ItemDashboard";
 import { ListRecipes } from "../../store/recipes/RecipesSlice";

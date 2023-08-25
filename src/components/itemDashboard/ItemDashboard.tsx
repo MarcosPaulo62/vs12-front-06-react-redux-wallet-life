@@ -5,8 +5,6 @@ import {
   StyledItemlDiv,
   StyledTrashCanButton,
 } from "../../styles/dashboardSections";
-import Eye from "../../assets/dashboard-olho.png";
-import TrashCan from "../../assets/dashboard-lixo.png";
 
 interface ItemDashboardProps {
   currentPage: "despesas" | "investimentos" | "receitas";
