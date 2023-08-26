@@ -17,7 +17,7 @@ import { selectExpenses, selectQuantidadeExpenses } from "../../store/expenses/S
 import { ExpensesSlice, ListExpenses } from "../../store/expenses/ExpensesSlice";
 import { useEffect, useState } from 'react';
 import ItemDashboard from "../itemDashboard/ItemDashboard";
-import { QuantidadeExpenses, QuantidadeExpensesSlice } from "../../store/expenses/TotalExpensesSlice";
+import { QuantidadeExpenses, QuantidadeExpensesSlice } from "../../store/expenses/QuantidadeExpensesSlice";
 import { Pagination } from '@mui/material';
 
 export default function ExpensesSectionDashboard() {

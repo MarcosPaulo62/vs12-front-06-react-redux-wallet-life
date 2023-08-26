@@ -22,21 +22,32 @@ import {
   selectRecipes,
 } from "../../store/recipes/Selectors";
 import { useEffect, useState } from "react";
+import { selectQuantidadeRecipes } from '../../store/expenses/Selectors';
+import { QuantidadeRecipes, QuantidadeRecipesSlice } from '../../store/recipes/QuantidadeRecipesSlice';
 
 export default function RevenuesSectionDashboard() {''
   const dispatch = useAppDispatch();
   const recipes = useSelector(selectRecipes);
-  const [currentPage, setPage] = useState(0);
-  const itemsPerPage = 5;
+  const quantidadeRecipes = useSelector(selectQuantidadeRecipes);
 
-  function handleSetPage(_: any, newPage: number) {
-    setPage(newPage - 1);
-  }
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const itemsPerPage = 5;
 
   useEffect(() => {
     dispatch(RecipesSlice.actions.resetRecipes());
-    dispatch(ListRecipes({ pagina: currentPage, quantidadeRegistros: itemsPerPage }));
+    dispatch(ListRecipes({ pagina: currentPage - 1, quantidadeRegistros: itemsPerPage }));
+    dispatch(QuantidadeRecipesSlice.actions.resetRecipes());
+    dispatch(QuantidadeRecipes({}));
   }, [currentPage]);
+
+  const totalPages: number = Math.ceil(quantidadeRecipes / itemsPerPage);
+
+  const handlePageChange = (
+    event: React.ChangeEvent<unknown>,
+    page: number
+  ): void => {
+    setCurrentPage(page);
+  };
 
   return (
     <StyledSectionDashboard>
@@ -70,7 +81,7 @@ export default function RevenuesSectionDashboard() {''
           ))}
         </ul>
       </div>
-      <Pagination count={10} onChange={handleSetPage} />
+      <Pagination count={totalPages} page={currentPage} onChange={handlePageChange} />
     </StyledSectionDashboard>
   );
 }

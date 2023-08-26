@@ -4,7 +4,8 @@ import { useDispatch } from 'react-redux'
 import userReducer from './UserSlice';
 import { RecipesSlice } from './recipes/RecipesSlice';
 import { ExpensesSlice } from './expenses/ExpensesSlice';
-import { QuantidadeExpensesSlice } from './expenses/TotalExpensesSlice';
+import { QuantidadeExpensesSlice } from './expenses/QuantidadeExpensesSlice';
+import { QuantidadeRecipesSlice } from './recipes/QuantidadeRecipesSlice';
 
 
 const store = configureStore({
@@ -13,7 +14,8 @@ const store = configureStore({
     user: userReducer,
     recipes: RecipesSlice.reducer,
     expenses: ExpensesSlice.reducer,
-    quantidadeExpenses: QuantidadeExpensesSlice.reducer
+    quantidadeExpenses: QuantidadeExpensesSlice.reducer,
+    quantidadeRecipes: QuantidadeRecipesSlice.reducer
   },
 })
 
