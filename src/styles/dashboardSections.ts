@@ -17,7 +17,6 @@ export const StyledDashboardLabel = styled.div<iStyledDashboardThemeProps>`
   align-items: center;
   border-radius: 0px 0px 32px 32px;
 
-  position: sticky;
   top: 0;
 
   ${({ themecolor }) => {
@@ -36,6 +35,10 @@ export const StyledDashboardLabel = styled.div<iStyledDashboardThemeProps>`
         `;
     }
   }}
+
+  @media (max-width: 760px) {
+    height: 6rem;
+  }
 `;
 
 export const StyledTotalDiv = styled.div<iStyledDashboardThemeProps>`
@@ -131,39 +134,45 @@ export const StyledDashboardInput = styled.input`
 `;
 
 export const StyledDashboardSearchButton = styled.button`
-    width: 100px;
-    height: 80px;
-    background: url(${Lupa});
-    background-repeat: no-repeat;
-    background-color: ${({ theme }) => theme.color.jet};
-    border-radius: 12px;
-    background-position: center;
-    margin-left: -100px;
-    position: absolute;
+  width: 100px;
+  height: 80px;
+  background: url(${Lupa});
+  background-repeat: no-repeat;
+  background-color: ${({ theme }) => theme.color.jet};
+  border-radius: 12px;
+  background-position: center;
+  margin-left: -100px;
+  position: absolute;
 `;
 
 export const StyledItemlDiv = styled.div`
   width: 50rem;
+  max-width: 100%;
   height: 6rem;
+  min-height: fit-content;
   display: flex;
   justify-content: space-between;
   align-items: center;
   border-radius: 32px 32px 32px 32px;
   background-color: ${({ theme }) => theme.color.alabaster};
+
+  @media (max-width: 481px) {
+    flex-direction: column;
+  }
 `;
 
 export const StyledItemValue = styled.p<iStyledDashboardThemeProps>`
-width: 15rem;
-height: 100%;
-border-radius: 36px 0 0 36px;
-display: flex;
-flex-direction: column;
-justify-content: center;
-align-items: center;
-font-size: 2rem;
-font-weight: 700;
+  width: 15rem;
+  height: 100%;
+  border-radius: 36px 0 0 36px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 2rem;
+  font-weight: 700;
 
-${({ themecolor }) => {
+  ${({ themecolor }) => {
     switch (themecolor) {
       case "receitas":
         return css`
@@ -179,6 +188,15 @@ ${({ themecolor }) => {
         `;
     }
   }}
+
+  @media (max-width: 760px) {
+    font-size: 1.5rem;
+  }
+
+  @media (max-width: 481px) {
+    font-size: 1.2rem;
+    border-radius: 36px 36px 36px 36px;
+  }
 `;
 
 export const StyledItemDescription = styled.p`
@@ -191,24 +209,32 @@ export const StyledItemDescription = styled.p`
   justify-content: center;
   align-items: start;
   padding-left: 1.5rem;
+
+  @media (max-width: 760px) {
+    font-size: 1.5rem;
+  }
+
+  @media (max-width: 481px) {
+    font-size: 1rem;
+    padding: 0;
+    text-justify: center;
+  }
 `;
 
 export const StyledEyeButton = styled.button`
-    width: 50px;
-    height: 100%;
-    background: url(${Eye});
-    background-repeat: no-repeat;
-    background-position: center;
-    margin-right: 1rem;
+  width: 50px;
+  height: 100%;
+  background: url(${Eye});
+  background-repeat: no-repeat;
+  background-position: center;
+  margin-right: 1rem;
 `;
 
 export const StyledTrashCanButton = styled.button`
-    width: 50px;
-    height: 100%;
-    background: url(${TrashCan});
-    background-repeat: no-repeat;
-    background-position: center;
-    margin-right: 1rem;
+  width: 50px;
+  height: 100%;
+  background: url(${TrashCan});
+  background-repeat: no-repeat;
+  background-position: center;
+  margin-right: 1rem;
 `;
-
-
