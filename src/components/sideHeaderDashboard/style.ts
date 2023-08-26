@@ -34,20 +34,53 @@ export const StyledHeader = styled.header`
         cursor: pointer;
     }
 
+    .ativo{
+        box-sizing: content-box;
+        font-size: 2rem;
+        span{
+            border-bottom: 2px solid ${({ theme }) => theme.color.jet};;
+        }
+    }
+
+    .logout{
+        margin-top: 2rem;
+
+        span{
+            display: flex;
+            align-items: center;
+            gap: .5rem;
+            color: ${({ theme }) => theme.color.jet};
+        }
+    }
+
     .menu-hamburguer{
         display: none;
+    }
+
+    @media (max-width: 1200px){
+        .navlink{
+            font-size: 1.3rem;
+        }
+        .ativo{
+            font-size: 1.5rem;
+        }
     }
 
     @media (max-width: 760px){
         position: relative;
         width: 100%;
-        height: 250px;
+        height: 180px;
         display: flex;
         flex-direction: row;
         justify-content: space-between;
 
         .menu-hamburguer{
-            display: block;
+            display: flex;
+            width: 60%;
+        }
+
+        img{
+            width: 60%;
         }
 
         .navegacao {
@@ -56,6 +89,28 @@ export const StyledHeader = styled.header`
     }
 
     @media (max-width: 480px){
+        img{
+            width: 70%;
+        }
+
+        .menu-hamburguer{
+            width: 100%;
+        }
+
+        .navlink{
+            font-size: 1.1rem;
+        }
+    }
+
+    @media (max-width: 400px){
+        img{
+            width: 90%;
+        }
+
+        .menu-hamburguer{
+            width: 100%;
+        }
+
         .navlink{
             font-size: 1.1rem;
         }
@@ -82,11 +137,15 @@ export const MenuHamburguer = styled.div`
         gap: 2rem;
         background-color: ${({theme}) => theme.color.alabaster};
         height: 100vh;
-        width: 50%;
+        width: 60%;
 
         .close-menu{
             align-self: flex-end;
             cursor: pointer;
+        }
+
+        @media (max-width: 540px) {
+            width: 70%;
         }
     }
 `
