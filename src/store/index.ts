@@ -3,13 +3,17 @@ import { usersSlice } from './users/usersSlice'
 import { useDispatch } from 'react-redux'
 import userReducer from './UserSlice';
 import { RecipesSlice } from './recipes/RecipesSlice';
+import { ExpensesSlice } from './expenses/ExpensesSlice';
+import { QuantidadeExpensesSlice } from './expenses/TotalExpensesSlice';
 
 
 const store = configureStore({
   reducer: {
     users: usersSlice.reducer,
     user: userReducer,
-    recipes: RecipesSlice.reducer
+    recipes: RecipesSlice.reducer,
+    expenses: ExpensesSlice.reducer,
+    quantidadeExpenses: QuantidadeExpensesSlice.reducer
   },
 })
 
