@@ -14,8 +14,6 @@ export const StyledFooterContainer = styled.footer`
   img {
     width: 17.1rem;
     height: 9.25rem;
-    margin-top: 2.9rem;
-    margin-left: 2.5rem;
   }
 
   .left-section {
@@ -78,6 +76,18 @@ export const StyledFooterContainer = styled.footer`
 
   .input-error {
     border: 1px solid red;
+  }
+
+  .arrow-anchor {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .arrow {
+    margin: 0;
+    width: 5rem;
+    height: 5rem;
   }
 
   @media screen and (max-width: 640px) {
