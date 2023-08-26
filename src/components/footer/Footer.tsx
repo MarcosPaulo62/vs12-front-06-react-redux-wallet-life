@@ -10,6 +10,8 @@ import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
 import { useState } from "react";
 
+import ArrowUp from "../../assets/arrow-circle-up.svg";
+
 type FormData = {
   email: string;
 };
@@ -59,13 +61,16 @@ export default function Footer() {
   return (
     <StyledFooterContainer>
       <div className="left-section">
-        <img src={logo} alt="Logo da walletLife, um quadrado preenchido na cor cinza claro, com 4 triangulos menores em cada uma das arestas, sendo um triângulo marrom escuro a direita, outro com a cor khaki abaixo, um marrom claro a esquerda e um último cinza escuro em cima. Abaixo da imagem está escrito walletlife finances." />
+        <img
+          src={logo}
+          alt="Logo da walletLife, um quadrado preenchido na cor cinza claro, com 4 triangulos menores em cada uma das arestas, sendo um triângulo marrom escuro a direita, outro com a cor khaki abaixo, um marrom claro a esquerda e um último cinza escuro em cima. Abaixo da imagem está escrito walletlife finances."
+        />
         <NavLink className="login" to={"/login"}>
           Login
         </NavLink>
         <NavLink className="cadastro" to={"/cadastro"}>
           Cadastro
-        </NavLink> 
+        </NavLink>
       </div>
       <div className="right-section">
         <StyledTag className="paragraphy">
@@ -88,6 +93,9 @@ export default function Footer() {
           </form>
         </div>
       </div>
+      <a className="arrow-anchor" href="#header">
+      <img className="arrow" src={ArrowUp} alt="" />
+      </a>
     </StyledFooterContainer>
   );
 }
