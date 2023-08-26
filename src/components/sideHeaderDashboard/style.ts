@@ -43,18 +43,27 @@ export const StyledHeader = styled.header`
     }
 
     .logout{
-        margin-top: 1.5rem;
+        margin-top: 2rem;
 
         span{
-            padding: 1rem 2.5rem;
-            border-radius: 12px;
-            color: ${({ theme }) => theme.color.white};
-            background-color: ${({ theme }) => theme.color.brownSugar};
+            display: flex;
+            align-items: center;
+            gap: .5rem;
+            color: ${({ theme }) => theme.color.jet};
         }
     }
 
     .menu-hamburguer{
         display: none;
+    }
+
+    @media (max-width: 1200px){
+        .navlink{
+            font-size: 1.3rem;
+        }
+        .ativo{
+            font-size: 1.5rem;
+        }
     }
 
     @media (max-width: 760px){
