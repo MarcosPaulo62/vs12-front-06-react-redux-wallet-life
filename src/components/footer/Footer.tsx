@@ -94,7 +94,7 @@ export default function Footer() {
         </div>
       </div>
       <a className="arrow-anchor" href="#header">
-      <img className="arrow" src={ArrowUp} alt="" />
+      <img className="arrow" src={ArrowUp} alt="Imagem de uma seta para cima, indicando que este botão leva ao topo da página" />
       </a>
     </StyledFooterContainer>
   );
