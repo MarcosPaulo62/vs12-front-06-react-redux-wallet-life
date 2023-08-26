@@ -22,7 +22,7 @@ import {
   selectRecipes,
 } from "../../store/recipes/Selectors";
 import { useEffect, useState } from "react";
-import { selectQuantidadeRecipes } from '../../store/expenses/Selectors';
+import { selectQuantidadeRecipes } from '../../store/recipes/Selectors';
 import { QuantidadeRecipes, QuantidadeRecipesSlice } from '../../store/recipes/QuantidadeRecipesSlice';
 
 export default function RevenuesSectionDashboard() {''
