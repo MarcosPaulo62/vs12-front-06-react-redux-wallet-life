@@ -20,7 +20,11 @@ import ItemDashboard from "../itemDashboard/ItemDashboard";
 import { QuantidadeExpenses, QuantidadeExpensesSlice } from "../../store/expenses/TotalExpensesSlice";
 import { Pagination } from '@mui/material';
 
-export default function ExpensesSectionDashboard() {
+interface ExpensesSectionProps {
+  handleOpenModal: () => void;
+}
+
+export default function ExpensesSectionDashboard({ handleOpenModal }: ExpensesSectionProps) {
   const dispatch = useAppDispatch();
   const expenses = useSelector(selectExpenses);
   const quantidadeExpenses = useSelector(selectQuantidadeExpenses);
@@ -60,7 +64,7 @@ export default function ExpensesSectionDashboard() {
         <StyledTotalTitle>Despesas totais:</StyledTotalTitle>
         <StyledTotalValueAndPlusButton>
           <StyledTotalValue>R$ -800,00</StyledTotalValue>
-          <StyledPlusButton>+</StyledPlusButton>
+          <StyledPlusButton onClick={handleOpenModal}>+</StyledPlusButton>
         </StyledTotalValueAndPlusButton>
       </StyledTotalDiv>
       <StyledInputAndButtonDiv>

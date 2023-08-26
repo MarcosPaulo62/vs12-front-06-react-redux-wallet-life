@@ -1,21 +1,21 @@
 import React from "react";
 import { StyledButton } from "../../../styles/buttons";
 import { StyledSpan, StyledTitle } from "../../../styles/typography";
-import { StyledModalContainer, StyledModalDespesaContainer } from "./style";
+import { StyledModalContainer, StyledModalReceitaContainer } from "./style";
 import { useForm } from 'react-hook-form';
 
-interface ModalAddDespesaProps {
+interface ModalAddReceitaProps {
     handleCloseModal: () => void;
 }
 
 interface TransactionFormData {
-    tipoDespesa: string;
+    tipoReceita: string;
     valor: number;
     descricao: string;
     data: string;
 }
 
-export default function ModalAddDespesa ({ handleCloseModal }: ModalAddDespesaProps) {
+export default function ModalAddReceita ({ handleCloseModal }: ModalAddReceitaProps) {
     const { register, handleSubmit, reset } = useForm<TransactionFormData>();
     
 
@@ -32,7 +32,7 @@ export default function ModalAddDespesa ({ handleCloseModal }: ModalAddDespesaPr
 
     return(
         
-       <StyledModalDespesaContainer>
+       <StyledModalReceitaContainer>
              
             <StyledModalContainer>
                 <div>
@@ -40,10 +40,14 @@ export default function ModalAddDespesa ({ handleCloseModal }: ModalAddDespesaPr
                     <StyledSpan className="close-modal" fontSize="lg" onClick={handleCloseModal}>X</StyledSpan>
                 </div>
                 <form onSubmit={handleSubmit((data) => onSubmit(data))}>
-                    <select id="tipoDespesa"  required {...register("tipoDespesa")}>
-                        <option className="opt" value="" disabled selected>Tipo de despesa</option>
-                        <option className="opt" value="Única">Única</option>
-                        <option className="opt" value="Recorrente">Recorrente</option>
+                    <select id="tipoReceita"  required {...register("tipoReceita")}>
+                        <option className="opt" value="" disabled selected>Tipo de Receita</option>
+                        <option className="opt" value="Salário">Salário</option>
+                        <option className="opt" value="Dividendos">Dividendos</option>
+                        <option className="opt" value="Juros Recebidos">Juros Recebidos</option>
+                        <option className="opt" value="Pagamentos">Pagamentos</option>
+                        <option className="opt" value="Outros">Outros</option>
+
                     </select>
                     <input type="number" id="valor" placeholder="Valor" required {...register("valor")} />
                     <input type="text" id="descricao" placeholder="Descrição" required {...register("descricao")} />
@@ -52,7 +56,7 @@ export default function ModalAddDespesa ({ handleCloseModal }: ModalAddDespesaPr
                 </form>                
             </StyledModalContainer>
              
-        </StyledModalDespesaContainer>
+        </StyledModalReceitaContainer>
     
         
     )

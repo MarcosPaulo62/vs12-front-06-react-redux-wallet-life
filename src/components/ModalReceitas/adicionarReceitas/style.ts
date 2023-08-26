@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const StyledModalDespesaContainer = styled.div`
+export const StyledModalReceitaContainer = styled.div`
   background-color: rgba(0, 0, 0, 0.65);
   position: absolute;
   display: flex;

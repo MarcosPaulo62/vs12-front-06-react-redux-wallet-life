@@ -22,7 +22,11 @@ import {
 } from "../../store/recipes/Selectors";
 import { useEffect } from "react";
 
-export default function RevenuesSectionDashboard() {
+interface ExpensesSectionProps {
+  handleOpenModal: () => void;
+}
+
+export default function RevenuesSectionDashboard({ handleOpenModal }: ExpensesSectionProps) {
   const dispatch = useAppDispatch();
   const errorOnList = useSelector(selectErrorOnList);
   const recipes = useSelector(selectRecipes);
@@ -44,7 +48,7 @@ export default function RevenuesSectionDashboard() {
         <StyledTotalTitle>Receitas totais:</StyledTotalTitle>
         <StyledTotalValueAndPlusButton>
           <StyledTotalValue>R$ 800,00</StyledTotalValue>
-          <StyledPlusButton>+</StyledPlusButton>
+          <StyledPlusButton onClick={handleOpenModal}>+</StyledPlusButton>
         </StyledTotalValueAndPlusButton>
       </StyledTotalDiv>
       <StyledInputAndButtonDiv>
