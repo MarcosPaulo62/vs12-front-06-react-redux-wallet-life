@@ -19,11 +19,15 @@ import { useEffect, useState } from 'react';
 import ItemDashboard from "../itemDashboard/ItemDashboard";
 import { QuantidadeExpenses, QuantidadeExpensesSlice } from "../../store/expenses/QuantidadeExpensesSlice";
 import { Pagination } from '@mui/material';
+import { TotaisSlice, TotalExpenses } from "../../store/users/TotaisSlice";
+import { selectTotalExpenses } from "../../store/users/selectors";
+import { formatNumber } from "../principalSectionDashboard/PrincipalSectionDashboard";
 
 export default function ExpensesSectionDashboard() {
   const dispatch = useAppDispatch();
   const expenses = useSelector(selectExpenses);
   const quantidadeExpenses = useSelector(selectQuantidadeExpenses);
+  const totalExpenses = useSelector(selectTotalExpenses);
 
   const itemsPerPage = 5;
   const [currentPage, setCurrentPage] = useState<number>(1);
@@ -33,6 +37,8 @@ export default function ExpensesSectionDashboard() {
     dispatch(ListExpenses({}));
     dispatch(QuantidadeExpensesSlice.actions.resetExpenses());
     dispatch(QuantidadeExpenses({}));
+    dispatch(TotaisSlice.actions.resetTotais());
+    dispatch(TotalExpenses({}));
   }, []);
 
   const totalPages: number = Math.ceil(quantidadeExpenses / itemsPerPage);
@@ -59,7 +65,7 @@ export default function ExpensesSectionDashboard() {
       <StyledTotalDiv themecolor={"despesas"}>
         <StyledTotalTitle>Despesas totais:</StyledTotalTitle>
         <StyledTotalValueAndPlusButton>
-          <StyledTotalValue>R$ -800,00</StyledTotalValue>
+          <StyledTotalValue>R$ -{formatNumber(totalExpenses)}</StyledTotalValue>
           <StyledPlusButton>+</StyledPlusButton>
         </StyledTotalValueAndPlusButton>
       </StyledTotalDiv>

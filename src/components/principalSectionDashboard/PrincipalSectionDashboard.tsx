@@ -7,33 +7,37 @@ import { useAppDispatch } from "../../store";
 import { useSelector } from "react-redux";
 import { TotaisSlice, TotalExpenses, TotalInvestments, TotalRecipes } from "../../store/users/TotaisSlice";
 import { useEffect, useState } from "react";
-import { selectTotalExpenses, selectTotalInvestments, selectTotalRecipes } from "../../store/users/selectors";
+import { selectTotalExpenses, selectTotalInvestments, selectTotalRecipes, selectUserLogged } from "../../store/users/selectors";
+import { UserLogged, UserLoggedSlice } from "../../store/users/UserLoggedSlice";
+
+export function formatNumber(number: number): string {
+  const formattedNumber = number.toFixed(2);
+
+  const numberWithComma = formattedNumber.replace('.', ',');
+
+  return numberWithComma;
+}
 
 export default function PrincipalSectionDashboard() {
   const dispatch = useAppDispatch();
   const totalRecipes = useSelector(selectTotalRecipes);
   const totalExpenses = useSelector(selectTotalExpenses);
   const totalInvestments = useSelector(selectTotalInvestments);
+  const userLogged = useSelector(selectUserLogged);
 
   useEffect(() => {
     dispatch(TotaisSlice.actions.resetTotais());
+    dispatch(UserLoggedSlice.actions.resetUserLogged());
     dispatch(TotalRecipes({}));
     dispatch(TotalExpenses({}));
     dispatch(TotalInvestments({}));
+    dispatch(UserLogged({}));
   }, []);
-
-  function formatNumber(number: number): string {
-    const formattedNumber = number.toFixed(2);
-  
-    const numberWithComma = formattedNumber.replace('.', ',');
-  
-    return numberWithComma;
-  }
 
   return (
     <StyledSectionDashboard>
       <StyledTitle className="title" tag="h1" fontWeight={700} fontSize="lg">
-        Olá, Fulano
+        Olá, {userLogged.nome}
       </StyledTitle>
       <div className="saldo-total">
         <StyledSpan className="title-card-saldo" fontSize="lg">

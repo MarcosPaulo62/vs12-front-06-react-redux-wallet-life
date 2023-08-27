@@ -25,6 +25,9 @@ import {
 import { useEffect, useState } from "react";
 import { selectQuantidadeInvestments } from '../../store/investments/Selectors';
 import { QuantidadeInvestments, QuantidadeInvestmentsSlice } from '../../store/investments/QuantidadeInvestmentsSlice';
+import { selectTotalInvestments } from "../../store/users/selectors";
+import { TotaisSlice, TotalInvestments } from "../../store/users/TotaisSlice";
+import { formatNumber } from "../principalSectionDashboard/PrincipalSectionDashboard";
 
 
 export default function InvestmentsSectionDashboard() {''
@@ -32,6 +35,7 @@ export default function InvestmentsSectionDashboard() {''
   const dispatch = useAppDispatch();
   const investments = useSelector(selectInvestments);
   const quantidadeInvestments = useSelector(selectQuantidadeInvestments);
+  const totalInvestments = useSelector(selectTotalInvestments);
 
   const [currentPage, setCurrentPage] = useState<number>(1);
   const itemsPerPage = 5;
@@ -41,6 +45,8 @@ export default function InvestmentsSectionDashboard() {''
     dispatch(ListInvestments({ pagina: currentPage - 1, quantidadeRegistros: itemsPerPage }));
     dispatch(QuantidadeInvestmentsSlice.actions.resetInvestments());
     dispatch(QuantidadeInvestments({}));
+    dispatch(TotaisSlice.actions.resetTotais());
+    dispatch(TotalInvestments({}));
   }, [currentPage]);
 
   const totalPages: number = Math.ceil(quantidadeInvestments / itemsPerPage);
@@ -64,7 +70,7 @@ export default function InvestmentsSectionDashboard() {''
       <StyledTotalDiv themecolor={"investimentos"}>
         <StyledTotalTitle>Total investido:</StyledTotalTitle>
         <StyledTotalValueAndPlusButton>
-          <StyledTotalValue>R$ 15.000,00</StyledTotalValue>
+          <StyledTotalValue>R$ {formatNumber(totalInvestments)}</StyledTotalValue>
           <StyledPlusButton>+</StyledPlusButton>
         </StyledTotalValueAndPlusButton>
       </StyledTotalDiv>
