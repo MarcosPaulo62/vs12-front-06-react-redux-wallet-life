@@ -24,6 +24,7 @@ export const StyledSectionDashboard = styled.section`
 
   .paginacao {
     margin-bottom: 3rem;
+    z-index: -1;
   }
 
   @media (max-width: 760px) {
