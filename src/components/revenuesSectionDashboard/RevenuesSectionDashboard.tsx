@@ -22,11 +22,11 @@ import {
 } from "../../store/recipes/Selectors";
 import { useEffect } from "react";
 
-interface ExpensesSectionProps {
+interface RevenueSectionProps {
   handleOpenModal: () => void;
 }
 
-export default function RevenuesSectionDashboard({ handleOpenModal }: ExpensesSectionProps) {
+export default function RevenuesSectionDashboard({ handleOpenModal }: RevenueSectionProps) {
   const dispatch = useAppDispatch();
   const errorOnList = useSelector(selectErrorOnList);
   const recipes = useSelector(selectRecipes);

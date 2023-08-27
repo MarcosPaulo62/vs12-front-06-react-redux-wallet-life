@@ -12,7 +12,12 @@ import {
 } from "../../styles/dashboardSections";
 import { StyledSectionDashboard } from "../revenuesSectionDashboard/style";
 
-export default function InvestmentsSectionDashboard() {
+interface InvesttmentSectionProps {
+  handleOpenModal: () => void;
+}
+
+
+export default function InvestmentsSectionDashboard({ handleOpenModal }: InvesttmentSectionProps) {
   return (
     <StyledSectionDashboard>
       <StyledDashboardLabel themecolor={"investimentos"}>
@@ -24,7 +29,7 @@ export default function InvestmentsSectionDashboard() {
         <StyledTotalTitle>Total investido:</StyledTotalTitle>
         <StyledTotalValueAndPlusButton>
           <StyledTotalValue>R$ 15.000,00</StyledTotalValue>
-          <StyledPlusButton>+</StyledPlusButton>
+          <StyledPlusButton onClick={handleOpenModal}>+</StyledPlusButton>
         </StyledTotalValueAndPlusButton>
       </StyledTotalDiv>
       <StyledInputAndButtonDiv>
