@@ -61,6 +61,7 @@ export default function RevenuesSectionDashboard() {
                 description={recipe.descricao}
                 value={recipe.valor}
                 currentPage="receitas"
+                id={recipe.idReceita}
               />
             </li>
           ))}
