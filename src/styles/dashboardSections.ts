@@ -10,7 +10,7 @@ export interface iStyledDashboardThemeProps {
 export const StyledDashboardLabel = styled.div<iStyledDashboardThemeProps>`
   width: 50rem;
   max-width: 80%;
-  height: 12rem;
+  height: 8rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -209,6 +209,10 @@ export const StyledDashboardInput = styled.input`
     z-index: -1;
     font-size: 1.4rem;
   }
+
+  @media (min-width: 1025px) {
+    z-index: -1;
+  }
 `;
 
 export const StyledDashboardSearchButton = styled.button`
@@ -242,6 +246,10 @@ export const StyledDashboardSearchButton = styled.button`
     width: 4.5rem;
     height: 4.5rem;
     margin-left: -4.5rem;
+  }
+
+  @media (min-width: 1025px) {
+    z-index: -1;
   }
 `;
 

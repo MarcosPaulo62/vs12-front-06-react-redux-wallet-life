@@ -45,6 +45,10 @@ export const StyledModalContainer = styled.div`
       @media (max-width: 480px) {
         margin-left: 0;
       }
+
+      @media (min-width: 481px) and (max-width: 760px) {
+        margin-left: 3rem;
+      }
     }
 
     span {
