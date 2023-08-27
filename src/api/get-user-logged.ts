@@ -1,13 +1,12 @@
 import { http } from "./http";
 
 export async function getUserLogged(): Promise<GetUserLoggedResponse> {
-  const token = localStorage.getItem('token');
+  const token = localStorage.getItem('user');
   const response = await http.get<GetUserLoggedResponse>('/usuario/recuperar-usuario-logado', { headers:{ 
     Authorization: token,
   }
   })
   return response.data;
-
 }
 
 export type GetUserLoggedResponse = {
@@ -24,5 +23,5 @@ export type GetUserLoggedResponse = {
 export type AuthorityResponse = {
   idCargo: number,
   nome: string,
-  authority: "string"
+  authority: string
 }

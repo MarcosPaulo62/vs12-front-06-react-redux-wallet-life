@@ -1,10 +1,10 @@
 import {http} from './http';
 
-export async function getRecipes(pagina : number, quantidadeRegistros: number){
+export async function getRecipes(pagina : number, quantidadeRegistros: number, valor?: number){
   const token = localStorage.getItem('user');
 
   const response = await http.get<GetRecipesData[]>(`/usuario/usuario-receita`,{ headers:{ Authorization: token}, params: { pagina: pagina,
-    quantidadeRegistros: quantidadeRegistros}});
+    quantidadeRegistros: quantidadeRegistros, valor: valor}});
     return response.data;
 }
 

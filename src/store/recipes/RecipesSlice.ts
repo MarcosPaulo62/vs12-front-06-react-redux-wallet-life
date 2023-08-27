@@ -6,6 +6,7 @@ type RecipesSliceState = {
   pagina: number,
   quantidadeRegistros: number,
   errorOnList?: string,
+  valor?: number,
 }
 
 export interface Recipes {
@@ -54,7 +55,7 @@ export const ListRecipes = createAsyncThunk(
   
   async (payload: any, thunkApi) => {
     try{
-      const recipes = await API.getRecipes(payload.pagina, payload.quantidadeRegistros)
+      const recipes = await API.getRecipes(payload.pagina, payload.quantidadeRegistros, payload.valor)
       return recipes;
     } catch {
       return thunkApi.rejectWithValue('Falha ao buscar receitas')

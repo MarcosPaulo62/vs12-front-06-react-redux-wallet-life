@@ -1,4 +1,4 @@
-import { Pagination } from '@mui/material';
+import { Pagination } from "@mui/material";
 import { StyledTitle } from "../../styles/typography";
 import { StyledSectionDashboard } from "./style";
 import {
@@ -22,8 +22,14 @@ import {
   selectRecipes,
 } from "../../store/recipes/Selectors";
 import { useEffect, useState } from "react";
-import { selectQuantidadeRecipes } from '../../store/recipes/Selectors';
-import { QuantidadeRecipes, QuantidadeRecipesSlice } from '../../store/recipes/QuantidadeRecipesSlice';
+import { selectQuantidadeRecipes } from "../../store/recipes/Selectors";
+import {
+  QuantidadeRecipes,
+  QuantidadeRecipesSlice,
+} from "../../store/recipes/QuantidadeRecipesSlice";
+import { selectTotalRecipes } from "../../store/users/selectors";
+import { TotaisSlice, TotalRecipes } from "../../store/users/TotaisSlice";
+import { formatNumber } from "../principalSectionDashboard/PrincipalSectionDashboard";
 
 interface RevenueSectionProps {
   handleOpenModal: () => void;
@@ -33,15 +39,40 @@ export default function RevenuesSectionDashboard({ handleOpenModal }: RevenueSec
   const dispatch = useAppDispatch();
   const recipes = useSelector(selectRecipes);
   const quantidadeRecipes = useSelector(selectQuantidadeRecipes);
+  const totalRecipes = useSelector(selectTotalRecipes);
 
   const [currentPage, setCurrentPage] = useState<number>(1);
   const itemsPerPage = 5;
+  const [searchInput, setSearchInput] = useState("");
 
-  useEffect(() => {
+  const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchInput(event.target.value);
+  };
+
+  const handleSearchClick = () => {
     dispatch(RecipesSlice.actions.resetRecipes());
-    dispatch(ListRecipes({ pagina: currentPage - 1, quantidadeRegistros: itemsPerPage }));
+    dispatch(
+      ListRecipes({
+        pagina: currentPage - 1,
+        quantidadeRegistros: itemsPerPage,
+        valor: Number(searchInput),
+      })
+    );
     dispatch(QuantidadeRecipesSlice.actions.resetRecipes());
     dispatch(QuantidadeRecipes({}));
+  };
+  useEffect(() => {
+    dispatch(RecipesSlice.actions.resetRecipes());
+    dispatch(
+      ListRecipes({
+        pagina: currentPage - 1,
+        quantidadeRegistros: itemsPerPage,
+      })
+    );
+    dispatch(QuantidadeRecipesSlice.actions.resetRecipes());
+    dispatch(QuantidadeRecipes({}));
+    dispatch(TotaisSlice.actions.resetTotais());
+    dispatch(TotalRecipes({}));
   }, [currentPage]);
 
   const totalPages: number = Math.ceil(quantidadeRecipes / itemsPerPage);
@@ -63,13 +94,22 @@ export default function RevenuesSectionDashboard({ handleOpenModal }: RevenueSec
       <StyledTotalDiv themecolor={"receitas"}>
         <StyledTotalTitle>Receitas totais:</StyledTotalTitle>
         <StyledTotalValueAndPlusButton>
-          <StyledTotalValue>R$ 800,00</StyledTotalValue>
+          <StyledTotalValue>R$ {formatNumber(totalRecipes)}</StyledTotalValue>
           <StyledPlusButton onClick={handleOpenModal}>+</StyledPlusButton>
         </StyledTotalValueAndPlusButton>
       </StyledTotalDiv>
       <StyledInputAndButtonDiv>
-        <StyledDashboardInput placeholder="busque uma receita" ></StyledDashboardInput>
-        <StyledDashboardSearchButton aria-label={"Imagem de uma lupa, indicando que este botão serve para ativar a pesquisa com o parâmetro inserido no campo"}/>
+        <StyledDashboardInput
+          type="number"
+          placeholder="busque um valor"
+          onChange={handleSearchChange}
+        ></StyledDashboardInput>
+        <StyledDashboardSearchButton
+          onClick={handleSearchClick}
+          aria-label={
+            "Imagem de uma lupa, indicando que este botão serve para ativar a pesquisa com o parâmetro inserido no campo"
+          }
+        />
       </StyledInputAndButtonDiv>
 
       <div className="itens-paginacao">
@@ -80,12 +120,17 @@ export default function RevenuesSectionDashboard({ handleOpenModal }: RevenueSec
                 description={recipe.descricao}
                 value={recipe.valor}
                 currentPage="receitas"
+                id={recipe.idReceita}
               />
             </li>
           ))}
         </ul>
       </div>
-      <Pagination count={totalPages} page={currentPage} onChange={handlePageChange} />
+      <Pagination
+        count={totalPages}
+        page={currentPage}
+        onChange={handlePageChange}
+      />
     </StyledSectionDashboard>
   );
 }

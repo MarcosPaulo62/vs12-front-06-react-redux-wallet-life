@@ -8,5 +8,5 @@ export async function getQuantidadeInvestments(){
 }
 
 export type GetQuantidadeInvestmentsData = {
-  totalInvestments: number;
+  quantidadeInvestments: number;
 }
