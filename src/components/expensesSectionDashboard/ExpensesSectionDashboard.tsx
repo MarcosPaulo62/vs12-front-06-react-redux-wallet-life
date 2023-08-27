@@ -79,7 +79,7 @@ export default function ExpensesSectionDashboard({ handleOpenModal }: ExpensesSe
         <StyledTotalTitle>Despesas totais:</StyledTotalTitle>
         <StyledTotalValueAndPlusButton>
           <StyledTotalValue>R$ -{formatNumber(totalExpenses)}</StyledTotalValue>
-          <StyledPlusButton>+</StyledPlusButton>
+          <StyledPlusButton onClick={handleOpenModal}>+</StyledPlusButton>
         </StyledTotalValueAndPlusButton>
       </StyledTotalDiv>
       <StyledInputAndButtonDiv>
