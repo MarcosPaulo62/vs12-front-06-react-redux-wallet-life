@@ -7,7 +7,8 @@ import { useAppDispatch } from "../../store";
 import { useSelector } from "react-redux";
 import { selectUserLogged } from "../../store/users/selectors";
 import { UserLogged, UserLoggedSlice } from "../../store/users/UserLoggedSlice";
-import { PencilSimple, Trash } from "@phosphor-icons/react";
+import { CheckCircle, PencilSimple, Trash } from "@phosphor-icons/react";
+import { DeleteUser } from "../../store/users/DeleteUser";
 
 interface ModalAddDespesaProps {
   handleCloseModal: () => void;
@@ -15,7 +16,7 @@ interface ModalAddDespesaProps {
 
 interface UserFormData {
   nome: string;
-  dataNascimento: number;
+  dataNascimento: string;
   cpf: string;
   email: string;
   senha: string;
@@ -30,6 +31,25 @@ export default function ModalMeusDados({ closeModal }: ModalMeusDadosProps) {
 
   const dispatch = useAppDispatch();
   const userLogged = useSelector(selectUserLogged);
+  
+  const [deleteUser, setDeleteUser] = useState<Boolean>(false);
+
+  useEffect(() => {
+    if(deleteUser){
+        dispatch(
+            DeleteUser({idUser: userLogged.idUsuario})
+        )
+    }
+  }, [deleteUser])
+
+  useEffect(() => {
+    reset({
+      nome: userLogged.nome,
+      dataNascimento: userLogged.dataNascimento,
+      cpf: (userLogged.cpf).toString(),
+      email: userLogged.email,
+    });
+  }, [userLogged, reset]);
 
   const [isEditing, setIsEditing] = useState(false);
 
@@ -40,22 +60,22 @@ export default function ModalMeusDados({ closeModal }: ModalMeusDadosProps) {
 
   const onSubmit = (data: UserFormData) => {
     console.log("Dados capturados:", data);
-    const transactions = JSON.parse(
-      localStorage.getItem("transactions") || "[]"
-    ) as UserFormData[];
-    transactions.push(data);
-    localStorage.setItem("transactions", JSON.stringify(transactions));
-
-    reset();
+    setIsEditing(false)
   };
 
   return (
     <StyledModalMeusDadosContainer>
       <StyledModalContainer>
         <div>
-          <StyledSpan className="close-modal" fontSize="lg">
-            <PencilSimple size={32} weight="bold" onClick={() => setIsEditing(!isEditing)}/>
-          </StyledSpan>
+          {isEditing ? 
+            <StyledSpan className="close-modal" fontSize="lg">
+                <CheckCircle size={32} weight="fill" onClick={() => setIsEditing(!isEditing)}/>
+            </StyledSpan>     
+            :
+            <StyledSpan className="close-modal" fontSize="lg">
+                <PencilSimple size={32} weight="bold" onClick={() => setIsEditing(!isEditing)}/>
+            </StyledSpan>
+          }
           <StyledTitle fontSize="md" fontWeight={700} tag="h3">
             VISUALIZAR DADOS
           </StyledTitle>
@@ -103,14 +123,18 @@ export default function ModalMeusDados({ closeModal }: ModalMeusDadosProps) {
           <input
               type="password"
               id="senha"
-              placeholder="Senha"
+              placeholder="Nova senha"
               required
               {...register("senha")}
               disabled={!isEditing}
           />
           <div className="buttons">
-            <button onClick={() => closeModal()}>fechar</button>
-            <button className="delete">deletar conta <Trash size={32} weight="bold" /></button>
+            {isEditing ? 
+                <button type="submit">concluir</button>    
+                :
+                <button onClick={() => closeModal()}>fechar</button>
+            }
+            <button className="delete" onClick={() => setDeleteUser(true)}>deletar conta <Trash size={32} weight="bold" /></button>
           </div>
         </form>
       </StyledModalContainer>
