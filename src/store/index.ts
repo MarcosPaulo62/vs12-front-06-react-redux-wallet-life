@@ -8,6 +8,7 @@ import { InvestmentsSlice } from './investments/InvestmentsSlice';
 import { QuantidadeExpensesSlice } from './expenses/QuantidadeExpensesSlice';
 import { QuantidadeRecipesSlice } from './recipes/QuantidadeRecipesSlice';
 import { QuantidadeInvestmentsSlice } from './investments/QuantidadeInvestmentsSlice';
+import { TotaisSlice } from './users/TotaisSlice';
 
 
 const store = configureStore({
@@ -20,6 +21,7 @@ const store = configureStore({
     quantidadeExpenses: QuantidadeExpensesSlice.reducer,
     quantidadeRecipes: QuantidadeRecipesSlice.reducer,
     quantidadeInvestments: QuantidadeInvestmentsSlice.reducer,
+    totais: TotaisSlice.reducer,
   },
 })
 
