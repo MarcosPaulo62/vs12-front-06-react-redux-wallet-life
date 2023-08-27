@@ -9,7 +9,7 @@ interface ModalAddInvestimentoProps {
 }
 
 interface TransactionFormData {
-    tipoDespesa: string;
+    tipoInvestimento: string;
     valor: number;
     descricao: string;
     corretora: string;
@@ -41,7 +41,7 @@ export default function ModalAddInvestimento ({ handleCloseModal }: ModalAddInve
                     <StyledSpan className="close-modal" fontSize="lg" onClick={handleCloseModal}>X</StyledSpan>
                 </div>
                 <form onSubmit={handleSubmit((data) => onSubmit(data))}>
-                    <select id="tipoDespesa"  required {...register("tipoDespesa")}>
+                    <select id="tipoInvestimento"  required {...register("tipoInvestimento")}>
                         <option className="opt" value="" disabled selected>Tipo de investimento</option>
                         <option className="opt" value="Renda fixa">Renda fixa</option>
                         <option className="opt" value="Renda variável">Renda variável</option>
