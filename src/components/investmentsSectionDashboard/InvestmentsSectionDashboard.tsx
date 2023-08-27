@@ -12,7 +12,7 @@ import {
 } from "../../styles/dashboardSections";
 import { StyledSectionDashboard } from "../revenuesSectionDashboard/style";
 
-import { Pagination } from '@mui/material';
+import { Pagination } from "@mui/material";
 import ItemDashboard from "../itemDashboard/ItemDashboard";
 import { ListInvestments } from "../../store/investments/InvestmentsSlice";
 import { InvestmentsSlice } from "../../store/investments/InvestmentsSlice";
@@ -23,11 +23,14 @@ import {
   selectInvestments,
 } from "../../store/investments/Selectors";
 import { useEffect, useState } from "react";
-import { selectQuantidadeInvestments } from '../../store/investments/Selectors';
-import { QuantidadeInvestments, QuantidadeInvestmentsSlice } from '../../store/investments/QuantidadeInvestmentsSlice';
+import { selectQuantidadeInvestments } from "../../store/investments/Selectors";
+import {
+  QuantidadeInvestments,
+  QuantidadeInvestmentsSlice,
+} from "../../store/investments/QuantidadeInvestmentsSlice";
 
-
-export default function InvestmentsSectionDashboard() {''
+export default function InvestmentsSectionDashboard() {
+  ("");
 
   const dispatch = useAppDispatch();
   const investments = useSelector(selectInvestments);
@@ -35,10 +38,33 @@ export default function InvestmentsSectionDashboard() {''
 
   const [currentPage, setCurrentPage] = useState<number>(1);
   const itemsPerPage = 5;
+  const [searchInput, setSearchInput] = useState("");
+
+  const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchInput(event.target.value);
+  };
+
+  const handleSearchClick = () => {
+    dispatch(InvestmentsSlice.actions.resetInvestments());
+    dispatch(
+      ListInvestments({
+        pagina: currentPage - 1,
+        quantidadeRegistros: itemsPerPage,
+        corretora: searchInput,
+      })
+    );
+    dispatch(QuantidadeInvestmentsSlice.actions.resetInvestments());
+    dispatch(QuantidadeInvestments({}));
+  };
 
   useEffect(() => {
     dispatch(InvestmentsSlice.actions.resetInvestments());
-    dispatch(ListInvestments({ pagina: currentPage - 1, quantidadeRegistros: itemsPerPage }));
+    dispatch(
+      ListInvestments({
+        pagina: currentPage - 1,
+        quantidadeRegistros: itemsPerPage,
+      })
+    );
     dispatch(QuantidadeInvestmentsSlice.actions.resetInvestments());
     dispatch(QuantidadeInvestments({}));
   }, [currentPage]);
@@ -51,8 +77,6 @@ export default function InvestmentsSectionDashboard() {''
   ): void => {
     setCurrentPage(page);
   };
-
-
 
   return (
     <StyledSectionDashboard>
@@ -69,8 +93,17 @@ export default function InvestmentsSectionDashboard() {''
         </StyledTotalValueAndPlusButton>
       </StyledTotalDiv>
       <StyledInputAndButtonDiv>
-        <StyledDashboardInput placeholder="busque um investimento"></StyledDashboardInput>
-        <StyledDashboardSearchButton aria-label={"Imagem de uma lupa, indicando que este botão serve para ativar a pesquisa com o parâmetro inserido no campo"}/>
+        <StyledDashboardInput
+          type="text"
+          placeholder="busque uma corretora"
+          onChange={handleSearchChange}
+        ></StyledDashboardInput>
+        <StyledDashboardSearchButton
+          onClick={handleSearchClick}
+          aria-label={
+            "Imagem de uma lupa, indicando que este botão serve para ativar a pesquisa com o parâmetro inserido no campo"
+          }
+        />
       </StyledInputAndButtonDiv>
 
       <div className="itens-paginacao">
@@ -81,12 +114,17 @@ export default function InvestmentsSectionDashboard() {''
                 description={investment.descricao}
                 value={investment.valor}
                 currentPage="investimentos"
+                id={investment.idInvestimento}
               />
             </li>
           ))}
         </ul>
       </div>
-      <Pagination count={totalPages} page={currentPage} onChange={handlePageChange} />
+      <Pagination
+        count={totalPages}
+        page={currentPage}
+        onChange={handlePageChange}
+      />
     </StyledSectionDashboard>
   );
 }
