@@ -29,6 +29,9 @@ export const InvestmentsSlice = createSlice({
     resetInvestments: (state) => {
       state.investments = [];
     },
+    resetCreateSucess: (state) => {
+      state.createSuccess = false;
+    }
   },
   extraReducers: (builder) => {
     builder.addCase(ListInvestments.fulfilled, (state, { payload }) => {

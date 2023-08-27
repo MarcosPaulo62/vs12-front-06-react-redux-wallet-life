@@ -59,7 +59,7 @@ export default function ModalAddReceita({
       ).unwrap();
       await dispatch(QuantidadeExpenses({})).unwrap();
       await dispatch(
-        ListRecipes({ pagina: 1, quantidadeRegistros: 5 })
+        ListRecipes({ pagina: 0, quantidadeRegistros: 5 })
       ).unwrap();
       toast.success("Receita adicionada com sucesso!", {
         position: toast.POSITION.TOP_CENTER,
@@ -71,7 +71,7 @@ export default function ModalAddReceita({
 
   useEffect(() => {
     if (createSuccess) {
-      toast.success("Usuário cadastrado com sucesso!", {
+      toast.success("Receita cadastrada com sucesso!", {
         position: toast.POSITION.TOP_CENTER,
       });
     }
