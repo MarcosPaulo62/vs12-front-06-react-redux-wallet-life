@@ -2,21 +2,16 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import * as API from "../../api";
 
 type InvestmentsSliceState = {
-  investments: Investments[];
+  investments: any[];
   pagina: number;
   quantidadeRegistros: number;
   errorOnList?: string;
-  corretora?: string
+  corretora?: string,
+  creatingUser: boolean,
+  errorOnCreate?: string,
+  createSuccess: boolean
 };
 
-export interface Investments {
-  idUsuario: number;
-  nome: string;
-  idInvestimento: number;
-  valor: number;
-  descricao: string;
-  corretora?: string;
-}
 
 export const InvestmentsSlice = createSlice({
   name: "investments",
@@ -25,7 +20,10 @@ export const InvestmentsSlice = createSlice({
     pagina: 0,
     quantidadeRegistros: 10,
     errorOnList: undefined,
-    corretora: ""
+    corretora: "",
+    creatingUser: false,
+    errorOnCreate: undefined,
+    createSuccess: false,
   } as InvestmentsSliceState,
   reducers: {
     resetInvestments: (state) => {
@@ -47,7 +45,36 @@ export const InvestmentsSlice = createSlice({
     builder.addCase(ListInvestments.pending, (state, action) => {
       state.errorOnList = undefined;
     });
-  },
+
+
+
+    builder.addCase(createInvestment.fulfilled, (state, { payload }) => {
+      if (payload) {
+        state.creatingUser = false;
+        state.createSuccess = true;
+        state.investments = [...state.investments, payload]
+      }
+    });
+    
+    builder.addCase(createInvestment.rejected, (state, { payload, error }) => {
+      if(payload){
+        state.errorOnCreate = 'Receita inválida!';
+        state.creatingUser = false;
+        state.createSuccess = false;
+      } else{
+      state.errorOnCreate = 'Falha ao criar investimento!';
+      state.creatingUser = false;
+      state.createSuccess = false;
+      }
+    });
+
+    builder.addCase(createInvestment.pending, (state, action) => {
+      state.creatingUser = true;
+      state.errorOnCreate = undefined;
+      state.createSuccess = false;
+    })
+  }
+    
 });
 
 export const ListInvestments = createAsyncThunk(
@@ -61,3 +88,16 @@ export const ListInvestments = createAsyncThunk(
       return thunkApi.rejectWithValue('Falha ao buscar investimentos')
     }
   })
+
+  export const createInvestment  = createAsyncThunk(
+    'investments/createInvestment',
+    async (data: API.CreateInvestmentData, thunkApi) => {
+      try{
+        const invest = await API.createInvestment(data);
+        return invest;
+      }
+      catch{
+        return thunkApi.rejectWithValue('Falha ao adicionar investimento!')
+      }
+    }
+  )
