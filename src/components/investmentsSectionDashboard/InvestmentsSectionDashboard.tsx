@@ -36,8 +36,10 @@ interface InvesttmentSectionProps {
   handleOpenModal: () => void;
 }
 
-
-export default function InvestmentsSectionDashboard({ handleOpenModal }: InvesttmentSectionProps) {''
+export default function InvestmentsSectionDashboard({
+  handleOpenModal,
+}: InvesttmentSectionProps) {
+  ("");
 
   const dispatch = useAppDispatch();
   const investments = useSelector(selectInvestments);
@@ -91,13 +93,18 @@ export default function InvestmentsSectionDashboard({ handleOpenModal }: Investt
   return (
     <StyledSectionDashboard>
       <StyledDashboardLabel themecolor={"investimentos"}>
-        <StyledTitle fontWeight={700} tag={"h2"} fontSize={"lg"}>
+        <StyledTitle
+          className="styled-title"
+          fontWeight={700}
+          tag={"h2"}
+          fontSize={"lg"}
+        >
           INVESTIMENTOS
         </StyledTitle>
       </StyledDashboardLabel>
       <StyledTotalDiv themecolor={"investimentos"}>
         <StyledTotalTitle>Total investido:</StyledTotalTitle>
-        <StyledTotalValueAndPlusButton>          
+        <StyledTotalValueAndPlusButton>
           <StyledTotalValue>
             R$ {formatNumber(totalInvestments)}
           </StyledTotalValue>
@@ -133,6 +140,7 @@ export default function InvestmentsSectionDashboard({ handleOpenModal }: Investt
         </ul>
       </div>
       <Pagination
+        className="paginacao"
         count={totalPages}
         page={currentPage}
         onChange={handlePageChange}
