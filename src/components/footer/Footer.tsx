@@ -10,7 +10,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
 import { useState } from "react";
 
-import ArrowUp from "../../assets/arrow-circle-up.svg";
+import ArrowUp from "../../assets/arrow-line-up.svg";
 
 type FormData = {
   email: string;

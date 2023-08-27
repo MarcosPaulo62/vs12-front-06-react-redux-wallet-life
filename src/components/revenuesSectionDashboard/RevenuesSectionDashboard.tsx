@@ -1,3 +1,4 @@
+import { Pagination } from '@mui/material';
 import { StyledTitle } from "../../styles/typography";
 import { StyledSectionDashboard } from "./style";
 import {
@@ -20,22 +21,37 @@ import {
   selectErrorOnList,
   selectRecipes,
 } from "../../store/recipes/Selectors";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { selectQuantidadeRecipes } from '../../store/recipes/Selectors';
+import { QuantidadeRecipes, QuantidadeRecipesSlice } from '../../store/recipes/QuantidadeRecipesSlice';
 
 interface RevenueSectionProps {
   handleOpenModal: () => void;
 }
 
-export default function RevenuesSectionDashboard({ handleOpenModal }: RevenueSectionProps) {
+export default function RevenuesSectionDashboard({ handleOpenModal }: RevenueSectionProps) {''
   const dispatch = useAppDispatch();
-  const errorOnList = useSelector(selectErrorOnList);
   const recipes = useSelector(selectRecipes);
-  console.log(recipes);
+  const quantidadeRecipes = useSelector(selectQuantidadeRecipes);
+
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const itemsPerPage = 5;
 
   useEffect(() => {
     dispatch(RecipesSlice.actions.resetRecipes());
-    dispatch(ListRecipes({ pagina: 0, quantidadeRegistros: 10 }));
-  }, []);
+    dispatch(ListRecipes({ pagina: currentPage - 1, quantidadeRegistros: itemsPerPage }));
+    dispatch(QuantidadeRecipesSlice.actions.resetRecipes());
+    dispatch(QuantidadeRecipes({}));
+  }, [currentPage]);
+
+  const totalPages: number = Math.ceil(quantidadeRecipes / itemsPerPage);
+
+  const handlePageChange = (
+    event: React.ChangeEvent<unknown>,
+    page: number
+  ): void => {
+    setCurrentPage(page);
+  };
 
   return (
     <StyledSectionDashboard>
@@ -69,6 +85,7 @@ export default function RevenuesSectionDashboard({ handleOpenModal }: RevenueSec
           ))}
         </ul>
       </div>
+      <Pagination count={totalPages} page={currentPage} onChange={handlePageChange} />
     </StyledSectionDashboard>
   );
 }
