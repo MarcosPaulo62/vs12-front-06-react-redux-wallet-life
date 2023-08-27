@@ -36,8 +36,18 @@ export const StyledDashboardLabel = styled.div<iStyledDashboardThemeProps>`
     }
   }}
 
-  @media (max-width: 760px) {
-    height: 6rem;
+  @media (max-width: 481px) {
+    height: 3rem;
+  }
+
+  @media (min-width: 482px) and (max-width: 760px) {
+    height: 5rem;
+  }
+
+  .styled-title {
+    @media (max-width: 481px) {
+      font-size: 1.5rem;
+    }
   }
 `;
 
@@ -67,6 +77,16 @@ export const StyledTotalDiv = styled.div<iStyledDashboardThemeProps>`
         `;
     }
   }}
+
+  @media (max-width: 480px) {
+    max-width: 90%;
+    height: 6rem;
+  }
+
+  @media (min-width: 481px) and (max-width: 760px) {
+    max-width: 90%;
+    height: 7rem;
+  }
 `;
 
 export const StyledTotalTitle = styled.span`
@@ -80,6 +100,14 @@ export const StyledTotalTitle = styled.span`
   padding: 0 2rem;
   font-size: 1.75rem;
   font-weight: 700;
+
+  @media (max-width: 480px) {
+    font-size: 1.2rem;
+  }
+
+  @media (min-width: 481px) and (max-width: 760px) {
+    font-size: 1.4rem;
+  }
 `;
 
 export const StyledTotalValueAndPlusButton = styled.div`
@@ -104,6 +132,14 @@ export const StyledTotalValue = styled.p`
   color: ${({ theme }) => theme.color.white};
   font-size: 2rem;
   font-weight: 700;
+
+  @media (max-width: 480px) {
+    font-size: 1.2rem;
+  }
+
+  @media (min-width: 481px) and (max-width: 760px) {
+    font-size: 1.4rem;
+  }
 `;
 
 export const StyledPlusButton = styled.button`
@@ -114,11 +150,38 @@ export const StyledPlusButton = styled.button`
   align-items: center;
   color: ${({ theme }) => theme.color.white};
   font-size: 5rem;
+
+  @media (max-width: 481px) {
+    font-size: 3rem;
+  }
+
+  @media (min-width: 481px) and (max-width: 760px) {
+    font-size: 4rem;
+  }
 `;
 
 export const StyledInputAndButtonDiv = styled.div`
   width: 50%;
   height: 5rem;
+
+  @media (max-width: 480px) {
+    width: 80%;
+    height: 2rem;
+  }
+
+  @media (min-width: 481px) and (max-width: 760px) {
+    width: 80%;
+    height: 3.5rem;
+  }
+
+  @media (min-width: 761px) and (max-width: 1024px) {
+    width: 70%;
+    height: 4.5rem;
+  }
+
+  @media (min-width: 1025px) and (max-width: 1200px) {
+    width: 60%;
+  }
 `;
 
 export const StyledDashboardInput = styled.input`
@@ -131,6 +194,21 @@ export const StyledDashboardInput = styled.input`
   font-size: 1.5rem;
   padding-left: 1.5rem;
   position: relative;
+
+  @media (max-width: 481px) {
+    z-index: -1;
+    font-size: 1rem;
+  }
+
+  @media (min-width: 481px) and (max-width: 760px) {
+    z-index: -1;
+    font-size: 1.3rem;
+  }
+
+  @media (min-width: 761px) and (max-width: 1024px) {
+    z-index: -1;
+    font-size: 1.4rem;
+  }
 `;
 
 export const StyledDashboardSearchButton = styled.button`
@@ -143,6 +221,28 @@ export const StyledDashboardSearchButton = styled.button`
   background-position: center;
   margin-left: -100px;
   position: absolute;
+
+  @media (max-width: 480px) {
+    z-index: -1;
+    width: 2rem;
+    height: 2rem;
+    margin-left: -2rem;
+    background-size: 1.3rem 1.3rem;
+  }
+
+  @media (min-width: 481px) and (max-width: 760px) {
+    z-index: -1;
+    width: 3.5rem;
+    height: 3.5rem;
+    margin-left: -3.5rem;
+  }
+
+  @media (min-width: 761px) and (max-width: 1024px) {
+    z-index: -1;
+    width: 4.5rem;
+    height: 4.5rem;
+    margin-left: -4.5rem;
+  }
 `;
 
 export const StyledItemlDiv = styled.div`
@@ -156,8 +256,8 @@ export const StyledItemlDiv = styled.div`
   border-radius: 32px 32px 32px 32px;
   background-color: ${({ theme }) => theme.color.alabaster};
 
-  @media (max-width: 481px) {
-    flex-direction: column;
+  @media (max-width: 460px) {
+    height: 4.5rem;
   }
 `;
 
@@ -194,8 +294,9 @@ export const StyledItemValue = styled.p<iStyledDashboardThemeProps>`
   }
 
   @media (max-width: 481px) {
-    font-size: 1.2rem;
-    border-radius: 36px 36px 36px 36px;
+    text-align: center;
+    max-width: 30%;
+    font-size: 1rem;
   }
 `;
 
@@ -215,8 +316,9 @@ export const StyledItemDescription = styled.p`
   }
 
   @media (max-width: 481px) {
-    font-size: 1rem;
-    padding: 0;
+    width: 55%;
+    font-size: .9rem;
+    padding-left: .3rem;
     text-justify: center;
   }
 `;
@@ -228,6 +330,11 @@ export const StyledEyeButton = styled.button`
   background-repeat: no-repeat;
   background-position: center;
   margin-right: 1rem;
+
+  @media (max-width: 481px) {
+    background-size: 30px 20px;
+    margin: 0 .5rem;
+  }
 `;
 
 export const StyledTrashCanButton = styled.button`
@@ -237,4 +344,9 @@ export const StyledTrashCanButton = styled.button`
   background-repeat: no-repeat;
   background-position: center;
   margin-right: 1rem;
+
+  @media (max-width: 481px) {
+    background-size: 25px 30px;
+    margin-right: .7rem;
+  }
 `;

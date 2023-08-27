@@ -91,6 +91,8 @@ export const StyledHeader = styled.header`
     }
 
     @media (max-width: 480px){
+        height: 90px;
+
         img{
             width: 70%;
         }
