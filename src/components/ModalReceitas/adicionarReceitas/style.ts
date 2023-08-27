@@ -12,8 +12,10 @@ export const StyledModalReceitaContainer = styled.div`
 `;
 
 export const StyledModalContainer = styled.div`
-  width: 660px;
-  height: 660px;
+  width: 41rem;
+  max-width: 95vw;
+  height: 41rem;
+  max-height: 95vh;
   border-radius: 32px;
   background-color: ${({ theme }) => theme.color.alabaster};
   display: flex;
@@ -21,32 +23,40 @@ export const StyledModalContainer = styled.div`
   justify-content: space-around;
   align-items: center;
 
+  @media (min-width: 481px) and (max-width: 760px) {
+    max-width: 70%;
+  }
+
   div {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    width: 34rem;
+    width: 83%;
 
     .close-modal {
-      cursor: pointer;      
+      cursor: pointer;
     }
 
-    h3 {      
+    h3 {
       font-size: 1.75rem;
       font-weight: 700;
       margin-left: 6rem;
+
+      @media (max-width: 480px) {
+        margin-left: 0;
+      }
     }
 
     span {
       font-size: 3rem;
-      font-weight: 700;      
+      font-weight: 700;
     }
   }
 
   form {
     display: flex;
     flex-direction: column;
-    width: 520px;
+    width: 83%;
     gap: 1rem;
     justify-content: space-between;
     align-items: center;
@@ -62,24 +72,26 @@ export const StyledModalContainer = styled.div`
       align-items: center;
       height: 60px;
       width: 100%;
-      font-size: 24px;
+      font-size: 1.5rem;
       border-radius: 12px;
       background-color: ${({ theme }) => theme.color.white};
       font-weight: 500;
       color: ${({ theme }) => theme.color.jet};
       padding: 0 1.5rem;
+
+      @media (max-width: 760px) {
+        font-size: 1rem;
+        padding: 0 1rem;
+      }
     }
 
     .opt {
       overflow: hidden;
-      white-space: nowrap ; 
+      white-space: nowrap;
       text-overflow: ellipsis;
       max-width: 10px !important;
       font-size: 1rem;
       border-radius: 1rem;
-
     }
-
-    
   }
 `;

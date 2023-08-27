@@ -3,7 +3,10 @@ import * as API from '../../api'
 
 type ExpensesSliceState = {
   expenses: Expenses[],
+  pagina: number,
+  quantidadeRegistros: number,
   errorOnList?: string,
+  valor?: number,
 }
 
 export interface Expenses {
@@ -18,6 +21,8 @@ export const ExpensesSlice = createSlice({
   name: 'expenses',
   initialState: {
     expenses: [],
+    pagina: 0,
+    quantidadeRegistros: 10,
     errorOnList: undefined,
   } as ExpensesSliceState,
   reducers: {
@@ -48,10 +53,10 @@ export const ListExpenses = createAsyncThunk(
   'expenses/getExpenses',
   
   async (payload: any, thunkApi) => {
-  try{
-    const expenses = await API.getExpenses()
-    return expenses;
-  } catch {
-    return thunkApi.rejectWithValue('Falha ao buscar despesas')
-  }
-})
+    try{
+      const expenses = await API.getExpenses(payload.pagina, payload.quantidadeRegistros, payload.valor)
+      return expenses;
+    } catch {
+      return thunkApi.rejectWithValue('Falha ao buscar despesas')
+    }
+  })

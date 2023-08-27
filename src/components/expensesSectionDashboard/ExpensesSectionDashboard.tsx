@@ -1,60 +1,79 @@
+import { Pagination } from "@mui/material";
 import { StyledTitle } from "../../styles/typography";
+import { StyledSectionDashboard } from "../revenuesSectionDashboard/style";
 import {
-  StyledDashboardInput,
   StyledDashboardLabel,
-  StyledDashboardSearchButton,
+  StyledDashboardInput,
   StyledInputAndButtonDiv,
   StyledPlusButton,
   StyledTotalDiv,
   StyledTotalTitle,
   StyledTotalValue,
   StyledTotalValueAndPlusButton,
+  StyledDashboardSearchButton,
 } from "../../styles/dashboardSections";
-import { StyledSectionDashboard } from "../revenuesSectionDashboard/style";
+import ItemDashboard from "../itemDashboard/ItemDashboard";
+import { ListExpenses } from "../../store/expenses/ExpensesSlice";
+import { ExpensesSlice } from "../../store/expenses/ExpensesSlice";
 import { useAppDispatch } from "../../store";
 import { useSelector } from "react-redux";
 import {
+  selectErrorOnList,
   selectExpenses,
-  selectQuantidadeExpenses,
 } from "../../store/expenses/Selectors";
-import {
-  ExpensesSlice,
-  ListExpenses,
-} from "../../store/expenses/ExpensesSlice";
 import { useEffect, useState } from "react";
-import ItemDashboard from "../itemDashboard/ItemDashboard";
+import { selectQuantidadeExpenses } from "../../store/expenses/Selectors";
 import {
   QuantidadeExpenses,
   QuantidadeExpensesSlice,
 } from "../../store/expenses/QuantidadeExpensesSlice";
-import { Pagination } from "@mui/material";
-import { TotaisSlice, TotalExpenses } from "../../store/users/TotaisSlice";
 import { selectTotalExpenses } from "../../store/users/selectors";
+import { TotaisSlice, TotalExpenses } from "../../store/users/TotaisSlice";
 import { formatNumber } from "../principalSectionDashboard/PrincipalSectionDashboard";
 
-interface ExpensesSectionProps {
+interface RevenueSectionProps {
   handleOpenModal: () => void;
 }
 
-export default function ExpensesSectionDashboard({
-  handleOpenModal,
-}: ExpensesSectionProps) {
+export default function RevenuesSectionDashboard({ handleOpenModal }: RevenueSectionProps) {''
   const dispatch = useAppDispatch();
   const expenses = useSelector(selectExpenses);
   const quantidadeExpenses = useSelector(selectQuantidadeExpenses);
   const totalExpenses = useSelector(selectTotalExpenses);
 
-  const itemsPerPage = 5;
   const [currentPage, setCurrentPage] = useState<number>(1);
+  const itemsPerPage = 5;
+  const [searchInput, setSearchInput] = useState("");
 
+  const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchInput(event.target.value);
+  };
+
+  const handleSearchClick = () => {
+    dispatch(ExpensesSlice.actions.resetExpenses());
+    dispatch(
+      ListExpenses({
+        pagina: currentPage - 1,
+        quantidadeRegistros: itemsPerPage,
+        valor: Number(searchInput),
+      })
+    );
+    dispatch(QuantidadeExpensesSlice.actions.resetExpenses());
+    dispatch(QuantidadeExpenses({}));
+  };
   useEffect(() => {
     dispatch(ExpensesSlice.actions.resetExpenses());
-    dispatch(ListExpenses({}));
+    dispatch(
+      ListExpenses({
+        pagina: currentPage - 1,
+        quantidadeRegistros: itemsPerPage,
+      })
+    );
     dispatch(QuantidadeExpensesSlice.actions.resetExpenses());
     dispatch(QuantidadeExpenses({}));
     dispatch(TotaisSlice.actions.resetTotais());
     dispatch(TotalExpenses({}));
-  }, []);
+  }, [currentPage]);
 
   const totalPages: number = Math.ceil(quantidadeExpenses / itemsPerPage);
 
@@ -64,11 +83,6 @@ export default function ExpensesSectionDashboard({
   ): void => {
     setCurrentPage(page);
   };
-
-  const startIndex: number = (currentPage - 1) * itemsPerPage;
-  const endIndex: number = startIndex + itemsPerPage;
-
-  const expensesToDisplay = expenses.slice(startIndex, endIndex);
 
   return (
     <StyledSectionDashboard>
@@ -100,7 +114,7 @@ export default function ExpensesSectionDashboard({
 
       <div className="itens-paginacao">
         <ul>
-          {expensesToDisplay.map((expense) => (
+          {expenses.map((expense) => (
             <li key={expense.idDespesa}>
               <ItemDashboard
                 description={expense.descricao}
