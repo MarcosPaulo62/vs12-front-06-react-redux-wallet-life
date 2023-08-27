@@ -10,6 +10,7 @@ import { QuantidadeRecipesSlice } from './recipes/QuantidadeRecipesSlice';
 import { QuantidadeInvestmentsSlice } from './investments/QuantidadeInvestmentsSlice';
 import { TotaisSlice } from './users/TotaisSlice';
 import { UserLoggedSlice } from './users/UserLoggedSlice';
+import { DeleteUserSlice } from './users/DeleteUser';
 
 
 const store = configureStore({
@@ -17,6 +18,7 @@ const store = configureStore({
     users: usersSlice.reducer,
     user: userReducer,
     userLogged: UserLoggedSlice.reducer,
+    deleteUser: DeleteUserSlice.reducer,
     recipes: RecipesSlice.reducer,
     expenses: ExpensesSlice.reducer,
     investments: InvestmentsSlice.reducer,

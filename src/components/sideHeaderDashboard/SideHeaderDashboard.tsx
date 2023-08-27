@@ -4,15 +4,18 @@ import { NavLink } from "react-router-dom";
 import { List, X, SignOut } from "@phosphor-icons/react";
 import { useState } from "react";
 import { useLocation } from 'react-router-dom';
+import ModalMeusDados from "../modalMeusDados/ModalMeusDados";
 
 export default function SideHeader() {
   const [showMenu, setShowMenu] = useState<Boolean>(false);
+  const [showModal, setShowModal] = useState<Boolean>(false);
 
   const location = useLocation();
   const rotaAtual = location.pathname;
 
   return (
     <StyledHeader>
+      { showModal && <ModalMeusDados closeModal={() => setShowModal(false)} /> }
       <div className="logo">
         <NavLink to="/">
           <img
@@ -34,7 +37,7 @@ export default function SideHeader() {
         <NavLink className={`navlink ${rotaAtual == "/investimentos" && 'ativo'}`} to={"/investimentos"}>
           <span>Investimentos</span>
         </NavLink>
-        <span className="navlink">Meus dados</span>
+        <span className="navlink" onClick={() => setShowModal(true)}>Meus dados</span>
         <NavLink
           onClick={() => localStorage.removeItem("user")}
           className="navlink logout"
@@ -62,7 +65,7 @@ export default function SideHeader() {
               <NavLink className={`navlink ${rotaAtual == "/investimentos" && 'ativo'}`} to={"/investimentos"}>
                 <span>Investimentos</span>
               </NavLink>
-              <span className="navlink">Meus dados</span>
+              <span className="navlink" onClick={() => setShowModal(true)}>Meus dados</span>
               <NavLink
                 onClick={() => localStorage.removeItem("user")}
                 className="navlink logout"
