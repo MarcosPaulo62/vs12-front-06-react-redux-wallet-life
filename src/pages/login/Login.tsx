@@ -23,6 +23,19 @@ export default function Login() {
   const location = useLocation();
   const email = location.state?.email || "";
 
+  const dismissPreviousToasts = () => {
+    toast.dismiss();
+  };
+  
+  useEffect(() => {
+    if (email != "") {
+      dismissPreviousToasts();
+      toast.success("Usuário cadastrado com sucesso!", {
+        position: toast.POSITION.TOP_RIGHT,
+      });
+    }
+  }, []);
+
   const { register, handleSubmit } = useForm<IFormLogin>({
     defaultValues: { login: email || "" },
   });
