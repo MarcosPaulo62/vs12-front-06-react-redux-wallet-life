@@ -13,12 +13,14 @@ export default function SideHeader() {
 
   return (
     <StyledHeader>
-      <NavLink to="/">
-        <img
-          src={logo}
-          alt="Logo da walletLife, um quadrado preenchido na cor cinza claro, com 4 triangulos menores em cada uma das arestas, sendo um triângulo marrom escuro a direita, outro com a cor khaki abaixo, um marrom claro a esquerda e um último cinza escuro em cima. Abaixo da imagem está escrito walletlife finances."
-        />
-      </NavLink>
+      <div className="logo">
+        <NavLink to="/">
+          <img
+            src={logo}
+            alt="Logo da walletLife, um quadrado preenchido na cor cinza claro, com 4 triangulos menores em cada uma das arestas, sendo um triângulo marrom escuro a direita, outro com a cor khaki abaixo, um marrom claro a esquerda e um último cinza escuro em cima. Abaixo da imagem está escrito walletlife finances."
+          />
+        </NavLink>
+      </div>
       <div className="navegacao">
         <NavLink className={`navlink ${rotaAtual == "/sua-carteira" && 'ativo'}`} to={"/sua-carteira"}>
           <span>Início</span>

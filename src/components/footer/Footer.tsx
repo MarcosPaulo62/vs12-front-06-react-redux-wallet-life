@@ -66,7 +66,7 @@ export default function Footer() {
           alt="Logo da walletLife, um quadrado preenchido na cor cinza claro, com 4 triangulos menores em cada uma das arestas, sendo um triângulo marrom escuro a direita, outro com a cor khaki abaixo, um marrom claro a esquerda e um último cinza escuro em cima. Abaixo da imagem está escrito walletlife finances."
         />
         <NavLink className="login" to={"/login"}>
-          Login
+          {localStorage.getItem("user") ? "Sua área" : "Login"}
         </NavLink>
         <NavLink className="cadastro" to={"/cadastro"}>
           Cadastro

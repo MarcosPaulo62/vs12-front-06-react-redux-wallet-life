@@ -1,10 +1,9 @@
 import {http} from './http';
 
-export async function getInvestments(pagina : number, quantidadeRegistros: number){
+export async function getInvestments(pagina : number, quantidadeRegistros: number, corretora?: string){
   const token = localStorage.getItem('user');
-
-  const response = await http.get<GetInvestmentsData[]>(`/usuario/usuario-investimento`,{ headers:{ Authorization: token}, params: { pagina: pagina,
-    quantidadeRegistros: quantidadeRegistros}});
+  console.log(corretora)
+  const response = await http.get<GetInvestmentsData[]>(`/usuario/usuario-investimento`,{ headers:{ Authorization: token}, params: { pagina: pagina, quantidadeRegistros: quantidadeRegistros, corretora: corretora}});
     return response.data;
 }
 

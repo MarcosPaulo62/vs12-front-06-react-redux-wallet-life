@@ -6,6 +6,7 @@ type InvestmentsSliceState = {
   pagina: number;
   quantidadeRegistros: number;
   errorOnList?: string;
+  corretora?: string
 };
 
 export interface Investments {
@@ -14,7 +15,7 @@ export interface Investments {
   idInvestimento: number;
   valor: number;
   descricao: string;
-  corretora: string;
+  corretora?: string;
 }
 
 export const InvestmentsSlice = createSlice({
@@ -24,6 +25,7 @@ export const InvestmentsSlice = createSlice({
     pagina: 0,
     quantidadeRegistros: 10,
     errorOnList: undefined,
+    corretora: ""
   } as InvestmentsSliceState,
   reducers: {
     resetInvestments: (state) => {
@@ -53,7 +55,7 @@ export const ListInvestments = createAsyncThunk(
   
   async (payload: any, thunkApi) => {
     try{
-      const investments = await API.getInvestments(payload.pagina, payload.quantidadeRegistros)
+      const investments = await API.getInvestments(payload.pagina, payload.quantidadeRegistros, payload.corretora)
       return investments;
     } catch {
       return thunkApi.rejectWithValue('Falha ao buscar investimentos')

@@ -22,7 +22,7 @@ export default function Header() {
             buttonsize="sm"
             buttonstyle="landingPage"
           >
-            Login
+            {localStorage.getItem("user") ? "Sua área" : "Login"}
           </StyledButton>
         </NavLink>
       </div>
