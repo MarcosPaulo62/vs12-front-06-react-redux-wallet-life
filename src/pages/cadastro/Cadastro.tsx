@@ -48,6 +48,12 @@ export default function Cadastro() {
     setEmailValue(event.target.value);
   };
 
+  const [inputType, setInputType] = useState<string>('text');
+
+  const handleInputFocus = () => {
+    setInputType('date');
+  };
+
   const [formErrors, setFormErrors] = useState<IFormErrors>({
     name: false,
     email: false,
@@ -145,7 +151,7 @@ export default function Cadastro() {
     <StyledCadastroContainer>
       <div className="header">
         <NavLink to={"/"}>
-          <img src={logoDark} alt="Logo da Wallet Life" />
+          <img src={logoDark} alt="Logo da Wallet Life" data-testid="logo-link-home"/>
         </NavLink>
         <div>
           <StyledTitle
@@ -181,11 +187,12 @@ export default function Cadastro() {
           onChange={handleEmailChange}
         />
         <input
-          type="date"
+          type={inputType}
           id="dateBith"
           {...register("dateBirth")}
           placeholder="data de nascimento"
           className={formErrors.dateBirth ? "input-error" : ""}
+          onFocus={handleInputFocus}
         />
         <input
           type="text"

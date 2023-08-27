@@ -3,13 +3,27 @@ import { usersSlice } from './users/usersSlice'
 import { useDispatch } from 'react-redux'
 import userReducer from './UserSlice';
 import { RecipesSlice } from './recipes/RecipesSlice';
+import { ExpensesSlice } from './expenses/ExpensesSlice';
+import { InvestmentsSlice } from './investments/InvestmentsSlice';
+import { QuantidadeExpensesSlice } from './expenses/QuantidadeExpensesSlice';
+import { QuantidadeRecipesSlice } from './recipes/QuantidadeRecipesSlice';
+import { QuantidadeInvestmentsSlice } from './investments/QuantidadeInvestmentsSlice';
+import { TotaisSlice } from './users/TotaisSlice';
+import { UserLoggedSlice } from './users/UserLoggedSlice';
 
 
 const store = configureStore({
   reducer: {
     users: usersSlice.reducer,
     user: userReducer,
-    recipes: RecipesSlice.reducer
+    userLogged: UserLoggedSlice.reducer,
+    recipes: RecipesSlice.reducer,
+    expenses: ExpensesSlice.reducer,
+    investments: InvestmentsSlice.reducer,
+    quantidadeExpenses: QuantidadeExpensesSlice.reducer,
+    quantidadeRecipes: QuantidadeRecipesSlice.reducer,
+    quantidadeInvestments: QuantidadeInvestmentsSlice.reducer,
+    totais: TotaisSlice.reducer,
   },
 })
 
