@@ -13,3 +13,5 @@ export const selectTotalInvestments = (state: RootState) => state.totais.totalIn
 
 export const selectErrorOnUserLogged = (state: RootState) => state.userLogged.errorOnUserLogged;
 export const selectUserLogged = (state: RootState) => state.userLogged.userLogged;
+
+export const selectErrorOnDeleteUser = (state: RootState) => state.deleteUser.errorOnDelete;

@@ -7,6 +7,7 @@ export * from './create-expense';
 export * from './create-recipe';
 export * from './create-investiment';
 
+export * from './delete-user';
 export * from './delete-expense';
 export * from './delete-recipe';
 export * from './delete-investiment';
