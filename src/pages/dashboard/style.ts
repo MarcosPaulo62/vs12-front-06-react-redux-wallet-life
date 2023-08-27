@@ -8,3 +8,7 @@ export const StyledContainerDashboard = styled.div`
         flex-direction: column;
     }
 `
+export const ContainerPage = styled.div`
+    display: flex;
+    flex-direction: column;
+`

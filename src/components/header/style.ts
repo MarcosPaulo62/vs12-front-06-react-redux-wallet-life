@@ -10,7 +10,7 @@ export const StyledHeader = styled.header`
   background-color: ${({ theme }) => theme.color.alabaster};
 
   img {
-    width: 20.43rem;
+    width: 20.43rem;  
     height: 11.06rem;
     margin-left: 4.3rem;
   }
