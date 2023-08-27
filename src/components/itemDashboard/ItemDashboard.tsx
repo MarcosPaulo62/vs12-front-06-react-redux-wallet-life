@@ -5,8 +5,6 @@ import {
   StyledItemlDiv,
   StyledTrashCanButton,
 } from "../../styles/dashboardSections";
-import Eye from "../../assets/dashboard-olho.png";
-import TrashCan from "../../assets/dashboard-lixo.png";
 import { deleteExpense, deleteInvestiment, deleteRecipe } from "../../api";
 
 interface ItemDashboardProps {
@@ -55,8 +53,15 @@ export default function ItemDashboard({
     <StyledItemlDiv>
       <StyledItemValue themecolor={currentPage}>R$ {value}</StyledItemValue>
       <StyledItemDescription>{description}</StyledItemDescription>
-      <StyledEyeButton></StyledEyeButton>
+      <StyledEyeButton
+        aria-label={
+          "Imagem de um olho, indicando que este botão serve para ver detalhes deste item"
+        }
+      ></StyledEyeButton>
       <StyledTrashCanButton
+        aria-label={
+          "Imagem de uma lata de lixo, indicando que este botão serve para excluir este item da lista"
+        }
         onClick={() => handleDeleteClick(id)}
       ></StyledTrashCanButton>
     </StyledItemlDiv>

@@ -1,5 +1,4 @@
 import { styled } from "styled-components";
-import logo from "../../assets/logoTextLight.png";
 
 export const StyledCadastroContainer = styled.main`
   display: flex;
@@ -70,12 +69,12 @@ export const StyledCadastroContainer = styled.main`
     align-items: center;
     gap: 1rem;
 
-    @media (min-width: 768px) and (max-width: 1200px) {
+    @media (min-width: 640px) and (max-width: 1200px) {
       width: 60%;
     }
 
-    @media (min-width: 300px) and (max-width: 767px) {
-      width: 220px;
+    @media screen and (max-width: 640px) {
+      width: 80%;
     }
 
     button {
@@ -93,8 +92,9 @@ export const StyledCadastroContainer = styled.main`
       font-size: 1.3rem;
       border: none;
 
-      @media (min-width: 300px) and (max-width: 767px) {
-        font-size: 1rem;
+      @media screen and (max-width: 640px) {
+        font-size: .9rem;
+        padding: 2rem 1rem;
       }
     }
 

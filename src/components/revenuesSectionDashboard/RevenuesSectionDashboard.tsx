@@ -1,4 +1,5 @@
-import { StyledSpan, StyledTitle } from "../../styles/typography";
+import { Pagination } from '@mui/material';
+import { StyledTitle } from "../../styles/typography";
 import { StyledSectionDashboard } from "./style";
 import {
   StyledDashboardLabel,
@@ -10,7 +11,6 @@ import {
   StyledTotalValue,
   StyledTotalValueAndPlusButton,
   StyledDashboardSearchButton,
-  StyledItemlDiv,
 } from "../../styles/dashboardSections";
 import ItemDashboard from "../itemDashboard/ItemDashboard";
 import { ListRecipes } from "../../store/recipes/RecipesSlice";
@@ -21,18 +21,33 @@ import {
   selectErrorOnList,
   selectRecipes,
 } from "../../store/recipes/Selectors";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { selectQuantidadeRecipes } from '../../store/recipes/Selectors';
+import { QuantidadeRecipes, QuantidadeRecipesSlice } from '../../store/recipes/QuantidadeRecipesSlice';
 
-export default function RevenuesSectionDashboard() {
+export default function RevenuesSectionDashboard() {''
   const dispatch = useAppDispatch();
-  const errorOnList = useSelector(selectErrorOnList);
   const recipes = useSelector(selectRecipes);
-  console.log(recipes);
+  const quantidadeRecipes = useSelector(selectQuantidadeRecipes);
+
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const itemsPerPage = 5;
 
   useEffect(() => {
     dispatch(RecipesSlice.actions.resetRecipes());
-    dispatch(ListRecipes({ pagina: 0, quantidadeRegistros: 10 }));
-  }, []);
+    dispatch(ListRecipes({ pagina: currentPage - 1, quantidadeRegistros: itemsPerPage }));
+    dispatch(QuantidadeRecipesSlice.actions.resetRecipes());
+    dispatch(QuantidadeRecipes({}));
+  }, [currentPage]);
+
+  const totalPages: number = Math.ceil(quantidadeRecipes / itemsPerPage);
+
+  const handlePageChange = (
+    event: React.ChangeEvent<unknown>,
+    page: number
+  ): void => {
+    setCurrentPage(page);
+  };
 
   return (
     <StyledSectionDashboard>
@@ -49,8 +64,8 @@ export default function RevenuesSectionDashboard() {
         </StyledTotalValueAndPlusButton>
       </StyledTotalDiv>
       <StyledInputAndButtonDiv>
-        <StyledDashboardInput placeholder="busque uma receita"></StyledDashboardInput>
-        <StyledDashboardSearchButton />
+        <StyledDashboardInput placeholder="busque uma receita" ></StyledDashboardInput>
+        <StyledDashboardSearchButton aria-label={"Imagem de uma lupa, indicando que este botão serve para ativar a pesquisa com o parâmetro inserido no campo"}/>
       </StyledInputAndButtonDiv>
 
       <div className="itens-paginacao">
@@ -67,6 +82,7 @@ export default function RevenuesSectionDashboard() {
           ))}
         </ul>
       </div>
+      <Pagination count={totalPages} page={currentPage} onChange={handlePageChange} />
     </StyledSectionDashboard>
   );
 }
