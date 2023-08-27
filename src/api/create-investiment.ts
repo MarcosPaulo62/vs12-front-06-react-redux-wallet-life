@@ -2,7 +2,7 @@ import { http } from "./http"
 
 export async function createInvestiment(data: CreateInvestimentData): Promise<CreateInvestimentResponse> {
   const token = localStorage.getItem('user');
-  const response = await http.post<CreateInvestimentResponse>('/investimentos/criar-investimentos', { headers: { Authorization: token}, params: { data }});
+  const response = await http.post<CreateInvestimentResponse>('/investimentos/criar-investimentos', data, { headers: { Authorization: token}});
   return response.data;
 
 }
