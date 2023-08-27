@@ -8,18 +8,22 @@ import { InvestmentsSlice } from './investments/InvestmentsSlice';
 import { QuantidadeExpensesSlice } from './expenses/QuantidadeExpensesSlice';
 import { QuantidadeRecipesSlice } from './recipes/QuantidadeRecipesSlice';
 import { QuantidadeInvestmentsSlice } from './investments/QuantidadeInvestmentsSlice';
+import { TotaisSlice } from './users/TotaisSlice';
+import { UserLoggedSlice } from './users/UserLoggedSlice';
 
 
 const store = configureStore({
   reducer: {
     users: usersSlice.reducer,
     user: userReducer,
+    userLogged: UserLoggedSlice.reducer,
     recipes: RecipesSlice.reducer,
     expenses: ExpensesSlice.reducer,
     investments: InvestmentsSlice.reducer,
     quantidadeExpenses: QuantidadeExpensesSlice.reducer,
     quantidadeRecipes: QuantidadeRecipesSlice.reducer,
     quantidadeInvestments: QuantidadeInvestmentsSlice.reducer,
+    totais: TotaisSlice.reducer,
   },
 })
 

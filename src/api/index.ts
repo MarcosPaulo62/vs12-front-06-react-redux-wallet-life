@@ -15,4 +15,5 @@ export * from './get-investments';
 export * from './get-quantidade-expenses';
 export * from './get-quantidade-recipes';
 export * from './get-quantidade-investments';
+export * from './get-totais';
 export * from './get-user-logged';

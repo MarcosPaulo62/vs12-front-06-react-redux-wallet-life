@@ -27,12 +27,16 @@ import {
   QuantidadeRecipes,
   QuantidadeRecipesSlice,
 } from "../../store/recipes/QuantidadeRecipesSlice";
+import { selectTotalRecipes } from "../../store/users/selectors";
+import { TotaisSlice, TotalRecipes } from "../../store/users/TotaisSlice";
+import { formatNumber } from "../principalSectionDashboard/PrincipalSectionDashboard";
 
 export default function RevenuesSectionDashboard() {
   ("");
   const dispatch = useAppDispatch();
   const recipes = useSelector(selectRecipes);
   const quantidadeRecipes = useSelector(selectQuantidadeRecipes);
+  const totalRecipes = useSelector(selectTotalRecipes);
 
   const [currentPage, setCurrentPage] = useState<number>(1);
   const itemsPerPage = 5;
@@ -64,6 +68,8 @@ export default function RevenuesSectionDashboard() {
     );
     dispatch(QuantidadeRecipesSlice.actions.resetRecipes());
     dispatch(QuantidadeRecipes({}));
+    dispatch(TotaisSlice.actions.resetTotais());
+    dispatch(TotalRecipes({}));
   }, [currentPage]);
 
   const totalPages: number = Math.ceil(quantidadeRecipes / itemsPerPage);
@@ -85,7 +91,7 @@ export default function RevenuesSectionDashboard() {
       <StyledTotalDiv themecolor={"receitas"}>
         <StyledTotalTitle>Receitas totais:</StyledTotalTitle>
         <StyledTotalValueAndPlusButton>
-          <StyledTotalValue>R$ 800,00</StyledTotalValue>
+          <StyledTotalValue>R$ {formatNumber(totalRecipes)}</StyledTotalValue>
           <StyledPlusButton>+</StyledPlusButton>
         </StyledTotalValueAndPlusButton>
       </StyledTotalDiv>
