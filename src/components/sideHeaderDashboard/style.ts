@@ -14,9 +14,16 @@ export const StyledHeader = styled.header`
     position: sticky;
     top: 0;
 
-    img{
-        width: 20.43rem;
-        max-width: 100%;      
+    .logo{
+        a{
+            display: flex;
+            justify-content: center;
+        }
+     
+        img{
+            width: 70%;
+            max-width: 100%;      
+        }
     }
 
     .navegacao {
@@ -24,7 +31,7 @@ export const StyledHeader = styled.header`
         display: flex;
         flex-direction: column;
         align-items: left;
-        gap: 2rem;
+        gap: 1.5rem;
     }
 
     .navlink {
@@ -35,15 +42,13 @@ export const StyledHeader = styled.header`
     }
 
     .ativo{
-        box-sizing: content-box;
-        font-size: 2rem;
         span{
             border-bottom: 2px solid ${({ theme }) => theme.color.jet};;
         }
     }
 
     .logout{
-        margin-top: 2rem;
+        margin-top: 1.5rem;
 
         span{
             display: flex;
@@ -60,9 +65,6 @@ export const StyledHeader = styled.header`
     @media (max-width: 1200px){
         .navlink{
             font-size: 1.3rem;
-        }
-        .ativo{
-            font-size: 1.5rem;
         }
     }
 
