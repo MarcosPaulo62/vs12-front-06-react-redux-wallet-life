@@ -87,7 +87,7 @@ export default function RevenuesSectionDashboard({ handleOpenModal }: RevenueSec
   return (
     <StyledSectionDashboard>
       <StyledDashboardLabel themecolor={"receitas"}>
-        <StyledTitle fontWeight={700} tag={"h2"} fontSize={"lg"}>
+        <StyledTitle className="styled-title" fontWeight={700} tag={"h2"} fontSize={"lg"}>
           RECEITAS
         </StyledTitle>
       </StyledDashboardLabel>
@@ -127,6 +127,7 @@ export default function RevenuesSectionDashboard({ handleOpenModal }: RevenueSec
         </ul>
       </div>
       <Pagination
+        className="paginacao"
         count={totalPages}
         page={currentPage}
         onChange={handlePageChange}

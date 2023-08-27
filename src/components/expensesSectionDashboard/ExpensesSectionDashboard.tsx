@@ -36,7 +36,9 @@ interface ExpensesSectionProps {
   handleOpenModal: () => void;
 }
 
-export default function ExpensesSectionDashboard({ handleOpenModal }: ExpensesSectionProps) {
+export default function ExpensesSectionDashboard({
+  handleOpenModal,
+}: ExpensesSectionProps) {
   const dispatch = useAppDispatch();
   const expenses = useSelector(selectExpenses);
   const quantidadeExpenses = useSelector(selectQuantidadeExpenses);
@@ -71,7 +73,12 @@ export default function ExpensesSectionDashboard({ handleOpenModal }: ExpensesSe
   return (
     <StyledSectionDashboard>
       <StyledDashboardLabel themecolor={"despesas"}>
-        <StyledTitle fontWeight={700} tag={"h2"} fontSize={"lg"}>
+        <StyledTitle
+          className="styled-title"
+          fontWeight={700}
+          tag={"h2"}
+          fontSize={"lg"}
+        >
           DESPESAS
         </StyledTitle>
       </StyledDashboardLabel>
@@ -106,6 +113,7 @@ export default function ExpensesSectionDashboard({ handleOpenModal }: ExpensesSe
         </ul>
       </div>
       <Pagination
+        className="paginacao"
         count={totalPages}
         page={currentPage}
         onChange={handlePageChange}
