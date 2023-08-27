@@ -14,22 +14,24 @@ export const StyledModalMeusDadosContainer = styled.div`
 `;
 
 export const StyledModalContainer = styled.div`
-  width: 660px;
-  height: 660px;
+  max-width: 660px;
+  width: 90%;
+  height: 90%;
   border-radius: 32px;
   background-color: ${({ theme }) => theme.color.alabaster};
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
+  padding: 1rem;
 
   div {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    width: 34rem;
+    width: 90%;
 
-    .close-modal {
+    .close-modal, .pencil {
       cursor: pointer;      
     }
 
@@ -47,7 +49,7 @@ export const StyledModalContainer = styled.div`
   form {
     display: flex;
     flex-direction: column;
-    width: 520px;
+    width: 85%;
     gap: 1rem;
     justify-content: space-between;
     align-items: center;
@@ -107,5 +109,56 @@ export const StyledModalContainer = styled.div`
       }
     }
     
+  }
+
+  @media (max-width: 600px) {
+    div {
+      width: 95%;
+
+      h3 {      
+        font-size: 1.5rem;
+        font-weight: 700;
+      }
+
+      span, .pencil {
+        font-size: 1.5rem;     
+      }
+    }
+
+    form{
+      input,
+      select{
+        font-size: 1rem;
+      }
+      .buttons button{
+        font-size: 1.5rem;
+      }
+    }
+  }
+
+  @media (max-width: 400px) {
+    div {
+      width: 95%;
+
+      h3 {      
+        font-size: 1.2rem;
+        font-weight: 700;
+      }
+
+      span, .pencil {
+        font-size: 1.5rem;     
+      }
+    }
+
+    form{
+      input,
+      select{
+        font-size: 1rem;
+      }
+      .buttons button{
+        font-size: 1.3rem;
+        width: 100%;
+      }
+    }
   }
 `;

@@ -69,11 +69,11 @@ export default function ModalMeusDados({ closeModal }: ModalMeusDadosProps) {
         <div>
           {isEditing ? 
             <StyledSpan className="close-modal" fontSize="lg">
-                <CheckCircle size={32} weight="fill" onClick={() => setIsEditing(!isEditing)}/>
+                <CheckCircle className="pencil" weight="fill" onClick={() => setIsEditing(!isEditing)}/>
             </StyledSpan>     
             :
             <StyledSpan className="close-modal" fontSize="lg">
-                <PencilSimple size={32} weight="bold" onClick={() => setIsEditing(!isEditing)}/>
+                <PencilSimple className="pencil" weight="bold" onClick={() => setIsEditing(!isEditing)}/>
             </StyledSpan>
           }
           <StyledTitle fontSize="md" fontWeight={700} tag="h3">

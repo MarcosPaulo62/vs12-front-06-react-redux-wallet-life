@@ -65,7 +65,7 @@ export default function SideHeader() {
               <NavLink className={`navlink ${rotaAtual == "/investimentos" && 'ativo'}`} to={"/investimentos"}>
                 <span>Investimentos</span>
               </NavLink>
-              <span className="navlink">Meus dados</span>
+              <span className="navlink" onClick={() => setShowModal(true)}>Meus dados</span>
               <NavLink
                 onClick={() => localStorage.removeItem("user")}
                 className="navlink logout"
