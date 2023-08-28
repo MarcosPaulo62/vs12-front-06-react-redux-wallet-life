@@ -30,6 +30,7 @@ import { formatNumber } from "../principalSectionDashboard/PrincipalSectionDashb
 import { Expense } from "../../model";
 import UpdateExpenseModal from "../modalDespesas/UpdateExpenseModal";
 import { getExpense } from "../../api";
+import { ToastContainer, toast } from "react-toastify";
 
 interface RevenueSectionProps {
   handleOpenModal: () => void;
@@ -96,6 +97,12 @@ export default function RevenuesSectionDashboard({
     setExpense(expense);
   };
 
+  function sucessoExclusao(){
+    toast.success("Transação excluída com sucesso!", {
+      position: toast.POSITION.TOP_CENTER,
+    });
+  }
+
   return (
     <StyledSectionDashboard>
       <StyledDashboardLabel themecolor={"despesas"}>
@@ -139,6 +146,7 @@ export default function RevenuesSectionDashboard({
                 id={expense.idDespesa}
                 onViewClick={() => loadExpense(expense.idDespesa)}
                 onDeleteClick={() => setReload(true)}
+                sucessoExclusao={() => sucessoExclusao()}
               />
             </li>
           ))}
@@ -156,6 +164,7 @@ export default function RevenuesSectionDashboard({
           onClose={() => setExpense(undefined)}
         />
       )}
+      <ToastContainer />
     </StyledSectionDashboard>
   );
 }

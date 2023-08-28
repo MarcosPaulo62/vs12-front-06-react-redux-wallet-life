@@ -30,6 +30,7 @@ import {
 import { selectTotalRecipes } from "../../store/users/selectors";
 import { TotaisSlice, TotalRecipes } from "../../store/users/TotaisSlice";
 import { formatNumber } from "../principalSectionDashboard/PrincipalSectionDashboard";
+import { ToastContainer, toast } from "react-toastify";
 
 interface RevenueSectionProps {
   handleOpenModal: () => void;
@@ -86,6 +87,12 @@ export default function RevenuesSectionDashboard({ handleOpenModal }: RevenueSec
     setCurrentPage(page);
   };
 
+  function sucessoExclusao(){
+    toast.success("Transação excluída com sucesso!", {
+      position: toast.POSITION.TOP_CENTER,
+    });
+  }
+
   return (
     <StyledSectionDashboard>
       <StyledDashboardLabel themecolor={"receitas"}>
@@ -124,6 +131,7 @@ export default function RevenuesSectionDashboard({ handleOpenModal }: RevenueSec
                 currentPage="receitas"
                 id={recipe.idReceita}
                 onDeleteClick={() => setReload(true)}
+                sucessoExclusao={() => sucessoExclusao()}
               />
             </li>
           ))}
@@ -135,6 +143,7 @@ export default function RevenuesSectionDashboard({ handleOpenModal }: RevenueSec
         page={currentPage}
         onChange={handlePageChange}
       />
+      <ToastContainer />
     </StyledSectionDashboard>
   );
 }
