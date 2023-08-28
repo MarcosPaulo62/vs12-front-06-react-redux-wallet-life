@@ -26,7 +26,7 @@ export default function ItemDashboard({
   id,
   onViewClick,
   onDeleteClick,
-  sucessoExclusao
+  sucessoExclusao,
 }: ItemDashboardProps) {
   let themecolor: string;
 
@@ -60,24 +60,30 @@ export default function ItemDashboard({
     }
   };
 
-  function deleteClick(){
-    handleDeleteClick(id); 
-    onDeleteClick()
+  function deleteClick() {
+    handleDeleteClick(id);
+    onDeleteClick();
     sucessoExclusao();
   }
   return (
     <StyledItemlDiv>
-      {
-        showModalDelete && <ModalDeletarTransacao onClose={() => setShowModalDelete(false)} onConfirm={() => deleteClick()} />
-      }
+      {showModalDelete && (
+        <ModalDeletarTransacao
+          onClose={() => setShowModalDelete(false)}
+          onConfirm={() => deleteClick()}
+        />
+      )}
       <StyledItemValue themecolor={currentPage}>R$ {value}</StyledItemValue>
       <StyledItemDescription>{description}</StyledItemDescription>
-      {/* <StyledEyeButton
-        onClick={onViewClick}
-        aria-label={
-          "Imagem de um olho, indicando que este botão serve para ver detalhes deste item"
-        } data-testid="logo-link-home"
-      ></StyledEyeButton> */}
+      {
+        <StyledEyeButton
+          onClick={onViewClick}
+          aria-label={
+            "Imagem de um olho, indicando que este botão serve para ver detalhes deste item"
+          }
+          data-testid="logo-link-home"
+        ></StyledEyeButton>
+      }
       <StyledTrashCanButton
         aria-label={
           "Imagem de uma lata de lixo, indicando que este botão serve para excluir este item da lista"
@@ -86,4 +92,4 @@ export default function ItemDashboard({
       ></StyledTrashCanButton>
     </StyledItemlDiv>
   );
-};
+}
