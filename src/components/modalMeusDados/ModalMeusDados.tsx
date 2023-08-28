@@ -149,7 +149,7 @@ export default function ModalMeusDados({ closeModal }: ModalMeusDadosProps) {
                 :
                 <button onClick={() => closeModal()}>fechar</button>
             }
-            <button className="delete" onClick={() => setShowModalDelete(true)}>deletar conta <Trash size={32} weight="bold" /></button>
+            <button type="button" className="delete" onClick={() => setShowModalDelete(true)}>deletar conta <Trash size={32} weight="bold" /></button>
           </div>
         </form>
       </StyledModalContainer>
