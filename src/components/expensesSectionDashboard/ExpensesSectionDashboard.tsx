@@ -124,7 +124,7 @@ export default function RevenuesSectionDashboard({
       </StyledTotalDiv>
       <StyledInputAndButtonDiv>
         <StyledDashboardInput
-          placeholder="busque uma despesa"
+          placeholder="busque um valor mínimo"
           onChange={handleSearchChange}
         ></StyledDashboardInput>
         <StyledDashboardSearchButton
