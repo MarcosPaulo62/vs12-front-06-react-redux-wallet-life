@@ -32,6 +32,9 @@ import { selectTotalInvestments } from "../../store/users/selectors";
 import { TotaisSlice, TotalInvestments } from "../../store/users/TotaisSlice";
 import { formatNumber } from "../principalSectionDashboard/PrincipalSectionDashboard";
 import { ToastContainer, toast } from "react-toastify";
+import { getInvestment } from "../../api";
+import { Investment } from "../../model";
+import UpdateInvestmentModal from "../modalInvestimentos/UpdateInvestmentModal";
 
 interface InvesttmentSectionProps {
   handleOpenModal: () => void;
@@ -40,8 +43,6 @@ interface InvesttmentSectionProps {
 export default function InvestmentsSectionDashboard({
   handleOpenModal,
 }: InvesttmentSectionProps) {
-  ("");
-
   const dispatch = useAppDispatch();
   const investments = useSelector(selectInvestments);
   const quantidadeInvestments = useSelector(selectQuantidadeInvestments);
@@ -51,6 +52,7 @@ export default function InvestmentsSectionDashboard({
   const itemsPerPage = 5;
   const [searchInput, setSearchInput] = useState("");
   const [reload, setReload] = useState(false);
+  const [investment, setInvestment] = useState<Investment>();
 
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchInput(event.target.value);
@@ -93,7 +95,12 @@ export default function InvestmentsSectionDashboard({
     setCurrentPage(page);
   };
 
-  function sucessoExclusao(){
+  const loadInvestment = async (id: number) => {
+    const investment = await getInvestment(id);
+    setInvestment(investment);
+  };
+
+  function sucessoExclusao() {
     toast.success("Transação excluída com sucesso!", {
       position: toast.POSITION.TOP_CENTER,
     });
@@ -143,6 +150,7 @@ export default function InvestmentsSectionDashboard({
                 value={investment.valor}
                 currentPage="investimentos"
                 id={investment.idInvestimento}
+                onViewClick={() => loadInvestment(investment.idInvestimento)}
                 onDeleteClick={() => setReload(true)}
                 sucessoExclusao={() => sucessoExclusao()}
               />
@@ -156,6 +164,12 @@ export default function InvestmentsSectionDashboard({
         page={currentPage}
         onChange={handlePageChange}
       />
+      {investment && (
+        <UpdateInvestmentModal
+          investment={investment}
+          onClose={() => setInvestment(undefined)}
+        />
+      )}
       <ToastContainer />
     </StyledSectionDashboard>
   );

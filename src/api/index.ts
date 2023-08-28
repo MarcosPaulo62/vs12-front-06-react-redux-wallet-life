@@ -12,6 +12,7 @@ export * from './get-expense'
 export * from './get-investment'
 export * from './get-recipe'
 export * from './update-recipe'
+export * from './update-investment'
 
 export * from './delete-user';
 export * from './delete-expense';
