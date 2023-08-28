@@ -116,18 +116,22 @@ export default function ModalAddReceita({
             type="text"
             id="descricao"
             placeholder="Descrição"
+            minLength={5}
+            maxLength={30}
             {...register("descricao")}
           />
           <input
             type="text"
             id="empresa"
             placeholder="Empresa"
+            minLength={3}
             {...register("empresa")}
           />
           <input
             type="text"
             id="banco"
             placeholder="Banco"
+            minLength={3}
             {...register("banco")}
           />
           <StyledButton

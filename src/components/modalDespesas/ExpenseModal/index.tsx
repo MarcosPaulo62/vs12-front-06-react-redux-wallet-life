@@ -79,6 +79,8 @@ export default function ExpenseModal({
             type="text"
             placeholder="Descrição"
             required
+            minLength={5}
+            maxLength={30}
             {...register("descricao")}
           />
           <input

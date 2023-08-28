@@ -132,6 +132,8 @@ export default function ModalAddInvestimento({
             id="descricao"
             placeholder="Descrição"
             required
+            minLength={5}
+            maxLength={30}
             {...register("descricao")}
           />
           <input
@@ -139,6 +141,7 @@ export default function ModalAddInvestimento({
             id="corretora"
             placeholder="Corretora"
             required
+            minLength={3}
             {...register("corretora")}
           />
           <input
