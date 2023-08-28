@@ -24,14 +24,6 @@ export default function ExpenseModal({
   onClose,
   onSubmit,
 }: ExpenseModalProps) {
-  console.log(expense);
-  console.log({
-    data: expense?.dataPagamento ?? "",
-    descricao: expense?.descricao ?? "",
-    tipoDespesa: expense?.tipo ?? "",
-    valor: String(expense?.valor ?? ""),
-  });
-
   const { register, handleSubmit, reset } = useForm<FormData>({
     values: {
       data: expense?.dataPagamento ?? "",
@@ -86,6 +78,8 @@ export default function ExpenseModal({
             type="text"
             placeholder="Descrição"
             required
+            minLength={5}
+            maxLength={30}
             {...register("descricao")}
           />
           <input

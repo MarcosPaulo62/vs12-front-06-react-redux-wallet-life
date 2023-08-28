@@ -4,6 +4,7 @@ import SideHeader from "../../components/sideHeaderDashboard/SideHeaderDashboard
 import { StyledContainerDashboard } from "../dashboard/style";
 import Expenses from "../../components/expensesSectionDashboard/ExpensesSectionDashboard";
 import CreateExpenseModal from "../../components/modalDespesas/CreateExpenseModal";
+import ModalDeletarTransacao from "../../components/modalDeletarTransacao/ModalDeletarTransacao";
 
 export default function Despesas() {
   const [isModalVisible, setIsModalVisible] = useState<boolean>(false);

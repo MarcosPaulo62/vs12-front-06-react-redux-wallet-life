@@ -8,6 +8,7 @@ import {
 import { TotaisSlice, TotalExpenses } from "../../../store/users/TotaisSlice";
 import ExpenseModal from "../ExpenseModal";
 import { Expense } from "../../../model";
+import { ToastContainer, toast } from "react-toastify";
 
 interface CreateExpenseModalProps {
   onClose: () => void;
@@ -28,9 +29,9 @@ export default function CreateExpenseModal({
       })
     );
 
-    dispatch(
+    await dispatch(
       ListExpenses({
-        pagina: 1,
+        pagina: 0,
         quantidadeRegistros: 5,
       })
     );
@@ -38,10 +39,15 @@ export default function CreateExpenseModal({
     dispatch(QuantidadeExpenses({}));
     dispatch(TotaisSlice.actions.resetTotais());
     dispatch(TotalExpenses({}));
-    onClose?.();
+    toast.success("Despesa adicionado com sucesso!", {
+      position: toast.POSITION.TOP_CENTER,
+    });
   };
 
   return (
-    <ExpenseModal title="Criar Despesa" onSubmit={onSubmit} onClose={onClose} />
+    <>
+      <ExpenseModal title="Criar Despesa" onSubmit={onSubmit} onClose={onClose} />
+      <ToastContainer />
+    </>
   );
 }

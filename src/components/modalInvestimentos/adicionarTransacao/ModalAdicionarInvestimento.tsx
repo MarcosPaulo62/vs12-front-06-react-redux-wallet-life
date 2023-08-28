@@ -19,7 +19,7 @@ import {
 } from "../../../store/investments/InvestmentsSlice";
 import { QuantidadeInvestments } from "../../../store/investments/QuantidadeInvestmentsSlice";
 import { TotalInvestments } from "../../../store/users/TotaisSlice";
-import { toast } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
 
 interface ModalAddInvestimentoProps {
   handleCloseModal: () => void;
@@ -41,6 +41,10 @@ export default function ModalAddInvestimento({
   const createSuccess = useSelector(selectCreateSuccess);
   const errorOnCreate = useSelector(selectErrorOnCreate);
 
+  const dismissPreviousToasts = () => {
+    toast.dismiss();
+  };
+
   const onSubmit = async (data: TransactionFormData) => {
     if (
       data.descricao === "" ||
@@ -48,7 +52,7 @@ export default function ModalAddInvestimento({
       data.data === "" ||
       data.valor < 1
     ) {
-      toast.warning("É necessário preencher todos os campos!", {
+      toast.warning("É necessário preencher todos os campos corretamente!", {
         position: toast.POSITION.TOP_RIGHT,
       });
     } else {
@@ -65,6 +69,7 @@ export default function ModalAddInvestimento({
       await dispatch(
         ListInvestments({ pagina: 0, quantidadeRegistros: 5 })
       ).unwrap();
+      dismissPreviousToasts();
       toast.success("Investimento adicionado com sucesso!", {
         position: toast.POSITION.TOP_CENTER,
       });
@@ -74,11 +79,6 @@ export default function ModalAddInvestimento({
   };
 
   useEffect(() => {
-    if (createSuccess) {
-      toast.success("Investimento cadastrado com sucesso!", {
-        position: toast.POSITION.TOP_CENTER,
-      });
-    }
     dispatch(InvestmentsSlice.actions.resetCreateSucess());
   });
   useEffect(() => {
@@ -132,6 +132,8 @@ export default function ModalAddInvestimento({
             id="descricao"
             placeholder="Descrição"
             required
+            minLength={5}
+            maxLength={30}
             {...register("descricao")}
           />
           <input
@@ -139,6 +141,7 @@ export default function ModalAddInvestimento({
             id="corretora"
             placeholder="Corretora"
             required
+            minLength={3}
             {...register("corretora")}
           />
           <input
@@ -157,6 +160,7 @@ export default function ModalAddInvestimento({
           </StyledButton>
         </form>
       </StyledModalContainer>
+      <ToastContainer />
     </StyledModalInvestimentoContainer>
   );
 }

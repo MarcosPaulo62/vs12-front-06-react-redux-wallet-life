@@ -48,6 +48,7 @@ export default function RevenuesSectionDashboard({
   const itemsPerPage = 5;
   const [searchInput, setSearchInput] = useState("");
   const [expense, setExpense] = useState<Expense>();
+  const [reload, setReload] = useState(false);
 
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchInput(event.target.value);
@@ -78,7 +79,8 @@ export default function RevenuesSectionDashboard({
     dispatch(QuantidadeExpenses({}));
     dispatch(TotaisSlice.actions.resetTotais());
     dispatch(TotalExpenses({}));
-  }, [currentPage]);
+    setReload(false);
+  }, [currentPage, reload]);
 
   const totalPages: number = Math.ceil(quantidadeExpenses / itemsPerPage);
 
@@ -119,7 +121,7 @@ export default function RevenuesSectionDashboard({
           onChange={handleSearchChange}
         ></StyledDashboardInput>
         <StyledDashboardSearchButton
-        onClick={handleSearchClick}
+          onClick={handleSearchClick}
           aria-label={
             "Imagem de uma lupa, indicando que este botão serve para ativar a pesquisa com o parâmetro inserido no campo"
           }
@@ -136,6 +138,7 @@ export default function RevenuesSectionDashboard({
                 currentPage="despesas"
                 id={expense.idDespesa}
                 onViewClick={() => loadExpense(expense.idDespesa)}
+                onDeleteClick={() => setReload(true)}
               />
             </li>
           ))}
