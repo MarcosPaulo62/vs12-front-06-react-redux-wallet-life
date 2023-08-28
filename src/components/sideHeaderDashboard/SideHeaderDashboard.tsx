@@ -6,6 +6,9 @@ import { useState } from "react";
 import { useLocation } from 'react-router-dom';
 import ModalMeusDados from "../modalMeusDados/ModalMeusDados";
 
+
+
+
 export default function SideHeader() {
   const [showMenu, setShowMenu] = useState<Boolean>(false);
   const [showModal, setShowModal] = useState<Boolean>(false);
@@ -20,7 +23,7 @@ export default function SideHeader() {
         <NavLink to="/">
           <img
             src={logo}
-            alt="Logo da walletLife, um quadrado preenchido na cor cinza claro, com 4 triangulos menores em cada uma das arestas, sendo um triângulo marrom escuro a direita, outro com a cor khaki abaixo, um marrom claro a esquerda e um último cinza escuro em cima. Abaixo da imagem está escrito walletlife finances."
+            alt="Logo da walletLife, um quadrado preenchido na cor cinza claro, com 4 triangulos menores em cada uma das arestas, sendo um triângulo marrom escuro a direita, outro com a cor khaki abaixo, um marrom claro a esquerda e um último cinza escuro em cima. Abaixo da imagem está escrito walletlife finances." data-testid="logo-link-home"
           />
         </NavLink>
       </div>
@@ -37,13 +40,13 @@ export default function SideHeader() {
         <NavLink className={`navlink ${rotaAtual == "/investimentos" && 'ativo'}`} to={"/investimentos"}>
           <span>Investimentos</span>
         </NavLink>
-        <span className="navlink" onClick={() => setShowModal(true)}>Meus dados</span>
+        <span data-testid="meus-dados" className="navlink" onClick={() => setShowModal(true)}>Meus dados</span>
         <NavLink
           onClick={() => localStorage.removeItem("user")}
           className="navlink logout"
           to={"/"}
         >
-          <span>Sair<SignOut size={40} weight="bold" /></span>            
+          <span data-testid="exit">Sair<SignOut size={40} weight="bold" /></span>            
         </NavLink>
       </div>
 
