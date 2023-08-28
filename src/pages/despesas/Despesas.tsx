@@ -23,7 +23,6 @@ export default function Despesas() {
         <Expenses handleOpenModal={handleOpenModal} />
         {isModalVisible && <CreateExpenseModal onClose={handleCloseModal} />}
       </StyledContainerDashboard>
-      <ModalDeletarTransacao />
       <NavLink to="/login"></NavLink>
     </>
   );
