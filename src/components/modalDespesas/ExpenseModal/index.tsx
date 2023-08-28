@@ -24,13 +24,6 @@ export default function ExpenseModal({
   onClose,
   onSubmit,
 }: ExpenseModalProps) {
-  console.log(expense);
-  console.log({
-    data: expense?.dataPagamento ?? "",
-    descricao: expense?.descricao ?? "",
-    tipoDespesa: expense?.tipo ?? "",
-    valor: String(expense?.valor ?? ""),
-  });
 
   const { register, handleSubmit, reset } = useForm<FormData>({
     values: {

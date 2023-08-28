@@ -49,6 +49,7 @@ export default function InvestmentsSectionDashboard({
   const [currentPage, setCurrentPage] = useState<number>(1);
   const itemsPerPage = 5;
   const [searchInput, setSearchInput] = useState("");
+  const [reload, setReload] = useState(false);
 
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchInput(event.target.value);
@@ -79,7 +80,8 @@ export default function InvestmentsSectionDashboard({
     dispatch(QuantidadeInvestments({}));
     dispatch(TotaisSlice.actions.resetTotais());
     dispatch(TotalInvestments({}));
-  }, [currentPage]);
+    setReload(false);
+  }, [currentPage, reload]);
 
   const totalPages: number = Math.ceil(quantidadeInvestments / itemsPerPage);
 
@@ -134,6 +136,7 @@ export default function InvestmentsSectionDashboard({
                 value={investment.valor}
                 currentPage="investimentos"
                 id={investment.idInvestimento}
+                onDeleteClick={() => setReload(true)}
               />
             </li>
           ))}

@@ -13,6 +13,7 @@ interface ItemDashboardProps {
   description: string;
   id: number;
   onViewClick?: () => void;
+  onDeleteClick: () => void;
 }
 
 export default function ItemDashboard({
@@ -21,6 +22,7 @@ export default function ItemDashboard({
   description,
   id,
   onViewClick,
+  onDeleteClick
 }: ItemDashboardProps) {
   let themecolor: string;
 
@@ -51,6 +53,11 @@ export default function ItemDashboard({
         break;
     }
   };
+
+  function deleteClick(){
+    handleDeleteClick(id); 
+    onDeleteClick()
+  }
   return (
     <StyledItemlDiv>
       <StyledItemValue themecolor={currentPage}>R$ {value}</StyledItemValue>
@@ -65,7 +72,7 @@ export default function ItemDashboard({
         aria-label={
           "Imagem de uma lata de lixo, indicando que este botão serve para excluir este item da lista"
         }
-        onClick={() => handleDeleteClick(id)}
+        onClick={() => deleteClick()}
       ></StyledTrashCanButton>
     </StyledItemlDiv>
   );

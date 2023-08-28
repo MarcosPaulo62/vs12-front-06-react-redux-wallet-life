@@ -52,7 +52,7 @@ export default function ModalAddInvestimento({
       data.data === "" ||
       data.valor < 1
     ) {
-      toast.warning("É necessário preencher todos os campos!", {
+      toast.warning("É necessário preencher todos os campos corretamente!", {
         position: toast.POSITION.TOP_RIGHT,
       });
     } else {
@@ -79,11 +79,6 @@ export default function ModalAddInvestimento({
   };
 
   useEffect(() => {
-    if (createSuccess) {
-      toast.success("Investimento cadastrado com sucesso!", {
-        position: toast.POSITION.TOP_CENTER,
-      });
-    }
     dispatch(InvestmentsSlice.actions.resetCreateSucess());
   });
   useEffect(() => {
