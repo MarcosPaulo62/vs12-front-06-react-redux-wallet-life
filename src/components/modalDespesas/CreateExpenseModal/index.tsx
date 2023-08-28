@@ -28,16 +28,16 @@ export default function CreateExpenseModal({
       })
     );
 
-    dispatch(
+    await dispatch(
       ListExpenses({
-        pagina: 1,
+        pagina: 0,
         quantidadeRegistros: 5,
       })
     );
-    dispatch(resetQuantidadeExpenses());
-    dispatch(QuantidadeExpenses({}));
-    dispatch(TotaisSlice.actions.resetTotais());
-    dispatch(TotalExpenses({}));
+    await dispatch(resetQuantidadeExpenses());
+    await dispatch(QuantidadeExpenses({}));
+    await dispatch(TotaisSlice.actions.resetTotais());
+    await dispatch(TotalExpenses({}));
     onClose?.();
   };
 

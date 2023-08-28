@@ -13,6 +13,7 @@ interface ItemDashboardProps {
   description: string;
   id: number;
   onViewClick?: () => void;
+  onDelete?: () => void;
 }
 
 export default function ItemDashboard({
@@ -21,6 +22,7 @@ export default function ItemDashboard({
   description,
   id,
   onViewClick,
+  onDelete,
 }: ItemDashboardProps) {
   let themecolor: string;
 
@@ -32,17 +34,17 @@ export default function ItemDashboard({
     themecolor = "receitas";
   }
 
-  const handleDeleteClick = (id: number) => {
+  const handleDeleteClick = async (id: number) => {
     switch (currentPage) {
       case "despesas":
-        deleteExpense(id);
+        await deleteExpense(id);
         break;
       case "investimentos":
-        deleteInvestiment(id);
+        await deleteInvestiment(id);
         break;
       case "receitas":
         try {
-          deleteRecipe(id);
+          await deleteRecipe(id);
         } catch {
           console.log("erro da misera");
         }
@@ -50,6 +52,8 @@ export default function ItemDashboard({
       default:
         break;
     }
+
+    onDelete?.();
   };
   return (
     <StyledItemlDiv>

@@ -66,7 +66,7 @@ export default function RevenuesSectionDashboard({
     dispatch(QuantidadeExpenses({}));
   };
 
-  useEffect(() => {
+  const load = () => {
     dispatch(ExpensesSlice.actions.resetExpenses());
     dispatch(
       ListExpenses({
@@ -78,6 +78,10 @@ export default function RevenuesSectionDashboard({
     dispatch(QuantidadeExpenses({}));
     dispatch(TotaisSlice.actions.resetTotais());
     dispatch(TotalExpenses({}));
+  };
+
+  useEffect(() => {
+    load();
   }, [currentPage]);
 
   const totalPages: number = Math.ceil(quantidadeExpenses / itemsPerPage);
@@ -119,7 +123,7 @@ export default function RevenuesSectionDashboard({
           onChange={handleSearchChange}
         ></StyledDashboardInput>
         <StyledDashboardSearchButton
-        onClick={handleSearchClick}
+          onClick={handleSearchClick}
           aria-label={
             "Imagem de uma lupa, indicando que este botão serve para ativar a pesquisa com o parâmetro inserido no campo"
           }
@@ -136,6 +140,7 @@ export default function RevenuesSectionDashboard({
                 currentPage="despesas"
                 id={expense.idDespesa}
                 onViewClick={() => loadExpense(expense.idDespesa)}
+                onDelete={load}
               />
             </li>
           ))}
