@@ -64,6 +64,7 @@ export default function Footer() {
         <img
           src={logo}
           alt="Logo da walletLife, um quadrado preenchido na cor cinza claro, com 4 triangulos menores em cada uma das arestas, sendo um triângulo marrom escuro a direita, outro com a cor khaki abaixo, um marrom claro a esquerda e um último cinza escuro em cima. Abaixo da imagem está escrito walletlife finances."
+          data-testid="logo-link-home"
         />
         <NavLink className="login" to={"/login"}>
           {localStorage.getItem("user") ? "Sua área" : "Login"}
@@ -73,7 +74,7 @@ export default function Footer() {
         </NavLink>
       </div>
       <div className="right-section">
-        <StyledTag className="paragraphy">
+        <StyledTag data-testid="paragraphy" className="paragraphy">
           Assine gratuitamente nossa newsletter e fique por dentro das nossas
           dicas sobre finanças!
         </StyledTag>
