@@ -6,6 +6,8 @@ import {
   StyledTrashCanButton,
 } from "../../styles/dashboardSections";
 import { deleteExpense, deleteInvestiment, deleteRecipe } from "../../api";
+import { useState } from "react";
+import ModalDeletarTransacao from "../modalDeletarTransacao/ModalDeletarTransacao";
 
 interface ItemDashboardProps {
   currentPage: "despesas" | "investimentos" | "receitas";
@@ -34,6 +36,8 @@ export default function ItemDashboard({
     themecolor = "receitas";
   }
 
+  const [showModalDelete, setShowModalDelete] = useState<Boolean>(false);
+
   const handleDeleteClick = async (id: number) => {
     switch (currentPage) {
       case "despesas":
@@ -60,19 +64,22 @@ export default function ItemDashboard({
   }
   return (
     <StyledItemlDiv>
+      {
+        showModalDelete && <ModalDeletarTransacao onClose={() => setShowModalDelete(false)} onConfirm={() => deleteClick()} />
+      }
       <StyledItemValue themecolor={currentPage}>R$ {value}</StyledItemValue>
       <StyledItemDescription>{description}</StyledItemDescription>
       <StyledEyeButton
         onClick={onViewClick}
         aria-label={
           "Imagem de um olho, indicando que este botão serve para ver detalhes deste item"
-        }
+        } data-testid="logo-link-home"
       ></StyledEyeButton>
       <StyledTrashCanButton
         aria-label={
           "Imagem de uma lata de lixo, indicando que este botão serve para excluir este item da lista"
         }
-        onClick={() => deleteClick()}
+        onClick={() => setShowModalDelete(true)}
       ></StyledTrashCanButton>
     </StyledItemlDiv>
   );
