@@ -11,17 +11,12 @@ import { CheckCircle, PencilSimple, Trash } from "@phosphor-icons/react";
 import { DeleteUser } from "../../store/users/DeleteUser";
 import ModalDeletarUsuario from "../modalDeletarUsuario/ModalDeletarUsuario";
 import { useNavigate } from "react-router-dom";
+import { User } from "../../model";
+import { updateUser } from "../../store/users/async-actions/update-user";
+import { ToastContainer, toast } from "react-toastify";
 
 interface ModalAddDespesaProps {
   handleCloseModal: () => void;
-}
-
-interface UserFormData {
-  nome: string;
-  dataNascimento: string;
-  cpf: string;
-  email: string;
-  senha: string;
 }
 
 interface ModalMeusDadosProps{
@@ -29,7 +24,7 @@ interface ModalMeusDadosProps{
 }
 
 export default function ModalMeusDados({ closeModal }: ModalMeusDadosProps) {
-  const { register, handleSubmit, reset } = useForm<UserFormData>();
+  const { register, handleSubmit, reset } = useForm<User>();
   const navigate = useNavigate();
 
   const dispatch = useAppDispatch();
@@ -65,8 +60,15 @@ export default function ModalMeusDados({ closeModal }: ModalMeusDadosProps) {
     dispatch(UserLogged({}));
   }, []);
 
-  const onSubmit = (data: UserFormData) => {
+  const onSubmit = async (data: User) => {
+    data.idUsuario = userLogged.idUsuario;
+    await dispatch(updateUser(data));
+    dispatch(UserLoggedSlice.actions.resetUserLogged());
+    dispatch(UserLogged({}));
     setIsEditing(false)
+    toast.success("Dados atualizados com sucesso!", {
+      position: toast.POSITION.TOP_CENTER,
+    });
   };
 
   function deletarUsuario(){
@@ -81,8 +83,8 @@ export default function ModalMeusDados({ closeModal }: ModalMeusDadosProps) {
       <StyledModalContainer>
         <div>
           {isEditing ? 
-            <StyledSpan className="close-modal" fontSize="lg">
-                <CheckCircle className="pencil" weight="fill" onClick={() => setIsEditing(!isEditing)}/>
+            <StyledSpan style={{ visibility: "hidden" }} className="close-modal" fontSize="lg">
+                <CheckCircle className="check-circle" weight="fill"/>
             </StyledSpan>     
             :
             <StyledSpan className="close-modal" fontSize="lg">
@@ -151,6 +153,7 @@ export default function ModalMeusDados({ closeModal }: ModalMeusDadosProps) {
           </div>
         </form>
       </StyledModalContainer>
+      <ToastContainer />
     </StyledModalMeusDadosContainer>
   );
 }
