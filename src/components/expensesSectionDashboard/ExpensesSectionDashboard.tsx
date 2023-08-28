@@ -104,7 +104,7 @@ export default function RevenuesSectionDashboard({ handleOpenModal }: RevenueSec
         </StyledTotalValueAndPlusButton>
       </StyledTotalDiv>
       <StyledInputAndButtonDiv>
-        <StyledDashboardInput placeholder="busque uma despesa"></StyledDashboardInput>
+        <StyledDashboardInput placeholder="busque um valor mínimo"></StyledDashboardInput>
         <StyledDashboardSearchButton
           aria-label={
             "Imagem de uma lupa, indicando que este botão serve para ativar a pesquisa com o parâmetro inserido no campo"

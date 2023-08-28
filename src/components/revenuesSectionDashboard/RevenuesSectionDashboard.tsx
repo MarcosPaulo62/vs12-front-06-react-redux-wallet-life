@@ -101,7 +101,7 @@ export default function RevenuesSectionDashboard({ handleOpenModal }: RevenueSec
       <StyledInputAndButtonDiv>
         <StyledDashboardInput
           type="number"
-          placeholder="busque um valor"
+          placeholder="busque um valor mínimo"
           onChange={handleSearchChange}
         ></StyledDashboardInput>
         <StyledDashboardSearchButton
