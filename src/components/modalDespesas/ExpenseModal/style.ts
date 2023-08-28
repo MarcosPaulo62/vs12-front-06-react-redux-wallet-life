@@ -2,13 +2,14 @@ import styled from "styled-components";
 
 export const StyledModalDespesaContainer = styled.div`
   background-color: rgba(0, 0, 0, 0.65);
-  position: absolute;
+  position: fixed;
   display: flex;
-  width: 100vw;
-  height: 100vh;
   align-items: center;
   justify-content: center;
-  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
 `;
 
 export const StyledModalContainer = styled.div`
