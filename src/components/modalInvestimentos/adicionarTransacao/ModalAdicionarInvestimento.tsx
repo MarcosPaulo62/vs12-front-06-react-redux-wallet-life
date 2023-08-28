@@ -19,7 +19,7 @@ import {
 } from "../../../store/investments/InvestmentsSlice";
 import { QuantidadeInvestments } from "../../../store/investments/QuantidadeInvestmentsSlice";
 import { TotalInvestments } from "../../../store/users/TotaisSlice";
-import { toast } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
 
 interface ModalAddInvestimentoProps {
   handleCloseModal: () => void;
@@ -40,6 +40,10 @@ export default function ModalAddInvestimento({
   const dispatch = useAppDispatch();
   const createSuccess = useSelector(selectCreateSuccess);
   const errorOnCreate = useSelector(selectErrorOnCreate);
+
+  const dismissPreviousToasts = () => {
+    toast.dismiss();
+  };
 
   const onSubmit = async (data: TransactionFormData) => {
     if (
@@ -65,6 +69,7 @@ export default function ModalAddInvestimento({
       await dispatch(
         ListInvestments({ pagina: 0, quantidadeRegistros: 5 })
       ).unwrap();
+      dismissPreviousToasts();
       toast.success("Investimento adicionado com sucesso!", {
         position: toast.POSITION.TOP_CENTER,
       });
@@ -157,6 +162,7 @@ export default function ModalAddInvestimento({
           </StyledButton>
         </form>
       </StyledModalContainer>
+      <ToastContainer />
     </StyledModalInvestimentoContainer>
   );
 }
