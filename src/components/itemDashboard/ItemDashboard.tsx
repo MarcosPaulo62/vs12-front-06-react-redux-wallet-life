@@ -66,7 +66,7 @@ export default function ItemDashboard({
         onClick={onViewClick}
         aria-label={
           "Imagem de um olho, indicando que este botão serve para ver detalhes deste item"
-        }
+        } data-testid="logo-link-home"
       ></StyledEyeButton>
       <StyledTrashCanButton
         aria-label={
