@@ -9,6 +9,8 @@ import { selectUserLogged } from "../../store/users/selectors";
 import { UserLogged, UserLoggedSlice } from "../../store/users/UserLoggedSlice";
 import { CheckCircle, PencilSimple, Trash } from "@phosphor-icons/react";
 import { DeleteUser } from "../../store/users/DeleteUser";
+import ModalDeletarUsuario from "../modalDeletarUsuario/ModalDeletarUsuario";
+import { useNavigate } from "react-router-dom";
 
 interface ModalAddDespesaProps {
   handleCloseModal: () => void;
@@ -28,6 +30,7 @@ interface ModalMeusDadosProps{
 
 export default function ModalMeusDados({ closeModal }: ModalMeusDadosProps) {
   const { register, handleSubmit, reset } = useForm<UserFormData>();
+  const navigate = useNavigate();
 
   const dispatch = useAppDispatch();
   const userLogged = useSelector(selectUserLogged);
@@ -37,10 +40,14 @@ export default function ModalMeusDados({ closeModal }: ModalMeusDadosProps) {
   useEffect(() => {
     if(deleteUser){
         dispatch(
-            DeleteUser({idUser: userLogged.idUsuario})
+          DeleteUser({idUser: userLogged.idUsuario})
         )
+        localStorage.removeItem("user");
+        navigate("/");
     }
   }, [deleteUser])
+
+  const [showModalDelete, setShowModalDelete] = useState<Boolean>(false);
 
   useEffect(() => {
     reset({
@@ -59,12 +66,18 @@ export default function ModalMeusDados({ closeModal }: ModalMeusDadosProps) {
   }, []);
 
   const onSubmit = (data: UserFormData) => {
-    console.log("Dados capturados:", data);
     setIsEditing(false)
   };
 
+  function deletarUsuario(){
+    setDeleteUser(true);
+  }
+
   return (
     <StyledModalMeusDadosContainer>
+      {
+        showModalDelete && <ModalDeletarUsuario onClose={() => setShowModalDelete(false)} onConfirm={() => deletarUsuario()} />
+      }
       <StyledModalContainer>
         <div>
           {isEditing ? 
@@ -134,7 +147,7 @@ export default function ModalMeusDados({ closeModal }: ModalMeusDadosProps) {
                 :
                 <button onClick={() => closeModal()}>fechar</button>
             }
-            <button className="delete" onClick={() => setDeleteUser(true)}>deletar conta <Trash size={32} weight="bold" /></button>
+            <button className="delete" onClick={() => setShowModalDelete(true)}>deletar conta <Trash size={32} weight="bold" /></button>
           </div>
         </form>
       </StyledModalContainer>
