@@ -12,6 +12,7 @@ interface ItemDashboardProps {
   value: number;
   description: string;
   id: number;
+  onViewClick?: () => void;
 }
 
 export default function ItemDashboard({
@@ -19,6 +20,7 @@ export default function ItemDashboard({
   value,
   description,
   id,
+  onViewClick,
 }: ItemDashboardProps) {
   let themecolor: string;
 
@@ -54,6 +56,7 @@ export default function ItemDashboard({
       <StyledItemValue themecolor={currentPage}>R$ {value}</StyledItemValue>
       <StyledItemDescription>{description}</StyledItemDescription>
       <StyledEyeButton
+        onClick={onViewClick}
         aria-label={
           "Imagem de um olho, indicando que este botão serve para ver detalhes deste item"
         }

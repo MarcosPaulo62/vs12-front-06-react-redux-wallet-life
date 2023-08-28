@@ -1,5 +1,6 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import * as API from '../../api'
+import { createSlice } from "@reduxjs/toolkit";
+import { QuantidadeExpenses } from "./async-actions";
+
 
 type QuantidadeExpensesSliceState = {
   quantidadeExpenses: number,
@@ -13,7 +14,7 @@ export const QuantidadeExpensesSlice = createSlice({
     errorOnQtd: undefined,
   } as QuantidadeExpensesSliceState,
   reducers: {
-    resetExpenses: (state) => {
+    resetQuantidadeExpenses: (state) => {
       state.quantidadeExpenses = 0;
     },
   },
@@ -36,14 +37,5 @@ export const QuantidadeExpensesSlice = createSlice({
   }
 })
 
-export const QuantidadeExpenses = createAsyncThunk(
-  'expenses/getQuantidadeExpenses',
-  
-  async (payload: any, thunkApi) => {
-  try{
-    const quantidadeExpenses = await API.getQuantidadeExpenses()
-    return quantidadeExpenses;
-  } catch {
-    return thunkApi.rejectWithValue('Falha ao buscar total de registros de despesas')
-  }
-})
+
+export const { resetQuantidadeExpenses } = QuantidadeExpensesSlice.actions
