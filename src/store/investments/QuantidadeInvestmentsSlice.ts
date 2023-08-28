@@ -47,3 +47,6 @@ export const QuantidadeInvestments = createAsyncThunk(
     return thunkApi.rejectWithValue('Falha ao buscar total de registros de investimentos')
   }
 })
+
+export const { resetInvestments } = QuantidadeInvestmentsSlice.actions
+

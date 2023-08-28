@@ -31,12 +31,18 @@ import { selectTotalRecipes } from "../../store/users/selectors";
 import { TotaisSlice, TotalRecipes } from "../../store/users/TotaisSlice";
 import { formatNumber } from "../principalSectionDashboard/PrincipalSectionDashboard";
 import { ToastContainer, toast } from "react-toastify";
+import { Revenue } from "../../model";
+import { getRecipe } from "../../api";
+import UpdateRevenueModal from "../ModalReceitas/UpdateRevenueModal";
 
 interface RevenueSectionProps {
   handleOpenModal: () => void;
 }
 
-export default function RevenuesSectionDashboard({ handleOpenModal }: RevenueSectionProps) {''
+export default function RevenuesSectionDashboard({
+  handleOpenModal,
+}: RevenueSectionProps) {
+  ("");
   const dispatch = useAppDispatch();
   const recipes = useSelector(selectRecipes);
   const quantidadeRecipes = useSelector(selectQuantidadeRecipes);
@@ -46,10 +52,11 @@ export default function RevenuesSectionDashboard({ handleOpenModal }: RevenueSec
   const itemsPerPage = 5;
   const [searchInput, setSearchInput] = useState("");
   const [reload, setReload] = useState(false);
+  const [revenue, setRevenue] = useState<Revenue>();
 
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchInput(event.target.value);
-  }; 
+  };
 
   const handleSearchClick = () => {
     dispatch(RecipesSlice.actions.resetRecipes());
@@ -87,7 +94,12 @@ export default function RevenuesSectionDashboard({ handleOpenModal }: RevenueSec
     setCurrentPage(page);
   };
 
-  function sucessoExclusao(){
+  const loadRevenue = async (id: number) => {
+    const revenue = await getRecipe(id);
+    setRevenue(revenue);
+  };
+
+  function sucessoExclusao() {
     toast.success("Transação excluída com sucesso!", {
       position: toast.POSITION.TOP_CENTER,
     });
@@ -96,7 +108,12 @@ export default function RevenuesSectionDashboard({ handleOpenModal }: RevenueSec
   return (
     <StyledSectionDashboard>
       <StyledDashboardLabel themecolor={"receitas"}>
-        <StyledTitle className="styled-title" fontWeight={700} tag={"h2"} fontSize={"lg"}>
+        <StyledTitle
+          className="styled-title"
+          fontWeight={700}
+          tag={"h2"}
+          fontSize={"lg"}
+        >
           RECEITAS
         </StyledTitle>
       </StyledDashboardLabel>
@@ -130,6 +147,7 @@ export default function RevenuesSectionDashboard({ handleOpenModal }: RevenueSec
                 value={recipe.valor}
                 currentPage="receitas"
                 id={recipe.idReceita}
+                onViewClick={() => loadRevenue(recipe.idReceita)}
                 onDeleteClick={() => setReload(true)}
                 sucessoExclusao={() => sucessoExclusao()}
               />
@@ -143,6 +161,12 @@ export default function RevenuesSectionDashboard({ handleOpenModal }: RevenueSec
         page={currentPage}
         onChange={handlePageChange}
       />
+      {revenue && (
+        <UpdateRevenueModal
+          revenue={revenue}
+          onClose={() => setRevenue(undefined)}
+        />
+      )}
       <ToastContainer />
     </StyledSectionDashboard>
   );

@@ -8,7 +8,7 @@ export async function createInvestment(data: CreateInvestmentData): Promise<Crea
 }
 
 export type CreateInvestmentData = {
-  tipo: "FIXA" | "VARIAVEL",
+  tipo: string,
   valor: number,
   descricao: string,
   corretora: string,

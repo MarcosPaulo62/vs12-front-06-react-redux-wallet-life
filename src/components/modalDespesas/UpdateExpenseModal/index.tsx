@@ -26,7 +26,7 @@ export default function UpdateExpenseModal({
 
     dispatch(
       ListExpenses({
-        pagina: 1,
+        pagina: 0,
         quantidadeRegistros: 5,
       })
     );

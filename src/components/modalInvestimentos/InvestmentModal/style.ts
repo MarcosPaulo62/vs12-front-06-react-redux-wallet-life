@@ -1,14 +1,17 @@
 import styled from "styled-components";
 
-export const StyledModalReceitaContainer = styled.div`
+export const StyledModalInvestimentoContainer = styled.div`
   background-color: rgba(0, 0, 0, 0.65);
-  position: absolute;
+  position: fixed;
   display: flex;
   width: 100vw;
   height: 100vh;
   align-items: center;
   justify-content: center;
-  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
 `;
 
 export const StyledModalContainer = styled.div`
@@ -34,10 +37,10 @@ export const StyledModalContainer = styled.div`
     width: 83%;
 
     .close-modal {
-      cursor: pointer;
+      cursor: pointer;      
     }
 
-    h3 {
+    h3 {      
       font-size: 1.75rem;
       font-weight: 700;
       margin-left: 6rem;
@@ -53,7 +56,7 @@ export const StyledModalContainer = styled.div`
 
     span {
       font-size: 3rem;
-      font-weight: 700;
+      font-weight: 700;      
     }
   }
 
@@ -76,7 +79,7 @@ export const StyledModalContainer = styled.div`
       align-items: center;
       height: 60px;
       width: 100%;
-      font-size: 1.5rem;
+      font-size: 24px;
       border-radius: 12px;
       background-color: ${({ theme }) => theme.color.white};
       font-weight: 500;
@@ -91,11 +94,14 @@ export const StyledModalContainer = styled.div`
 
     .opt {
       overflow: hidden;
-      white-space: nowrap;
+      white-space: nowrap ; 
       text-overflow: ellipsis;
       max-width: 10px !important;
       font-size: 1rem;
       border-radius: 1rem;
+
     }
+
+    
   }
 `;

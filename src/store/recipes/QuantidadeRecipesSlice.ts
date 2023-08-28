@@ -47,3 +47,5 @@ export const QuantidadeRecipes = createAsyncThunk(
     return thunkApi.rejectWithValue('Falha ao buscar total de registros de receitas')
   }
 })
+
+export const { resetRecipes } = QuantidadeRecipesSlice.actions
