@@ -39,7 +39,7 @@ export default function CreateRevenueModal({
         valor: data.valor,
         descricao: data.descricao,
         empresa: data.empresa,
-        banco: data.empresa,
+        banco: data.banco,
       })
     ).unwrap();
     await dispatch(QuantidadeExpenses({})).unwrap();
