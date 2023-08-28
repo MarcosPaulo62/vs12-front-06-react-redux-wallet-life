@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { StyledButton } from "../../../styles/buttons";
 import { StyledSpan, StyledTitle } from "../../../styles/typography";
 import { StyledModalContainer, StyledModalReceitaContainer } from "./style";
@@ -16,7 +16,7 @@ import {
   RecipesSlice,
   createRecipe,
 } from "../../../store/recipes/RecipesSlice";
-import { QuantidadeExpenses } from "../../../store/expenses/QuantidadeExpensesSlice";
+import { QuantidadeExpenses } from "../../../store/expenses";
 import { TotalRecipes } from "../../../store/users/TotaisSlice";
 
 interface ModalAddReceitaProps {
