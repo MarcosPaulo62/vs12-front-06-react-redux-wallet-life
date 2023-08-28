@@ -48,7 +48,7 @@ export default function RevenueModal({
       onSubmit?.({
         id: revenue?.id ?? 0,
         banco: data.banco,
-        descricao: data.banco,
+        descricao: data.descricao,
         empresa: data.empresa,
         valor: Number(data.valor),
       });
