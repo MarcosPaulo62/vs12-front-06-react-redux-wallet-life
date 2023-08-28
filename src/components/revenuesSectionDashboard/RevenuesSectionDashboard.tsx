@@ -47,7 +47,7 @@ export default function RevenuesSectionDashboard({ handleOpenModal }: RevenueSec
 
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchInput(event.target.value);
-  };
+  }; 
 
   const handleSearchClick = () => {
     dispatch(RecipesSlice.actions.resetRecipes());
