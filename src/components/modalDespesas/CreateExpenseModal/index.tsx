@@ -29,9 +29,9 @@ export default function CreateExpenseModal({
       })
     );
 
-    dispatch(
+    await dispatch(
       ListExpenses({
-        pagina: 1,
+        pagina: 0,
         quantidadeRegistros: 5,
       })
     );

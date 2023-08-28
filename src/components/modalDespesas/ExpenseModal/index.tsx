@@ -24,7 +24,6 @@ export default function ExpenseModal({
   onClose,
   onSubmit,
 }: ExpenseModalProps) {
-
   const { register, handleSubmit, reset } = useForm<FormData>({
     values: {
       data: expense?.dataPagamento ?? "",

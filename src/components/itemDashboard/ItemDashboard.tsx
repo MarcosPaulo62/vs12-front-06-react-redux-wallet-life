@@ -34,17 +34,17 @@ export default function ItemDashboard({
     themecolor = "receitas";
   }
 
-  const handleDeleteClick = (id: number) => {
+  const handleDeleteClick = async (id: number) => {
     switch (currentPage) {
       case "despesas":
-        deleteExpense(id);
+        await deleteExpense(id);
         break;
       case "investimentos":
-        deleteInvestiment(id);
+        await deleteInvestiment(id);
         break;
       case "receitas":
         try {
-          deleteRecipe(id);
+          await deleteRecipe(id);
         } catch {
           console.log("erro da misera");
         }

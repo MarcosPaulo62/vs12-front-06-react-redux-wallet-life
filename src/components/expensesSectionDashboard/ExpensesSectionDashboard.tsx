@@ -121,7 +121,7 @@ export default function RevenuesSectionDashboard({
           onChange={handleSearchChange}
         ></StyledDashboardInput>
         <StyledDashboardSearchButton
-        onClick={handleSearchClick}
+          onClick={handleSearchClick}
           aria-label={
             "Imagem de uma lupa, indicando que este botão serve para ativar a pesquisa com o parâmetro inserido no campo"
           }
