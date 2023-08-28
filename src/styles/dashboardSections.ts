@@ -10,7 +10,7 @@ export interface iStyledDashboardThemeProps {
 export const StyledDashboardLabel = styled.div<iStyledDashboardThemeProps>`
   width: 50rem;
   max-width: 80%;
-  height: 12rem;
+  height: 8rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -163,6 +163,7 @@ export const StyledPlusButton = styled.button`
 export const StyledInputAndButtonDiv = styled.div`
   width: 50%;
   height: 5rem;
+  display: flex;
 
   @media (max-width: 480px) {
     width: 80%;
@@ -193,21 +194,21 @@ export const StyledDashboardInput = styled.input`
   border: none;
   font-size: 1.5rem;
   padding-left: 1.5rem;
-  position: relative;
+  /* position: relative; */
 
   @media (max-width: 481px) {
-    z-index: -1;
     font-size: 1rem;
   }
 
   @media (min-width: 481px) and (max-width: 760px) {
-    z-index: -1;
     font-size: 1.3rem;
   }
 
   @media (min-width: 761px) and (max-width: 1024px) {
-    z-index: -1;
     font-size: 1.4rem;
+  }
+
+  @media (min-width: 1025px) {
   }
 `;
 
@@ -220,10 +221,8 @@ export const StyledDashboardSearchButton = styled.button`
   border-radius: 12px;
   background-position: center;
   margin-left: -100px;
-  position: absolute;
 
   @media (max-width: 480px) {
-    z-index: -1;
     width: 2rem;
     height: 2rem;
     margin-left: -2rem;
@@ -231,14 +230,12 @@ export const StyledDashboardSearchButton = styled.button`
   }
 
   @media (min-width: 481px) and (max-width: 760px) {
-    z-index: -1;
     width: 3.5rem;
     height: 3.5rem;
     margin-left: -3.5rem;
   }
 
   @media (min-width: 761px) and (max-width: 1024px) {
-    z-index: -1;
     width: 4.5rem;
     height: 4.5rem;
     margin-left: -4.5rem;

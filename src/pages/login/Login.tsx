@@ -124,7 +124,7 @@ export default function Login() {
         <StyledSpan fontSize="lg">
           Ainda não possui login?{" "}
           <strong>
-            <NavLink to={"/cadastro"}>Faça seu cadastro!</NavLink>
+            <NavLink data-testid="link-cadastro" to={"/cadastro"}>Faça seu cadastro!</NavLink>
           </strong>
         </StyledSpan>
         <StyledButton

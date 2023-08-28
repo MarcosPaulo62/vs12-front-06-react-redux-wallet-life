@@ -1,12 +1,15 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import * as API from '../../api'
+import { createSlice } from "@reduxjs/toolkit";
+import { ListExpenses, createExpense } from "./async-actions";
 
 type ExpensesSliceState = {
-  expenses: Expenses[],
+  expenses: any[],
   pagina: number,
   quantidadeRegistros: number,
   errorOnList?: string,
   valor?: number,
+  creatingUser: boolean,
+  errorOnCreate?: string,
+  createSuccess: boolean
 }
 
 export interface Expenses {
@@ -23,7 +26,11 @@ export const ExpensesSlice = createSlice({
     expenses: [],
     pagina: 0,
     quantidadeRegistros: 10,
-    errorOnList: undefined,
+    errorOnList: undefined,    
+    creatingUser: false,
+    errorOnCreate: undefined,
+    createSuccess: false,
+
   } as ExpensesSliceState,
   reducers: {
     resetExpenses: (state) => {
@@ -46,17 +53,35 @@ export const ExpensesSlice = createSlice({
       state.errorOnList = undefined;
     })
 
+    
+    builder.addCase(createExpense.fulfilled, (state, { payload }) => {
+      if (payload) {
+        state.creatingUser = false;
+        state.createSuccess = true;
+        state.expenses = [...state.expenses, payload]
+      }
+    });
+    
+    builder.addCase(createExpense.rejected, (state, { payload, error }) => {
+      if(payload){
+        state.errorOnCreate = 'Receita inválida!';
+        state.creatingUser = false;
+        state.createSuccess = false;
+      } else{
+      state.errorOnCreate = 'Falha ao criar investimento!';
+      state.creatingUser = false;
+      state.createSuccess = false;
+      }
+    });
+
+    builder.addCase(createExpense.pending, (state, action) => {
+      state.creatingUser = true;
+      state.errorOnCreate = undefined;
+      state.createSuccess = false;
+    })
+
   }
 })
 
-export const ListExpenses = createAsyncThunk(
-  'expenses/getExpenses',
-  
-  async (payload: any, thunkApi) => {
-    try{
-      const expenses = await API.getExpenses(payload.pagina, payload.quantidadeRegistros, payload.valor)
-      return expenses;
-    } catch {
-      return thunkApi.rejectWithValue('Falha ao buscar despesas')
-    }
-  })
+
+export const { resetExpenses } = ExpensesSlice.actions

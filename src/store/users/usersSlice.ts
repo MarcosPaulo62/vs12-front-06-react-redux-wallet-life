@@ -62,10 +62,8 @@ export const createUser = createAsyncThunk(
   async (data: CreateUserData, thunkApi) => {
     try {
       const user = await API.createUser(data)
-      console.log('Deu certo')
       return user;
     } catch {
-      console.log('Foi Rejeitado')
       return thunkApi.rejectWithValue('Falha ao tentar criar usuário!')
     }
   }

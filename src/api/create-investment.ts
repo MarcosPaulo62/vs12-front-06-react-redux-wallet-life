@@ -1,13 +1,13 @@
 import { http } from "./http"
 
-export async function createInvestiment(data: CreateInvestimentData): Promise<CreateInvestimentResponse> {
+export async function createInvestment(data: CreateInvestmentData): Promise<CreateInvestmentResponse> {
   const token = localStorage.getItem('user');
-  const response = await http.post<CreateInvestimentResponse>('/investimentos/criar-investimentos', { headers: { Authorization: token}, params: { data }});
+  const response = await http.post<CreateInvestmentResponse>('/investimentos/criar-investimento', data, { headers: { Authorization: token}});
   return response.data;
 
 }
 
-export type CreateInvestimentData = {
+export type CreateInvestmentData = {
   tipo: "FIXA" | "VARIAVEL",
   valor: number,
   descricao: string,
@@ -15,7 +15,7 @@ export type CreateInvestimentData = {
   dataInicio: string,
 }
 
-type CreateInvestimentResponse = {
+type CreateInvestmentResponse = {
   tipo: string,
   valor: number,
   descricao: string,

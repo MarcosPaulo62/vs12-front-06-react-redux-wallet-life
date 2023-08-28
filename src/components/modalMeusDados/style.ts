@@ -16,7 +16,7 @@ export const StyledModalMeusDadosContainer = styled.div`
 export const StyledModalContainer = styled.div`
   max-width: 660px;
   width: 90%;
-  height: 90%;
+  height: fit-content;
   border-radius: 32px;
   background-color: ${({ theme }) => theme.color.alabaster};
   display: flex;
@@ -53,6 +53,11 @@ export const StyledModalContainer = styled.div`
     gap: 1rem;
     justify-content: space-between;
     align-items: center;
+    margin-top: 1rem;
+
+    @media (max-width: 600px) {
+      width: 95%;
+    }
 
     button {
       margin-top: 3rem;
@@ -129,6 +134,7 @@ export const StyledModalContainer = styled.div`
       input,
       select{
         font-size: 1rem;
+        padding: 0 1rem;
       }
       .buttons button{
         font-size: 1.5rem;

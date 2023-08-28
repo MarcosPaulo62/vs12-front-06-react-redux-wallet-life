@@ -12,6 +12,8 @@ interface ItemDashboardProps {
   value: number;
   description: string;
   id: number;
+  onViewClick?: () => void;
+  onDeleteClick: () => void;
 }
 
 export default function ItemDashboard({
@@ -19,6 +21,8 @@ export default function ItemDashboard({
   value,
   description,
   id,
+  onViewClick,
+  onDeleteClick
 }: ItemDashboardProps) {
   let themecolor: string;
 
@@ -30,17 +34,17 @@ export default function ItemDashboard({
     themecolor = "receitas";
   }
 
-  const handleDeleteClick = (id: number) => {
+  const handleDeleteClick = async (id: number) => {
     switch (currentPage) {
       case "despesas":
-        deleteExpense(id);
+        await deleteExpense(id);
         break;
       case "investimentos":
-        deleteInvestiment(id);
+        await deleteInvestiment(id);
         break;
       case "receitas":
         try {
-          deleteRecipe(id);
+          await deleteRecipe(id);
         } catch {
           console.log("erro da misera");
         }
@@ -49,11 +53,17 @@ export default function ItemDashboard({
         break;
     }
   };
+
+  function deleteClick(){
+    handleDeleteClick(id); 
+    onDeleteClick()
+  }
   return (
     <StyledItemlDiv>
       <StyledItemValue themecolor={currentPage}>R$ {value}</StyledItemValue>
       <StyledItemDescription>{description}</StyledItemDescription>
       <StyledEyeButton
+        onClick={onViewClick}
         aria-label={
           "Imagem de um olho, indicando que este botão serve para ver detalhes deste item"
         }
@@ -62,7 +72,7 @@ export default function ItemDashboard({
         aria-label={
           "Imagem de uma lata de lixo, indicando que este botão serve para excluir este item da lista"
         }
-        onClick={() => handleDeleteClick(id)}
+        onClick={() => deleteClick()}
       ></StyledTrashCanButton>
     </StyledItemlDiv>
   );

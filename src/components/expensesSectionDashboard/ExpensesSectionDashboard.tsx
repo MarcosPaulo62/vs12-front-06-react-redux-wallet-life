@@ -13,29 +13,32 @@ import {
   StyledDashboardSearchButton,
 } from "../../styles/dashboardSections";
 import ItemDashboard from "../itemDashboard/ItemDashboard";
-import { ListExpenses } from "../../store/expenses/ExpensesSlice";
-import { ExpensesSlice } from "../../store/expenses/ExpensesSlice";
+import { ListExpenses, QuantidadeExpenses } from "../../store/expenses";
+import {
+  ExpensesSlice,
+  resetExpenses,
+} from "../../store/expenses/ExpensesSlice";
 import { useAppDispatch } from "../../store";
 import { useSelector } from "react-redux";
-import {
-  selectErrorOnList,
-  selectExpenses,
-} from "../../store/expenses/Selectors";
+import { selectExpenses } from "../../store/expenses/Selectors";
 import { useEffect, useState } from "react";
 import { selectQuantidadeExpenses } from "../../store/expenses/Selectors";
-import {
-  QuantidadeExpenses,
-  QuantidadeExpensesSlice,
-} from "../../store/expenses/QuantidadeExpensesSlice";
+import { resetQuantidadeExpenses } from "../../store/expenses";
 import { selectTotalExpenses } from "../../store/users/selectors";
 import { TotaisSlice, TotalExpenses } from "../../store/users/TotaisSlice";
 import { formatNumber } from "../principalSectionDashboard/PrincipalSectionDashboard";
+import { Expense } from "../../model";
+import UpdateExpenseModal from "../modalDespesas/UpdateExpenseModal";
+import { getExpense } from "../../api";
 
 interface RevenueSectionProps {
   handleOpenModal: () => void;
 }
 
-export default function RevenuesSectionDashboard({ handleOpenModal }: RevenueSectionProps) {''
+export default function RevenuesSectionDashboard({
+  handleOpenModal,
+}: RevenueSectionProps) {
+  ("");
   const dispatch = useAppDispatch();
   const expenses = useSelector(selectExpenses);
   const quantidadeExpenses = useSelector(selectQuantidadeExpenses);
@@ -44,13 +47,15 @@ export default function RevenuesSectionDashboard({ handleOpenModal }: RevenueSec
   const [currentPage, setCurrentPage] = useState<number>(1);
   const itemsPerPage = 5;
   const [searchInput, setSearchInput] = useState("");
+  const [expense, setExpense] = useState<Expense>();
+  const [reload, setReload] = useState(false);
 
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchInput(event.target.value);
   };
 
   const handleSearchClick = () => {
-    dispatch(ExpensesSlice.actions.resetExpenses());
+    dispatch(resetExpenses());
     dispatch(
       ListExpenses({
         pagina: currentPage - 1,
@@ -58,9 +63,10 @@ export default function RevenuesSectionDashboard({ handleOpenModal }: RevenueSec
         valor: Number(searchInput),
       })
     );
-    dispatch(QuantidadeExpensesSlice.actions.resetExpenses());
+    dispatch(resetQuantidadeExpenses());
     dispatch(QuantidadeExpenses({}));
   };
+
   useEffect(() => {
     dispatch(ExpensesSlice.actions.resetExpenses());
     dispatch(
@@ -69,11 +75,12 @@ export default function RevenuesSectionDashboard({ handleOpenModal }: RevenueSec
         quantidadeRegistros: itemsPerPage,
       })
     );
-    dispatch(QuantidadeExpensesSlice.actions.resetExpenses());
+    dispatch(resetQuantidadeExpenses());
     dispatch(QuantidadeExpenses({}));
     dispatch(TotaisSlice.actions.resetTotais());
     dispatch(TotalExpenses({}));
-  }, [currentPage]);
+    setReload(false);
+  }, [currentPage, reload]);
 
   const totalPages: number = Math.ceil(quantidadeExpenses / itemsPerPage);
 
@@ -82,6 +89,11 @@ export default function RevenuesSectionDashboard({ handleOpenModal }: RevenueSec
     page: number
   ): void => {
     setCurrentPage(page);
+  };
+
+  const loadExpense = async (id: number) => {
+    const expense = await getExpense(id);
+    setExpense(expense);
   };
 
   return (
@@ -104,8 +116,12 @@ export default function RevenuesSectionDashboard({ handleOpenModal }: RevenueSec
         </StyledTotalValueAndPlusButton>
       </StyledTotalDiv>
       <StyledInputAndButtonDiv>
-        <StyledDashboardInput placeholder="busque uma despesa"></StyledDashboardInput>
+        <StyledDashboardInput
+          placeholder="busque uma despesa"
+          onChange={handleSearchChange}
+        ></StyledDashboardInput>
         <StyledDashboardSearchButton
+          onClick={handleSearchClick}
           aria-label={
             "Imagem de uma lupa, indicando que este botão serve para ativar a pesquisa com o parâmetro inserido no campo"
           }
@@ -121,6 +137,8 @@ export default function RevenuesSectionDashboard({ handleOpenModal }: RevenueSec
                 value={expense.valor}
                 currentPage="despesas"
                 id={expense.idDespesa}
+                onViewClick={() => loadExpense(expense.idDespesa)}
+                onDeleteClick={() => setReload(true)}
               />
             </li>
           ))}
@@ -132,6 +150,12 @@ export default function RevenuesSectionDashboard({ handleOpenModal }: RevenueSec
         page={currentPage}
         onChange={handlePageChange}
       />
+      {expense && (
+        <UpdateExpenseModal
+          expense={expense}
+          onClose={() => setExpense(undefined)}
+        />
+      )}
     </StyledSectionDashboard>
   );
 }

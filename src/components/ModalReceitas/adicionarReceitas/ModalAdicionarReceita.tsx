@@ -1,63 +1,149 @@
-import React from "react";
+import { useEffect } from "react";
 import { StyledButton } from "../../../styles/buttons";
 import { StyledSpan, StyledTitle } from "../../../styles/typography";
 import { StyledModalContainer, StyledModalReceitaContainer } from "./style";
-import { useForm } from 'react-hook-form';
+import { useForm } from "react-hook-form";
+
+import { useAppDispatch } from "../../../store";
+import { useSelector } from "react-redux";
+import {
+  selectCreateSuccess,
+  selectErrorOnCreate,
+} from "../../../store/recipes/Selectors";
+import { ToastContainer, toast } from "react-toastify";
+import {
+  ListRecipes,
+  RecipesSlice,
+  createRecipe,
+} from "../../../store/recipes/RecipesSlice";
+import { QuantidadeExpenses } from "../../../store/expenses";
+import { TotalRecipes } from "../../../store/users/TotaisSlice";
 
 interface ModalAddReceitaProps {
-    handleCloseModal: () => void;
+  handleCloseModal: () => void;
 }
 
 interface TransactionFormData {
-    tipoReceita: string;
-    valor: number;
-    descricao: string;
-    data: string;
+  banco: string;
+  valor: string;
+  descricao: string;
+  empresa: string;
 }
 
-export default function ModalAddReceita ({ handleCloseModal }: ModalAddReceitaProps) {
-    const { register, handleSubmit, reset } = useForm<TransactionFormData>();
-    
+export default function ModalAddReceita({
+  handleCloseModal,
+}: ModalAddReceitaProps) {
+  const { register, handleSubmit, reset } = useForm<TransactionFormData>();
+  const dispatch = useAppDispatch();
+  const createSuccess = useSelector(selectCreateSuccess);
+  const errorOnCreate = useSelector(selectErrorOnCreate);
 
-    const onSubmit = (data: TransactionFormData) => {
+  const dismissPreviousToasts = () => {
+    toast.dismiss();
+  };
 
-        console.log('Dados capturados:', data);
-        const transactions = JSON.parse(localStorage.getItem('transactions') || '[]') as TransactionFormData[];
-        transactions.push(data);
-        localStorage.setItem('transactions', JSON.stringify(transactions));      
-        
-        
-        reset();
-    };
+  const onSubmit = async (data: TransactionFormData) => {
+    if (
+      data.banco === "" ||
+      data.descricao === "" ||
+      data.empresa === "" ||
+      data.valor === ""
+    ) {
+      toast.warning("É necessário preencher todos os campos!", {
+        position: toast.POSITION.TOP_RIGHT,
+      });
+    } else {
+      await dispatch(
+        createRecipe({
+          valor: Number(data.valor),
+          descricao: data.descricao,
+          empresa: data.empresa,
+          banco: data.empresa,
+        })
+      ).unwrap();
+      await dispatch(QuantidadeExpenses({})).unwrap();
+      await dispatch(
+        ListRecipes({ pagina: 0, quantidadeRegistros: 5 })
+      ).unwrap();
+      dismissPreviousToasts();
+      toast.success("Receita adicionada com sucesso!", {
+        position: toast.POSITION.TOP_CENTER,
+      });
+      dispatch(TotalRecipes({}));
+      reset();
+    }
+  };
 
-    return(
-        
-       <StyledModalReceitaContainer>
-             
-            <StyledModalContainer>
-                <div>
-                    <StyledTitle fontSize="md" fontWeight={700} tag="h3">ADICIONAR TRANSAÇÃO</StyledTitle>
-                    <StyledSpan className="close-modal" fontSize="lg" onClick={handleCloseModal}>X</StyledSpan>
-                </div>
-                <form onSubmit={handleSubmit((data) => onSubmit(data))}>
-                    <select id="tipoReceita"  required {...register("tipoReceita")}>
-                        <option className="opt" value="" disabled selected>Tipo de Receita</option>
-                        <option className="opt" value="Salário">Salário</option>
-                        <option className="opt" value="Dividendos">Dividendos</option>
-                        <option className="opt" value="Juros Recebidos">Juros Recebidos</option>
-                        <option className="opt" value="Pagamentos">Pagamentos</option>
-                        <option className="opt" value="Outros">Outros</option>
+  useEffect(() => {
+    if (createSuccess) {
+      toast.success("Receita cadastrada com sucesso!", {
+        position: toast.POSITION.TOP_CENTER,
+      });
+    }
+    dispatch(RecipesSlice.actions.resetCreateSucess());
+  });
+  useEffect(() => {
+    if (errorOnCreate) {
+      toast.error(errorOnCreate, {
+        position: toast.POSITION.TOP_CENTER,
+      });
+    }
+  }, [errorOnCreate]);
 
-                    </select>
-                    <input type="number" id="valor" placeholder="Valor" required {...register("valor")} />
-                    <input type="text" id="descricao" placeholder="Descrição" required {...register("descricao")} />
-                    <input type="date" id="data" placeholder="Data" required {...register("data")}/>
-                    <StyledButton buttonsize="mdlp" buttonstyle="landingPage" type="submit">Adicionar</StyledButton>
-                </form>                
-            </StyledModalContainer>
-             
-        </StyledModalReceitaContainer>
-    
-        
-    )
+  return (
+    <StyledModalReceitaContainer>
+      <StyledModalContainer>
+        <div>
+          <StyledTitle fontSize="md" fontWeight={700} tag="h3">
+            ADICIONAR TRANSAÇÃO
+          </StyledTitle>
+          <StyledSpan
+            className="close-modal"
+            fontSize="lg"
+            onClick={handleCloseModal}
+          >
+            X
+          </StyledSpan>
+        </div>
+        <form onSubmit={handleSubmit((data) => onSubmit(data))}>
+          <input
+            type="number"
+            id="valor"
+            placeholder="Valor (R$)"
+            {...register("valor")}
+          />
+          <input
+            type="text"
+            id="descricao"
+            placeholder="Descrição"
+            minLength={5}
+            maxLength={30}
+            {...register("descricao")}
+          />
+          <input
+            type="text"
+            id="empresa"
+            placeholder="Empresa"
+            minLength={3}
+            {...register("empresa")}
+          />
+          <input
+            type="text"
+            id="banco"
+            placeholder="Banco"
+            minLength={3}
+            {...register("banco")}
+          />
+          <StyledButton
+            buttonsize="mdlp"
+            buttonstyle="landingPage"
+            type="submit"
+          >
+            Adicionar
+          </StyledButton>
+        </form>
+      </StyledModalContainer>
+      <ToastContainer />
+    </StyledModalReceitaContainer>
+  );
 }

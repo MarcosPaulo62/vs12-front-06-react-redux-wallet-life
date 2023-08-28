@@ -2,7 +2,7 @@ import { http } from "./http"
 
 export async function createRecipe(data: CreateRecipeData): Promise<CreateRecipeResponse> {
   const token = localStorage.getItem('user');
-  const response = await http.post<CreateRecipeResponse>('/receita/criar-receita', { headers: { Authorization: token}, params: { data }});
+  const response = await http.post<CreateRecipeResponse>('/receita/criar-receita', data, { headers: { Authorization: token}});
   return response.data;
 
 }
