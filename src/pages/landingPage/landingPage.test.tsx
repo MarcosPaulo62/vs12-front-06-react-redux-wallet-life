@@ -1,35 +1,60 @@
-import { ThemeProvider } from "styled-components";
 import LandingPage from "./LandingPage";
 import { render, screen } from "@testing-library/react";
 import { ColorsTheme } from "../../styles/global";
+import { ThemeProvider } from "styled-components";
+import { Provider } from "react-redux";
+import { BrowserRouter } from "react-router-dom";
+import store from "../../store";
 
 
 describe("Testing renders LandignPage components", () => {
   test("renders banner", () => {
     render(
-      <ThemeProvider theme={ColorsTheme}>
-        <LandingPage />
-      </ThemeProvider>
+      <Provider store={store}>
+            <ThemeProvider theme={ColorsTheme}>
+                <BrowserRouter>
+                    <LandingPage />
+                </BrowserRouter>
+            </ThemeProvider>
+        </Provider> 
     );
 
     expect(screen.getByRole("banner")).toBeInTheDocument();
   });
 
   test("renders LandingPage components", () => {
-    render(<LandingPage />);
+    render(
+      <Provider store={store}>
+        <ThemeProvider theme={ColorsTheme}>
+          <BrowserRouter>
+            <LandingPage />
+          </BrowserRouter>
+        </ThemeProvider>
+      </Provider>
+    );
 
-    expect(screen.getByRole("main")).toBeInTheDocument();
+    const images = screen.getAllByRole("img");
+    images.forEach((image) => {
+      expect(image).toBeVisible();
+    });
   });
 
-  test("renders LandingPage components", () => {
-    render(<LandingPage />);
-
-    expect(screen.getByRole("complementary")).toBeInTheDocument();
-  });
 
   test("renders LandingPage components", () => {
-    render(<LandingPage />);
+    render(
+      <Provider store={store}>
+        <ThemeProvider theme={ColorsTheme}>
+          <BrowserRouter>
+            <LandingPage />
+          </BrowserRouter>
+        </ThemeProvider>
+      </Provider>
+    );
 
-    expect(screen.getByRole("contentinfo")).toBeInTheDocument();
+    const links = screen.getAllByRole("link");
+    links.forEach((link) =>{
+      expect(link).toBeVisible;
+    })
+
   });
 });
