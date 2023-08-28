@@ -83,4 +83,4 @@ export default function ItemDashboard({
       ></StyledTrashCanButton>
     </StyledItemlDiv>
   );
-}
+};
