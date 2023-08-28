@@ -1,17 +1,17 @@
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
-import ModalAddReceita from "./ModalAdicionarReceita";
+import ModalAddInvestimento from "./ModalAdicionarInvestimento";
 import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
 import { ThemeProvider } from "styled-components";
-import { ColorsTheme } from "../../../styles/global";
 import store from "../../../store";
+import { ColorsTheme } from "../../../styles/global";
 
-test("renders ModalAddReceita component", () => {
+test("renders ModalAddInvestimento component", () => {
   render(
     <Provider store={store}>
       <ThemeProvider theme={ColorsTheme}>
         <BrowserRouter>
-          <ModalAddReceita handleCloseModal={() => {}} />
+          <ModalAddInvestimento handleCloseModal={() => {}} />
         </BrowserRouter>
       </ThemeProvider>
     </Provider>
@@ -23,7 +23,7 @@ test("shows warning toast when submitting form with empty fields", async () => {
     <Provider store={store}>
       <ThemeProvider theme={ColorsTheme}>
         <BrowserRouter>
-          <ModalAddReceita handleCloseModal={() => {}} />
+          <ModalAddInvestimento handleCloseModal={() => {}} />
         </BrowserRouter>
       </ThemeProvider>
     </Provider>
@@ -34,10 +34,8 @@ test("shows warning toast when submitting form with empty fields", async () => {
 
   await waitFor(() => {
     const warningToast = screen.getByText(
-      "É necessário preencher todos os campos!"
+      "É necessário preencher todos os campos corretamente!"
     );
     expect(warningToast).toBeInTheDocument();
-  });
+  })
 });
-
-

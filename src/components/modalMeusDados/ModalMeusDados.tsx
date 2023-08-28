@@ -9,17 +9,14 @@ import { selectUserLogged } from "../../store/users/selectors";
 import { UserLogged, UserLoggedSlice } from "../../store/users/UserLoggedSlice";
 import { CheckCircle, PencilSimple, Trash } from "@phosphor-icons/react";
 import { DeleteUser } from "../../store/users/DeleteUser";
+import ModalDeletarUsuario from "../modalDeletarUsuario/ModalDeletarUsuario";
+import { useNavigate } from "react-router-dom";
+import { User } from "../../model";
+import { updateUser } from "../../store/users/async-actions/update-user";
+import { ToastContainer, toast } from "react-toastify";
 
 interface ModalAddDespesaProps {
   handleCloseModal: () => void;
-}
-
-interface UserFormData {
-  nome: string;
-  dataNascimento: string;
-  cpf: string;
-  email: string;
-  senha: string;
 }
 
 interface ModalMeusDadosProps{
@@ -27,7 +24,8 @@ interface ModalMeusDadosProps{
 }
 
 export default function ModalMeusDados({ closeModal }: ModalMeusDadosProps) {
-  const { register, handleSubmit, reset } = useForm<UserFormData>();
+  const { register, handleSubmit, reset } = useForm<User>();
+  const navigate = useNavigate();
 
   const dispatch = useAppDispatch();
   const userLogged = useSelector(selectUserLogged);
@@ -37,10 +35,14 @@ export default function ModalMeusDados({ closeModal }: ModalMeusDadosProps) {
   useEffect(() => {
     if(deleteUser){
         dispatch(
-            DeleteUser({idUser: userLogged.idUsuario})
+          DeleteUser({idUser: userLogged.idUsuario})
         )
+        localStorage.removeItem("user");
+        navigate("/");
     }
   }, [deleteUser])
+
+  const [showModalDelete, setShowModalDelete] = useState<Boolean>(false);
 
   useEffect(() => {
     reset({
@@ -58,18 +60,31 @@ export default function ModalMeusDados({ closeModal }: ModalMeusDadosProps) {
     dispatch(UserLogged({}));
   }, []);
 
-  const onSubmit = (data: UserFormData) => {
-    console.log("Dados capturados:", data);
+  const onSubmit = async (data: User) => {
+    data.idUsuario = userLogged.idUsuario;
+    await dispatch(updateUser(data));
+    dispatch(UserLoggedSlice.actions.resetUserLogged());
+    dispatch(UserLogged({}));
     setIsEditing(false)
+    toast.success("Dados atualizados com sucesso!", {
+      position: toast.POSITION.TOP_CENTER,
+    });
   };
+
+  function deletarUsuario(){
+    setDeleteUser(true);
+  }
 
   return (
     <StyledModalMeusDadosContainer>
+      {
+        showModalDelete && <ModalDeletarUsuario onClose={() => setShowModalDelete(false)} onConfirm={() => deletarUsuario()} />
+      }
       <StyledModalContainer>
         <div>
           {isEditing ? 
-            <StyledSpan className="close-modal" fontSize="lg">
-                <CheckCircle className="pencil" weight="fill" onClick={() => setIsEditing(!isEditing)}/>
+            <StyledSpan style={{ visibility: "hidden" }} className="close-modal" fontSize="lg">
+                <CheckCircle className="check-circle" weight="fill"/>
             </StyledSpan>     
             :
             <StyledSpan className="close-modal" fontSize="lg">
@@ -134,10 +149,11 @@ export default function ModalMeusDados({ closeModal }: ModalMeusDadosProps) {
                 :
                 <button onClick={() => closeModal()}>fechar</button>
             }
-            <button className="delete" onClick={() => setDeleteUser(true)}>deletar conta <Trash size={32} weight="bold" /></button>
+            <button type="button" className="delete" onClick={() => setShowModalDelete(true)}>deletar conta <Trash size={32} weight="bold" /></button>
           </div>
         </form>
       </StyledModalContainer>
+      <ToastContainer />
     </StyledModalMeusDadosContainer>
   );
 }
