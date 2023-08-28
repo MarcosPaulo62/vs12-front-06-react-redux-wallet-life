@@ -10,7 +10,7 @@ import {
   selectCreateSuccess,
   selectErrorOnCreate,
 } from "../../../store/recipes/Selectors";
-import { toast } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
 import {
   ListRecipes,
   RecipesSlice,
@@ -38,6 +38,10 @@ export default function ModalAddReceita({
   const createSuccess = useSelector(selectCreateSuccess);
   const errorOnCreate = useSelector(selectErrorOnCreate);
 
+  const dismissPreviousToasts = () => {
+    toast.dismiss();
+  };
+
   const onSubmit = async (data: TransactionFormData) => {
     if (
       data.banco === "" ||
@@ -61,6 +65,7 @@ export default function ModalAddReceita({
       await dispatch(
         ListRecipes({ pagina: 0, quantidadeRegistros: 5 })
       ).unwrap();
+      dismissPreviousToasts();
       toast.success("Receita adicionada com sucesso!", {
         position: toast.POSITION.TOP_CENTER,
       });
@@ -111,18 +116,22 @@ export default function ModalAddReceita({
             type="text"
             id="descricao"
             placeholder="Descrição"
+            minLength={5}
+            maxLength={30}
             {...register("descricao")}
           />
           <input
             type="text"
             id="empresa"
             placeholder="Empresa"
+            minLength={3}
             {...register("empresa")}
           />
           <input
             type="text"
             id="banco"
             placeholder="Banco"
+            minLength={3}
             {...register("banco")}
           />
           <StyledButton
@@ -134,6 +143,7 @@ export default function ModalAddReceita({
           </StyledButton>
         </form>
       </StyledModalContainer>
+      <ToastContainer />
     </StyledModalReceitaContainer>
   );
 }

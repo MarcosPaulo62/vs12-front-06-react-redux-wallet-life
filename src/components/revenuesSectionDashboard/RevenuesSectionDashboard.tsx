@@ -44,6 +44,7 @@ export default function RevenuesSectionDashboard({ handleOpenModal }: RevenueSec
   const [currentPage, setCurrentPage] = useState<number>(1);
   const itemsPerPage = 5;
   const [searchInput, setSearchInput] = useState("");
+  const [reload, setReload] = useState(false);
 
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchInput(event.target.value);
@@ -73,7 +74,8 @@ export default function RevenuesSectionDashboard({ handleOpenModal }: RevenueSec
     dispatch(QuantidadeRecipes({}));
     dispatch(TotaisSlice.actions.resetTotais());
     dispatch(TotalRecipes({}));
-  }, [currentPage]);
+    setReload(false);
+  }, [currentPage, reload]);
 
   const totalPages: number = Math.ceil(quantidadeRecipes / itemsPerPage);
 
@@ -121,6 +123,7 @@ export default function RevenuesSectionDashboard({ handleOpenModal }: RevenueSec
                 value={recipe.valor}
                 currentPage="receitas"
                 id={recipe.idReceita}
+                onDeleteClick={() => setReload(true)}
               />
             </li>
           ))}

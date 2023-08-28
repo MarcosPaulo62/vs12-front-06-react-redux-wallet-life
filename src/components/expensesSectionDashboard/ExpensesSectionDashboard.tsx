@@ -48,6 +48,7 @@ export default function RevenuesSectionDashboard({
   const itemsPerPage = 5;
   const [searchInput, setSearchInput] = useState("");
   const [expense, setExpense] = useState<Expense>();
+  const [reload, setReload] = useState(false);
 
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchInput(event.target.value);
@@ -66,7 +67,7 @@ export default function RevenuesSectionDashboard({
     dispatch(QuantidadeExpenses({}));
   };
 
-  const load = () => {
+  useEffect(() => {
     dispatch(ExpensesSlice.actions.resetExpenses());
     dispatch(
       ListExpenses({
@@ -78,11 +79,8 @@ export default function RevenuesSectionDashboard({
     dispatch(QuantidadeExpenses({}));
     dispatch(TotaisSlice.actions.resetTotais());
     dispatch(TotalExpenses({}));
-  };
-
-  useEffect(() => {
-    load();
-  }, [currentPage]);
+    setReload(false);
+  }, [currentPage, reload]);
 
   const totalPages: number = Math.ceil(quantidadeExpenses / itemsPerPage);
 
@@ -140,7 +138,7 @@ export default function RevenuesSectionDashboard({
                 currentPage="despesas"
                 id={expense.idDespesa}
                 onViewClick={() => loadExpense(expense.idDespesa)}
-                onDelete={load}
+                onDeleteClick={() => setReload(true)}
               />
             </li>
           ))}
