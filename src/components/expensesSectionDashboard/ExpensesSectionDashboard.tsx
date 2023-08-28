@@ -32,13 +32,13 @@ import UpdateExpenseModal from "../modalDespesas/UpdateExpenseModal";
 import { getExpense } from "../../api";
 import { ToastContainer, toast } from "react-toastify";
 
-interface RevenueSectionProps {
+interface ExpenseSectionProps {
   handleOpenModal: () => void;
 }
 
-export default function RevenuesSectionDashboard({
+export default function ExpensesSectionDashboard({
   handleOpenModal,
-}: RevenueSectionProps) {
+}: ExpenseSectionProps) {
   ("");
   const dispatch = useAppDispatch();
   const expenses = useSelector(selectExpenses);
@@ -97,7 +97,7 @@ export default function RevenuesSectionDashboard({
     setExpense(expense);
   };
 
-  function sucessoExclusao(){
+  function sucessoExclusao() {
     toast.success("Transação excluída com sucesso!", {
       position: toast.POSITION.TOP_CENTER,
     });
