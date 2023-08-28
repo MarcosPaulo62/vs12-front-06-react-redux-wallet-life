@@ -16,6 +16,7 @@ interface ItemDashboardProps {
   id: number;
   onViewClick?: () => void;
   onDeleteClick: () => void;
+  sucessoExclusao: () => void;
 }
 
 export default function ItemDashboard({
@@ -24,7 +25,8 @@ export default function ItemDashboard({
   description,
   id,
   onViewClick,
-  onDeleteClick
+  onDeleteClick,
+  sucessoExclusao
 }: ItemDashboardProps) {
   let themecolor: string;
 
@@ -61,6 +63,7 @@ export default function ItemDashboard({
   function deleteClick(){
     handleDeleteClick(id); 
     onDeleteClick()
+    sucessoExclusao();
   }
   return (
     <StyledItemlDiv>
@@ -69,12 +72,12 @@ export default function ItemDashboard({
       }
       <StyledItemValue themecolor={currentPage}>R$ {value}</StyledItemValue>
       <StyledItemDescription>{description}</StyledItemDescription>
-      <StyledEyeButton
+      {/* <StyledEyeButton
         onClick={onViewClick}
         aria-label={
           "Imagem de um olho, indicando que este botão serve para ver detalhes deste item"
         } data-testid="logo-link-home"
-      ></StyledEyeButton>
+      ></StyledEyeButton> */}
       <StyledTrashCanButton
         aria-label={
           "Imagem de uma lata de lixo, indicando que este botão serve para excluir este item da lista"

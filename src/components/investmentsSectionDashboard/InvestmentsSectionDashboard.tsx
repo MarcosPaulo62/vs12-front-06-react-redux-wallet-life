@@ -31,6 +31,7 @@ import {
 import { selectTotalInvestments } from "../../store/users/selectors";
 import { TotaisSlice, TotalInvestments } from "../../store/users/TotaisSlice";
 import { formatNumber } from "../principalSectionDashboard/PrincipalSectionDashboard";
+import { ToastContainer, toast } from "react-toastify";
 
 interface InvesttmentSectionProps {
   handleOpenModal: () => void;
@@ -92,6 +93,12 @@ export default function InvestmentsSectionDashboard({
     setCurrentPage(page);
   };
 
+  function sucessoExclusao(){
+    toast.success("Transação excluída com sucesso!", {
+      position: toast.POSITION.TOP_CENTER,
+    });
+  }
+
   return (
     <StyledSectionDashboard>
       <StyledDashboardLabel themecolor={"investimentos"}>
@@ -137,6 +144,7 @@ export default function InvestmentsSectionDashboard({
                 currentPage="investimentos"
                 id={investment.idInvestimento}
                 onDeleteClick={() => setReload(true)}
+                sucessoExclusao={() => sucessoExclusao()}
               />
             </li>
           ))}
@@ -148,6 +156,7 @@ export default function InvestmentsSectionDashboard({
         page={currentPage}
         onChange={handlePageChange}
       />
+      <ToastContainer />
     </StyledSectionDashboard>
   );
 }
